@@ -10,6 +10,11 @@
       "StackName": "amplify-ffgswrpgslackreact-dev-204355",
       "StackId": "arn:aws:cloudformation:us-east-1:602068971051:stack/amplify-ffgswrpgslackreact-dev-204355/b4ef62f0-f7b5-11ea-82f4-1277bf9feb05",
       "AmplifyAppId": "d2j0hmfi77daan"
+    },
+    "categories": {
+      "auth": {
+        "ffgswrpgslackreact398e6bf4": {}
+      }
     }
   }
 }

@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "ffgswrpgslackreact398e6bf4": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
