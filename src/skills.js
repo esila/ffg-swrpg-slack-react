@@ -3,12 +3,13 @@ import DiceRoller from './diceRoller'
 import SheetTips from './sheetTips'
 import toolTips from './toolTips'
 
-function Skills({ characteristics, generalSkills, combatSkills, knowledgeSkills, setState }){
+function Skills({ character, characteristics, generalSkills, combatSkills, knowledgeSkills, setState }){
     return (
         <div className="sheet-row">
             <div className="sheet-small-12 sheet-column">
                 <h3>Skills</h3>
                 <SkillsSection
+                    character={character}
                     characteristics={characteristics}
                     skills={generalSkills}
                     skillsLegend="General Skills"
@@ -16,6 +17,7 @@ function Skills({ characteristics, generalSkills, combatSkills, knowledgeSkills,
                     setState={setState}
                 />
                 <SkillsSection
+                    character={character}
                     characteristics={characteristics}
                     skills={combatSkills}
                     skillsLegend="Combat Skills"
@@ -23,6 +25,7 @@ function Skills({ characteristics, generalSkills, combatSkills, knowledgeSkills,
                     setState={setState}
                 />
                 <SkillsSection
+                    character={character}
                     characteristics={characteristics}
                     skills={knowledgeSkills}
                     skillsLegend="KnowledgeSkills"
@@ -34,7 +37,7 @@ function Skills({ characteristics, generalSkills, combatSkills, knowledgeSkills,
     )
 }
 
-function SkillsSection({ characteristics, skills, skillsLegend, skillsKey, setState }){
+function SkillsSection({ character, characteristics, skills, skillsLegend, skillsKey, setState }){
 
     function getDerivedDiceIcons(characteristic, rank) {
       return characteristic === rank ?
@@ -177,6 +180,7 @@ function SkillsSection({ characteristics, skills, skillsLegend, skillsKey, setSt
                                         `${getDerivedDiceString(characteristics[skills[elem].characteristic], skills[elem].rank)} ${skills[elem].extraDice}`
                                     }
                                     diceSource={`Skills: ${elem}`}
+                                    diceUser={character.name || "anonymous"}
                                 />
                             </td>
                         </tr>

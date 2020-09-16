@@ -1,6 +1,6 @@
 import React from "react";
 
-function DiceRoller({ rollType, diceString, diceSource, diceMessage }){
+function DiceRoller({ rollType, diceString, diceSource, diceMessage, diceUser }){
     function handleRoll(event) {
         const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/${rollType}`;
         //const API_ADDRESS = `http://127.0.0.1:5000/${rollType}`;
@@ -9,6 +9,7 @@ function DiceRoller({ rollType, diceString, diceSource, diceMessage }){
             roll_source: diceSource,
             roll_message: diceMessage,
             roll_string: diceString,
+            roll_user: diceUser,
         };
         console.log(`Clicked on dice roller:\n${JSON.stringify(data)}`);
         fetch(API_ADDRESS, {

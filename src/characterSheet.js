@@ -28,17 +28,21 @@ function CharacterSheet(){
                 <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
                 <Characteristics characteristics={characteristics} setState={setState} />
                 <Skills
+                    character={character}
                     characteristics={characteristics}
                     generalSkills={generalSkills}
                     combatSkills={combatSkills}
                     knowledgeSkills={knowledgeSkills}
                     setState={setState}
                 />
-                <Weapons weapons={weapons}
-                         characteristics={characteristics}
-                         generalSkills={generalSkills}
-                         combatSkills={combatSkills}
-                         setState={setState}/>
+                <Weapons
+                    character={character}
+                    weapons={weapons}
+                    characteristics={characteristics}
+                    generalSkills={generalSkills}
+                    combatSkills={combatSkills}
+                    setState={setState}
+                />
                 <p><button>Submit</button></p>
             </form>
         </div>

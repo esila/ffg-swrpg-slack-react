@@ -1,7 +1,7 @@
 import React from "react";
 import DiceRoller from './diceRoller'
 
-function Weapons({ weapons, characteristics, generalSkills, combatSkills, setState }){
+function Weapons({ character, weapons, characteristics, generalSkills, combatSkills, setState }){
 
     const getDerivedWeaponSkills = (skill) => {
         const derivedMap = {
@@ -133,6 +133,7 @@ function Weapons({ weapons, characteristics, generalSkills, combatSkills, setSta
                                                                             Range: range,
                                                                             Qualities: qualities,
                                                                         }}
+                                                                        diceUser={character.name || "anonymous"}
                                                                         diceString={`${getDerivedWeaponSkills(weapons[weapon_idx].skill)} ${modifiers}`}/>
                                                                 </td>
                                                             }
