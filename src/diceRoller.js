@@ -11,7 +11,7 @@ function DiceRoller({ rollType, diceString, diceSource, diceMessage, diceUser })
             roll_string: diceString,
             roll_user: diceUser,
         };
-        console.log(`Clicked on dice roller:\n${JSON.stringify(data)}`);
+        console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
         fetch(API_ADDRESS, {
             method: 'POST',
             headers: {
