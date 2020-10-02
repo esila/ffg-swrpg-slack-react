@@ -5,6 +5,7 @@ export const onCreateCharacterSheet = /* GraphQL */ `
   subscription OnCreateCharacterSheet {
     onCreateCharacterSheet {
       id
+      user
       weapons {
         make_model
         weapon_type
@@ -341,6 +342,7 @@ export const onUpdateCharacterSheet = /* GraphQL */ `
   subscription OnUpdateCharacterSheet {
     onUpdateCharacterSheet {
       id
+      user
       weapons {
         make_model
         weapon_type
@@ -677,6 +679,7 @@ export const onDeleteCharacterSheet = /* GraphQL */ `
   subscription OnDeleteCharacterSheet {
     onDeleteCharacterSheet {
       id
+      user
       weapons {
         make_model
         weapon_type

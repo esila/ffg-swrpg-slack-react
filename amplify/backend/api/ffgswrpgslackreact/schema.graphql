@@ -1,5 +1,6 @@
 type CharacterSheet @model {
   id: ID!
+  user: String!
   weapons: [Weapons ]
   soakWounds: SoakWounds
   knowledgeSkills: KnowledgeSkills

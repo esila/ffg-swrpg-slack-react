@@ -5,6 +5,7 @@ export const getCharacterSheet = /* GraphQL */ `
   query GetCharacterSheet($id: ID!) {
     getCharacterSheet(id: $id) {
       id
+      user
       weapons {
         make_model
         weapon_type
@@ -346,6 +347,7 @@ export const listCharacterSheets = /* GraphQL */ `
     listCharacterSheets(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        user
         weapons {
           make_model
           weapon_type

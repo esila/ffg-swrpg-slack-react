@@ -8,6 +8,7 @@ export const createCharacterSheet = /* GraphQL */ `
   ) {
     createCharacterSheet(input: $input, condition: $condition) {
       id
+      user
       weapons {
         make_model
         weapon_type
@@ -347,6 +348,7 @@ export const updateCharacterSheet = /* GraphQL */ `
   ) {
     updateCharacterSheet(input: $input, condition: $condition) {
       id
+      user
       weapons {
         make_model
         weapon_type
@@ -686,6 +688,7 @@ export const deleteCharacterSheet = /* GraphQL */ `
   ) {
     deleteCharacterSheet(input: $input, condition: $condition) {
       id
+      user
       weapons {
         make_model
         weapon_type

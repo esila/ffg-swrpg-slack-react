@@ -24,7 +24,7 @@ function CharacterSheet(){
         }
     };
     const [characterSheets, setCharacterSheets] = useState([]);
-    const [state, setState] = useState({...initState, ...player_name});
+    const [state, setState] = useState({...initState, ...player_name, user: user});
     const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons} = state;
 
     useEffect(() => {
@@ -32,7 +32,7 @@ function CharacterSheet(){
     }, []);
 
     async function fetchCharacterSheets() {
-        const apiData = await API.graphql({ query: listCharacterSheets });
+        const apiData = await API.graphql({ query: listCharacterSheets, variables: { filter: {user: {eq: user}}} });
         setCharacterSheets(apiData.data.listCharacterSheets.items);
     }
 

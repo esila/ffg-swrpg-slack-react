@@ -185,6 +185,7 @@ const CharacterInput = ({character, characterKey, type, setState}) => {
                     type={type}
                     name={`character_${characterKey}`}
                     value={`${character[characterKey]}`}
+                    readOnly={characterKey === "player_name"}
                     onChange={event => {
                         event.preventDefault();
                         const { target: {value} } = event;
