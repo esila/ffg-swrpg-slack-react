@@ -74,6 +74,7 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
             }
         });
 
+        console.log(`Background is: ${background}`);
         canvas.setBackgroundImage(background,
             canvas.renderAll.bind(canvas), {
                 scaleX: .35,
