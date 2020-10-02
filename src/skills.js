@@ -93,7 +93,7 @@ function SkillsSection({ character, characteristics, skills, skillsLegend, skill
                     </tr>
                 </thead>
                 <tbody>
-                {Object.keys(skills).map((elem, idx) => {
+                {Object.keys(skills).sort().map((elem, idx) => {
                     return (
                         <tr key={idx}>
                             <td>
