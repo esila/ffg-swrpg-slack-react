@@ -1012,3 +1012,36 @@ export const onDeleteCharacterSheet = /* GraphQL */ `
     }
   }
 `;
+export const onCreateFabricObject = /* GraphQL */ `
+  subscription OnCreateFabricObject {
+    onCreateFabricObject {
+      id
+      fabricId
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateFabricObject = /* GraphQL */ `
+  subscription OnUpdateFabricObject {
+    onUpdateFabricObject {
+      id
+      fabricId
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteFabricObject = /* GraphQL */ `
+  subscription OnDeleteFabricObject {
+    onDeleteFabricObject {
+      id
+      fabricId
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;

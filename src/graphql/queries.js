@@ -682,3 +682,32 @@ export const listCharacterSheets = /* GraphQL */ `
     }
   }
 `;
+export const getFabricObject = /* GraphQL */ `
+  query GetFabricObject($id: ID!) {
+    getFabricObject(id: $id) {
+      id
+      fabricId
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listFabricObjects = /* GraphQL */ `
+  query ListFabricObjects(
+    $filter: ModelFabricObjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFabricObjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        fabricId
+        data
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
