@@ -9,6 +9,7 @@ import {
 import {onUpdateFabricObject} from "./graphql/subscriptions";
 import {listFabricObjects} from "./graphql/queries";
 import { UserContext} from "./App";
+import backgroundImage from "./backgroundMap";
 
 function Visuals() {
     const [fabricObjects, setFabricObjects] = useState([]);
@@ -61,7 +62,10 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
             canvasDict[elem.fabricId] = elem.id;
             return elem.data;
         });
-        canvas.loadFromJSON(`{"objects": [${fabricData}]}`);
+        const backgroundData = {...backgroundImage, src: background };
+        //console.log(`BackgroundData: ${JSON.stringify(backgroundData)}`);
+        //console.log(`{"objects": [${fabricData}], "backgroundImage": ${JSON.stringify(backgroundData)}}`);
+        canvas.loadFromJSON(`{"objects": [${fabricData}], "backgroundImage": ${JSON.stringify(backgroundData)}}`);
         //console.log(`CANVAS: ${JSON.stringify(canvas.toJSON(['fabricId']))}`);
 
         !canvasState && canvas.on({
@@ -73,15 +77,6 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                 //console.log(JSON.stringify(e.target.toJSON(['fabricId'])));
             }
         });
-
-        console.log(`Background is: ${background}`);
-        canvas.setBackgroundImage(background,
-            canvas.renderAll.bind(canvas), {
-                scaleX: .35,
-                scaleY: .35,
-                backgroundImageOpacity: 0.5,
-            }
-        );
 
         setCanvasState(canvas);
         // UseEffect's cleanup function
