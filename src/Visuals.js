@@ -16,7 +16,6 @@ function Visuals() {
     useEffect(() => {
         fetchFabricObjects();
         subscribeFabricObjects();
-        //initializeCanvas();
     }, []);
 
     async function fetchFabricObjects() {
@@ -46,11 +45,12 @@ function MapCanvas({ fabricObjects }) {
     const user = useContext(UserContext);
     const canvasEl = useRef(null);
     const [canvasState, setCanvasState] = useState();
+    const [background, setBackground] = useState("https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg");
 
     useEffect(() => {
         initCanvas();
         //addToCanvas();
-    }, [fabricObjects]);
+    }, [fabricObjects, background]);
 
     function initCanvas() {
         const canvas = canvasState || new fabric.Canvas(canvasEl.current);
@@ -74,7 +74,7 @@ function MapCanvas({ fabricObjects }) {
             }
         });
 
-        canvas.setBackgroundImage("https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg",
+        canvas.setBackgroundImage(background,
             canvas.renderAll.bind(canvas), {
                 scaleX: .35,
                 scaleY: .35,
@@ -168,22 +168,29 @@ function MapCanvas({ fabricObjects }) {
     }
     return fabricObjects.length > 0 ? (
         <>
-            {user === "esila" &&
+            {user === "esilax" &&
                 <>
-                <button
-                    onClick={() => addToCanvas()}
-                >Add Elements</button>
-                <button
-                    className="chat__delete"
-                    onClick={(event) => {
-                        event.preventDefault();
-                        fabricObjects.forEach((obj) => { deleteFabricObject({id: obj.id}); })
-                    }}
-                >
-                    DELETE ALL
-                </button>
+                    <button
+                        onClick={() => addToCanvas()}
+                    >Add Elements</button>
+                    <button
+                        className="chat__delete"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            fabricObjects.forEach((obj) => { deleteFabricObject({id: obj.id}); })
+                        }}
+                    >
+                        DELETE ALL
+                    </button>
+
                 </>
             }
+            <button
+                onClick={() => setBackground("https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg")}
+            >Range Bands</button>
+            <button
+                onClick={() => setBackground("https://kainrath.files.wordpress.com/2014/05/mos-shuuta-streets-expanded-small.jpg")}
+            >Mos Shuuta Streets</button>
             <canvas ref={canvasEl} id="my-fabric-canvas" width="1920" height="1080" />
         </>
     ):

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import CharacterSheet from './characterSheet';
@@ -22,8 +23,17 @@ function InitApp() {
         <UserContext.Provider value={user}>
             <div className="App">
                 <AmplifySignOut />
-                <CharacterSheet/>
-                <Visuals/>
+                <Switch>
+                    <Route path={`/charactersheet`}>
+                        <CharacterSheet/>
+                    </Route>
+                    <Route path={`/visuals`}>
+                        <Visuals/>
+                    </Route>
+                    <Route>
+                        <Redirect to="/charactersheet"/>
+                    </Route>
+                </Switch>
             </div>
         </UserContext.Provider>
     )
