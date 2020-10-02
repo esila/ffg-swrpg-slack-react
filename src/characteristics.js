@@ -20,7 +20,7 @@ function Characteristics({ characteristics, setState }){
                                             step="1"
                                             max="7"
                                             min="1"
-                                            defaultValue={1}
+                                            value={characteristics[elem]}
                                             onChange={event => {
                                                 const { target: {value, name } } = event;
                                                 setState(prev => ({

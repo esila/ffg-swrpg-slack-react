@@ -34,6 +34,9 @@ function CharacterSheet(){
     async function fetchCharacterSheets() {
         const apiData = await API.graphql({ query: listCharacterSheets, variables: { filter: {user: {eq: user}}} });
         setCharacterSheets(apiData.data.listCharacterSheets.items);
+        //console.log(apiData.data.listCharacterSheets.items[0]);
+        const {createdAt, updatedAt, ...rest} = apiData.data.listCharacterSheets.items[0];
+        setState(rest);
     }
 
     async function createCharacterSheet() {
@@ -44,25 +47,18 @@ function CharacterSheet(){
 
     async function updateCharacterSheet(id) {
         if (!character.name || !character.player_name) return;
-        //console.log("STATE: " + JSON.stringify(state));
+        console.log("UPDATE: ", state);
         await API.graphql({ query: updateCharacterSheetMutation, variables: { input: { id, ...state } }});
         fetchCharacterSheets();
     }
 
     function handleSubmit(event) {
         event.preventDefault();
-        //console.log("STATE: " + JSON.stringify(state));
         characterSheets.length > 0 && characterSheets[0].id ? updateCharacterSheet(characterSheets[0].id) : createCharacterSheet()
     }
 
-    return (
+    return characterSheets.length > 0 ? (
         <div className={"charsheet"}>
-            <h1>Character Sheet</h1>
-            {characterSheets.map((characterSheet, cs_idx) => {
-                return (
-                    <h2 key={cs_idx}>{JSON.stringify(characterSheet)}</h2>
-                )
-            })}
             <form onSubmit={handleSubmit}>
                 <Character character={character} setState={setState} />
                 <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
@@ -87,6 +83,32 @@ function CharacterSheet(){
             </form>
         </div>
     )
+        :
+         <div className={"charsheet"}>
+            <h1>Character Sheet</h1>
+            <form onSubmit={handleSubmit}>
+                <Character character={character} setState={setState} />
+                <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
+                <Characteristics characteristics={characteristics} setState={setState} />
+                <Skills
+                    character={character}
+                    characteristics={characteristics}
+                    generalSkills={generalSkills}
+                    combatSkills={combatSkills}
+                    knowledgeSkills={knowledgeSkills}
+                    setState={setState}
+                />
+                <Weapons
+                    character={character}
+                    weapons={weapons}
+                    characteristics={characteristics}
+                    generalSkills={generalSkills}
+                    combatSkills={combatSkills}
+                    setState={setState}
+                />
+                <p><button>Submit</button></p>
+            </form>
+        </div>
 }
 
 export default CharacterSheet;
