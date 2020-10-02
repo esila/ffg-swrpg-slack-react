@@ -25,7 +25,7 @@ function SoakWoundsDefense({ soakWoundsDefense, setState }){
                                             type="number"
                                             step="1"
                                             name={`${swdfKey}_${leftLabel.toLowerCase()}`}
-                                            defaultValue={attr[leftLabel.toLowerCase()]}
+                                            value={attr[leftLabel.toLowerCase()]}
                                             onChange={event => {
                                                 const { target: {value} } = event;
                                                 setState(prev => ({
@@ -43,7 +43,7 @@ function SoakWoundsDefense({ soakWoundsDefense, setState }){
                                             type="number"
                                             step="1"
                                             name={`${swdfKey}_${rightLabel.toLowerCase()}`}
-                                            defaultValue={attr[rightLabel.toLowerCase()]}
+                                            value={attr[rightLabel.toLowerCase()]}
                                             onChange={event => {
                                                 const { target: {value} } = event;
                                                 setState(prev => ({
@@ -68,7 +68,7 @@ function SoakWoundsDefense({ soakWoundsDefense, setState }){
                                             type="number"
                                             step="1"
                                             min="1"
-                                            defaultValue={attr}
+                                            value={attr}
                                             onChange={event => {
                                                 const { target: {value} } = event;
                                                 setState(prev => ({
