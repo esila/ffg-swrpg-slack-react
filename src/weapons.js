@@ -45,7 +45,7 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
             attachments: [
                 {
                     attachment_name: "",
-                    hard_points: "",
+                    hard_points: 0,
                     base_modifiers: "",
                     modifications: "",
                     book_page: "",
@@ -140,7 +140,7 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
                                                             <td>
                                                                 <label data-i18n={lowerTitle}>{title}</label>
                                                                 <input
-                                                                    type="text"
+                                                                    type="number"
                                                                     name={`weapon_${weapon_idx}_${lowerTitle}`}
                                                                     value={`${elem[lowerTitle]}`}
                                                                     style={{width: "50%"}}

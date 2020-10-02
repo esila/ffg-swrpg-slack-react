@@ -34,6 +34,14 @@ export const createCharacterSheet = /* GraphQL */ `
           book_page
         }
       }
+      talents {
+        name
+        rank
+        passive_active
+        book_page
+        xp_cost
+        summary
+      }
       soakWounds {
         soak
         force_rating {
@@ -374,6 +382,14 @@ export const updateCharacterSheet = /* GraphQL */ `
           book_page
         }
       }
+      talents {
+        name
+        rank
+        passive_active
+        book_page
+        xp_cost
+        summary
+      }
       soakWounds {
         soak
         force_rating {
@@ -713,6 +729,14 @@ export const deleteCharacterSheet = /* GraphQL */ `
           modifications
           book_page
         }
+      }
+      talents {
+        name
+        rank
+        passive_active
+        book_page
+        xp_cost
+        summary
       }
       soakWounds {
         soak

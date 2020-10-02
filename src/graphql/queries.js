@@ -31,6 +31,14 @@ export const getCharacterSheet = /* GraphQL */ `
           book_page
         }
       }
+      talents {
+        name
+        rank
+        passive_active
+        book_page
+        xp_cost
+        summary
+      }
       soakWounds {
         soak
         force_rating {
@@ -372,6 +380,14 @@ export const listCharacterSheets = /* GraphQL */ `
             modifications
             book_page
           }
+        }
+        talents {
+          name
+          rank
+          passive_active
+          book_page
+          xp_cost
+          summary
         }
         soakWounds {
           soak

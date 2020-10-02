@@ -7,6 +7,7 @@ import Characteristics from './characteristics'
 import SoakWoundsDefense from './soakWoundsDefense'
 import Skills from './skills'
 import Weapons from './weapons'
+import Talents from './talents';
 import serializeForm from 'form-serialize'
 import './sheet-style.css';
 import { listCharacterSheets } from './graphql/queries';
@@ -25,7 +26,7 @@ function CharacterSheet(){
     };
     const [characterSheets, setCharacterSheets] = useState([]);
     const [state, setState] = useState({...initState, ...player_name, user: user});
-    const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons} = state;
+    const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons, talents} = state;
 
     useEffect(() => {
         fetchCharacterSheets();
@@ -36,7 +37,16 @@ function CharacterSheet(){
         setCharacterSheets(apiData.data.listCharacterSheets.items);
         //console.log(apiData.data.listCharacterSheets.items[0]);
         const {createdAt, updatedAt, ...rest} = apiData.data.listCharacterSheets.items[0];
-        setState(rest);
+        console.log("REST");
+        console.log(JSON.stringify(rest));
+
+        const initTalents = rest.talents || initState.talents;
+        console.log(`rest talents: ${JSON.stringify(rest.talents)}`);
+        console.log(`init talents: ${JSON.stringify(initState.talents)}`);
+        const newRest = {...rest, talents: initTalents };
+        console.log("NEWREST");
+        console.log(JSON.stringify(newRest));
+        setState(newRest);
     }
 
     async function createCharacterSheet() {
@@ -48,6 +58,7 @@ function CharacterSheet(){
     async function updateCharacterSheet(id) {
         if (!character.name || !character.player_name) return;
         console.log("UPDATE: ", state);
+        console.log(JSON.stringify(state));
         await API.graphql({ query: updateCharacterSheetMutation, variables: { input: { id, ...state } }});
         fetchCharacterSheets();
     }
@@ -79,6 +90,10 @@ function CharacterSheet(){
                     combatSkills={combatSkills}
                     setState={setState}
                 />
+                <Talents
+                    talents={talents}
+                    setState={setState}
+                />
                 <p><button>Submit</button></p>
             </form>
         </div>
@@ -103,6 +118,10 @@ function CharacterSheet(){
                     characteristics={characteristics}
                     generalSkills={generalSkills}
                     combatSkills={combatSkills}
+                    setState={setState}
+                />
+                <Talents
+                    talents={talents}
                     setState={setState}
                 />
                 <p><button>Submit</button></p>

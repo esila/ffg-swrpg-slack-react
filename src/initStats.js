@@ -215,6 +215,16 @@ const weaponStub = {
 };
 const weapons = [weaponStub];
 
+const talentStub = {
+    name: "",
+    rank: 0,
+    passive_active: "passive",
+    book_page: "",
+    xp_cost: 0,
+    summary: ""
+};
+const talents = [talentStub];
+
 const initState = {
     character: initCharacter,
     characteristics: initCharacteristicsState,
@@ -223,6 +233,7 @@ const initState = {
     knowledgeSkills: initKnowledgeSkillsState,
     soakWounds: initSoakWounds,
     weapons: weapons,
+    talents: talents,
 };
 
 export default initState;

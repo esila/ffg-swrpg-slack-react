@@ -2,6 +2,7 @@ type CharacterSheet @model {
   id: ID!
   user: String!
   weapons: [Weapons ]
+  talents: [Talents ]
   soakWounds: SoakWounds
   knowledgeSkills: KnowledgeSkills
   combatSkills: CombatSkills
@@ -32,6 +33,13 @@ type Weapons { make_model: String
   encumberance: Int
   hp: Int
   attachments: [Attachments ] }
+
+type Talents { name: String
+  rank: Int
+  passive_active: String
+  book_page: String
+  xp_cost: Int
+  summary: String }
 
 type ForceRating { threshold: Int committed: Int }
 
