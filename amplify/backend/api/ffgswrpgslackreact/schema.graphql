@@ -1,0 +1,330 @@
+type CharacterSheet @model {
+  id: ID!
+  weapons: [Weapons ]
+  soakWounds: SoakWounds
+  knowledgeSkills: KnowledgeSkills
+  combatSkills: CombatSkills
+  generalSkills: GeneralSkills
+  characteristics: Characteristics
+  character: Character }
+
+type Attachments { attachment_name: String
+  hard_points: Int
+  base_modifiers: String
+  modifications: String
+  book_page: String }
+
+type Weapons { make_model: String
+  weapon_type: String
+  modifiers: String
+  book_page: String
+  restricted: String
+  features: String
+  range: String
+  skill: String
+  condition: String
+  rarity: String
+  value: String
+  qualities: String
+  damage: Int
+  critical: Int
+  encumberance: Int
+  hp: Int
+  attachments: [Attachments ] }
+
+type ForceRating { threshold: Int committed: Int }
+
+type Encumberance { threshold: Int current: Int }
+
+type Defense { range: Int melee: Int }
+
+type Strain { threshold: Int current: Int }
+
+type Wounds { threshold: Int current: Int }
+
+type SoakWounds { soak: Int
+  force_rating: ForceRating
+  encumberance: Encumberance
+  defense: Defense
+  strain: Strain
+  wounds: Wounds }
+
+type Xenology { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Underworld { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type OuterRim { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Lore { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Education { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type CoreWorlds { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type KnowledgeSkills { Xenology: Xenology
+  Underworld: Underworld
+  OuterRim: OuterRim
+  Lore: Lore
+  Education: Education
+  CoreWorlds: CoreWorlds }
+
+type RangedHeavy { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type RangedLight { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Melee { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Lightsaber { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Gunnery { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Brawl { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type CombatSkills { RangedHeavy: RangedHeavy
+  RangedLight: RangedLight
+  Melee: Melee
+  Lightsaber: Lightsaber
+  Gunnery: Gunnery
+  Brawl: Brawl }
+
+type Vigilance { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Survival { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Streetwise { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Stealth { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Skulduggery { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Resilience { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type PilotingSpace { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type PilotingPlanetary { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Perception { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Negotiation { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Medicine { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Mechanics { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Leadership { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Discipline { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Deception { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Coordination { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Cool { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Computers { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Coercion { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Charm { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Athletics { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type Astrogation { name: String
+  characteristic: String
+  career: Boolean
+  rank: Int
+  extraDice: String }
+
+type GeneralSkills { Vigilance: Vigilance
+  Survival: Survival
+  Streetwise: Streetwise
+  Stealth: Stealth
+  Skulduggery: Skulduggery
+  Resilience: Resilience
+  PilotingSpace: PilotingSpace
+  PilotingPlanetary: PilotingPlanetary
+  Perception: Perception
+  Negotiation: Negotiation
+  Medicine: Medicine
+  Mechanics: Mechanics
+  Leadership: Leadership
+  Discipline: Discipline
+  Deception: Deception
+  Coordination: Coordination
+  Cool: Cool
+  Computers: Computers
+  Coercion: Coercion
+  Charm: Charm
+  Athletics: Athletics
+  Astrogation: Astrogation }
+
+type Characteristics { Brawn: Int
+  Agility: Int
+  Intellect: Int
+  Cunning: Int
+  Willpower: Int
+  Presence: Int }
+
+type Specializations { name: String in_career: String }
+
+type Character { name: String
+  player_name: String
+  species: String
+  credits: String
+  total_xp: Int
+  available_xp: Int
+  career: String
+  gender: String
+  age: String
+  height: String
+  build: String
+  hair: String
+  eyes: String
+  notable_features: String
+  other: String
+  motivations_1_category: String
+  motivations_1_type: String
+  motivations_1_description: String
+  motivations_2_category: String
+  motivations_2_type: String
+  motivations_2_description: String
+  specializations: [Specializations ] }
+
+
+type AutogeneratedMainType { CharacterSheet: CharacterSheet }
+
+# Types with identical fields:
+# Encumberance Strain Wounds
+# Xenology Underworld OuterRim Lore Education CoreWorlds RangedHeavy RangedLight Melee Lightsaber Gunnery Brawl Vigilance Survival Streetwise Stealth Skulduggery Resilience PilotingSpace PilotingPlanetary Perception Negotiation Medicine Mechanics Leadership Discipline Deception Coordination Cool Computers Coercion Charm Athletics Astrogation
