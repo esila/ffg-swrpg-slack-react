@@ -84,8 +84,7 @@ function CharacterSheet(){
         </div>
     )
         :
-         <div className={"charsheet"}>
-            <h1>Character Sheet</h1>
+        <div className={"charsheet"}>
             <form onSubmit={handleSubmit}>
                 <Character character={character} setState={setState} />
                 <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
