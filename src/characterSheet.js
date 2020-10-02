@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import initState from './initStats'
 import { API, Auth } from 'aws-amplify';
+import { UserContext } from './App';
 import Character from './character'
 import Characteristics from './characteristics'
 import SoakWoundsDefense from './soakWoundsDefense'
@@ -15,26 +16,20 @@ import {
 } from "./graphql/mutations";
 
 function CharacterSheet(){
+    const user = useContext(UserContext);
+    const player_name = {
+        character: {
+            ...initState.character,
+            player_name: user
+        }
+    };
     const [characterSheets, setCharacterSheets] = useState([]);
-    const [state, setState] = useState(initState);
+    const [state, setState] = useState({...initState, ...player_name});
     const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons} = state;
 
     useEffect(() => {
         fetchCharacterSheets();
-        Auth.currentAuthenticatedUser({
-            bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-        }).then(user => {
-            console.log(`USER: ${user.username}`);
-            updateCharacterUserName(user.username);
-        });
     }, []);
-
-    function updateCharacterUserName(u) {
-        setState(prev => ({
-            ...prev,
-            ...prev.character.player_name = u
-        }))
-    }
 
     async function fetchCharacterSheets() {
         const apiData = await API.graphql({ query: listCharacterSheets });
@@ -49,12 +44,14 @@ function CharacterSheet(){
 
     async function updateCharacterSheet(id) {
         if (!character.name || !character.player_name) return;
+        //console.log("STATE: " + JSON.stringify(state));
         await API.graphql({ query: updateCharacterSheetMutation, variables: { input: { id, ...state } }});
         fetchCharacterSheets();
     }
 
     function handleSubmit(event) {
         event.preventDefault();
+        //console.log("STATE: " + JSON.stringify(state));
         characterSheets.length > 0 && characterSheets[0].id ? updateCharacterSheet(characterSheets[0].id) : createCharacterSheet()
     }
 
