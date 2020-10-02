@@ -12,6 +12,7 @@ import { UserContext} from "./App";
 
 function Visuals() {
     const [fabricObjects, setFabricObjects] = useState([]);
+    const [background, setBackground] = useState("https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg");
 
     useEffect(() => {
         fetchFabricObjects();
@@ -35,17 +36,16 @@ function Visuals() {
 
     return fabricObjects.length > 0 ? (
         <div>
-            <MapCanvas fabricObjects={fabricObjects}/>
+            <MapCanvas fabricObjects={fabricObjects} background={background} setBackground={setBackground}/>
         </div>
     ):
         <div></div>
 }
 
-function MapCanvas({ fabricObjects }) {
+function MapCanvas({ fabricObjects, background, setBackground }) {
     const user = useContext(UserContext);
     const canvasEl = useRef(null);
     const [canvasState, setCanvasState] = useState();
-    const [background, setBackground] = useState("https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg");
 
     useEffect(() => {
         initCanvas();
@@ -168,7 +168,7 @@ function MapCanvas({ fabricObjects }) {
     }
     return fabricObjects.length > 0 ? (
         <>
-            {user === "esilax" &&
+            {user === "esila" &&
                 <>
                     <button
                         onClick={() => addToCanvas()}
