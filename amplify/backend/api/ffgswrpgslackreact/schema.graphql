@@ -314,6 +314,7 @@ type Character { name: String
   credits: String
   total_xp: Int
   available_xp: Int
+  image_url: String
   career: String
   gender: String
   age: String

@@ -321,6 +321,7 @@ export const onCreateCharacterSheet = /* GraphQL */ `
         credits
         total_xp
         available_xp
+        image_url
         career
         gender
         age
@@ -666,6 +667,7 @@ export const onUpdateCharacterSheet = /* GraphQL */ `
         credits
         total_xp
         available_xp
+        image_url
         career
         gender
         age
@@ -1011,6 +1013,7 @@ export const onDeleteCharacterSheet = /* GraphQL */ `
         credits
         total_xp
         available_xp
+        image_url
         career
         gender
         age

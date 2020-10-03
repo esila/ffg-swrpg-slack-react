@@ -321,6 +321,7 @@ export const getCharacterSheet = /* GraphQL */ `
         credits
         total_xp
         available_xp
+        image_url
         career
         gender
         age
@@ -671,6 +672,7 @@ export const listCharacterSheets = /* GraphQL */ `
           credits
           total_xp
           available_xp
+          image_url
           career
           gender
           age

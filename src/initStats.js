@@ -5,6 +5,7 @@ const initCharacter = {
     credits: "",
     total_xp: 0,
     available_xp: 0,
+    image_url: "",
     career: "",
     specializations: [
         {

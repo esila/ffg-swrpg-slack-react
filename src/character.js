@@ -58,6 +58,11 @@ function Character({character, setState}){
                                 type={"text"}
                                 setState={setState}
                             />
+                            {character.image_url &&
+                                <div style={{textAlign: "center"}}>
+                                    <img src={character.image_url}/>
+                                </div>
+                            }
                         </tr>
                         <tr>
                            <CharacterSelect
@@ -85,6 +90,14 @@ function Character({character, setState}){
                                 character={character}
                                 characterKey={"available_xp"}
                                 type={"number"}
+                                setState={setState}
+                            />
+                        </tr>
+                        <tr>
+                            <CharacterInput
+                                character={character}
+                                characterKey={"image_url"}
+                                type={"text"}
                                 setState={setState}
                             />
                         </tr>
@@ -176,6 +189,7 @@ const CharacterInput = ({character, characterKey, type, setState}) => {
         credits: "Credits",
         total_xp: "Total XP",
         available_xp: "Available XP",
+        image_url: "Image URL",
     };
     return (
         <>
