@@ -1087,3 +1087,45 @@ export const deleteFabricObject = /* GraphQL */ `
     }
   }
 `;
+export const createDestinyPool = /* GraphQL */ `
+  mutation CreateDestinyPool(
+    $input: CreateDestinyPoolInput!
+    $condition: ModelDestinyPoolConditionInput
+  ) {
+    createDestinyPool(input: $input, condition: $condition) {
+      id
+      light
+      dark
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateDestinyPool = /* GraphQL */ `
+  mutation UpdateDestinyPool(
+    $input: UpdateDestinyPoolInput!
+    $condition: ModelDestinyPoolConditionInput
+  ) {
+    updateDestinyPool(input: $input, condition: $condition) {
+      id
+      light
+      dark
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteDestinyPool = /* GraphQL */ `
+  mutation DeleteDestinyPool(
+    $input: DeleteDestinyPoolInput!
+    $condition: ModelDestinyPoolConditionInput
+  ) {
+    deleteDestinyPool(input: $input, condition: $condition) {
+      id
+      light
+      dark
+      createdAt
+      updatedAt
+    }
+  }
+`;

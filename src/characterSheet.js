@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import initState from './initStats'
-import { API, Auth } from 'aws-amplify';
+import { API } from 'aws-amplify';
 import { UserContext } from './App';
 import Character from './character'
 import Characteristics from './characteristics'
@@ -8,7 +8,7 @@ import SoakWoundsDefense from './soakWoundsDefense'
 import Skills from './skills'
 import Weapons from './weapons'
 import Talents from './talents';
-import serializeForm from 'form-serialize'
+import DestinyPool from './destiny';
 import './sheet-style.css';
 import { listCharacterSheets } from './graphql/queries';
 import {
@@ -37,15 +37,15 @@ function CharacterSheet(){
         setCharacterSheets(apiData.data.listCharacterSheets.items);
         //console.log(apiData.data.listCharacterSheets.items[0]);
         const {createdAt, updatedAt, ...rest} = apiData.data.listCharacterSheets.items[0];
-        console.log("REST");
-        console.log(JSON.stringify(rest));
+        //console.log("REST");
+        //console.log(JSON.stringify(rest));
 
         const initTalents = rest.talents || initState.talents;
-        console.log(`rest talents: ${JSON.stringify(rest.talents)}`);
-        console.log(`init talents: ${JSON.stringify(initState.talents)}`);
+        //console.log(`rest talents: ${JSON.stringify(rest.talents)}`);
+        //console.log(`init talents: ${JSON.stringify(initState.talents)}`);
         const newRest = {...rest, talents: initTalents };
-        console.log("NEWREST");
-        console.log(JSON.stringify(newRest));
+        //console.log("NEWREST");
+        //console.log(JSON.stringify(newRest));
         setState(newRest);
     }
 
@@ -57,8 +57,8 @@ function CharacterSheet(){
 
     async function updateCharacterSheet(id) {
         if (!character.name || !character.player_name) return;
-        console.log("UPDATE: ", state);
-        console.log(JSON.stringify(state));
+        //console.log("UPDATE: ", state);
+        //console.log(JSON.stringify(state));
         await API.graphql({ query: updateCharacterSheetMutation, variables: { input: { id, ...state } }});
         fetchCharacterSheets();
     }
@@ -70,6 +70,7 @@ function CharacterSheet(){
 
     return characterSheets.length > 0 ? (
         <div className={"charsheet"}>
+            <DestinyPool/>
             <form onSubmit={handleSubmit}>
                 <Character character={character} setState={setState} />
                 <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />

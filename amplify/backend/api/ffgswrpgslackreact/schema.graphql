@@ -341,6 +341,13 @@ type FabricObject
   data: String
 }
 
+type DestinyPool
+@model {
+  id: ID!
+  light: Int
+  dark: Int
+}
+
 # Types with identical fields:
 # Encumberance Strain Wounds
 # Xenology Underworld OuterRim Lore Education CoreWorlds RangedHeavy RangedLight Melee Lightsaber Gunnery Brawl Vigilance Survival Streetwise Stealth Skulduggery Resilience PilotingSpace PilotingPlanetary Perception Negotiation Medicine Mechanics Leadership Discipline Deception Coordination Cool Computers Coercion Charm Athletics Astrogation

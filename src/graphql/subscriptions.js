@@ -1069,3 +1069,36 @@ export const onDeleteFabricObject = /* GraphQL */ `
     }
   }
 `;
+export const onCreateDestinyPool = /* GraphQL */ `
+  subscription OnCreateDestinyPool {
+    onCreateDestinyPool {
+      id
+      light
+      dark
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateDestinyPool = /* GraphQL */ `
+  subscription OnUpdateDestinyPool {
+    onUpdateDestinyPool {
+      id
+      light
+      dark
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteDestinyPool = /* GraphQL */ `
+  subscription OnDeleteDestinyPool {
+    onDeleteDestinyPool {
+      id
+      light
+      dark
+      createdAt
+      updatedAt
+    }
+  }
+`;

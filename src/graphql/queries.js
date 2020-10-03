@@ -727,3 +727,32 @@ export const listFabricObjects = /* GraphQL */ `
     }
   }
 `;
+export const getDestinyPool = /* GraphQL */ `
+  query GetDestinyPool($id: ID!) {
+    getDestinyPool(id: $id) {
+      id
+      light
+      dark
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listDestinyPools = /* GraphQL */ `
+  query ListDestinyPools(
+    $filter: ModelDestinyPoolFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listDestinyPools(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        light
+        dark
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
