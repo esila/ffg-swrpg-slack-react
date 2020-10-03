@@ -70,7 +70,7 @@ function CharacterSheet(){
 
     return characterSheets.length > 0 ? (
         <div className={"charsheet"}>
-            <DestinyPool/>
+            <DestinyPool characterName={character.name}/>
             <form onSubmit={handleSubmit}>
                 <Character character={character} setState={setState} />
                 <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />

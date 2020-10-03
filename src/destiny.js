@@ -7,8 +7,10 @@ import {
 import {onUpdateDestinyPool} from "./graphql/subscriptions";
 import {listDestinyPools} from "./graphql/queries";
 import { UserContext} from "./App";
+import './destiny.css';
+import DiceRoller from "./diceRoller";
 
-function DestinyPool() {
+function DestinyPool({ characterName }) {
     const user = useContext(UserContext);
     const [destinyPool, setDestinyPool] = useState({});
 
@@ -49,14 +51,13 @@ function DestinyPool() {
             })
     }
 
-    async function updateDestinyPool() {
+    async function updateDestinyPool(light, dark) {
         //console.log("GOT HERE");
         //console.log(`UPDATE INPUT: ${JSON.stringify(fabricData)} / ${graphId}`);
         if (!destinyPool.id) return;
         //console.log("GOT PAST DATA TYPE");
-        const { id, light, dark } = destinyPool;
         await API.graphql({query: updateDestinyPoolMutation, variables: {
-            input: { id: id, light: light, dark: dark
+            input: { id: destinyPool.id, light: light, dark: dark
             }}})
             .then(success => {
                 console.log(`SUCCESS: ${JSON.stringify(success)}`);
@@ -66,10 +67,52 @@ function DestinyPool() {
             })
     }
     return destinyPool && Object.keys(destinyPool).includes("light") ? (
-        <div>
-            <p>{JSON.stringify(destinyPool)}</p>
+        <div className="destiny">
+            <div className="token_display">
+                <h3>Destiny Points</h3>
+                {[...Array(destinyPool.light).keys()].map((elem) => {
+                    return (
+                        <img
+                            key={elem}
+                            src="https://cdn.shopify.com/s/files/1/0013/7332/t/8/assets/product.star-wars.lightside-emblem.png"
+                            width="4%"
+                            style={{cursor: "pointer"}}
+                            onClick={() => {
+                                const newLight = destinyPool.light - 1;
+                                const newDark = destinyPool.dark + 1;
+                                updateDestinyPool(newLight, newDark);
+                            }}
+                        />
+                    )
+                })}
+                {[...Array(destinyPool.dark).keys()].map((elem) => {
+                    return (
+                        <img
+                            key={elem}
+                            src="https://cdn.shopify.com/s/files/1/0013/7332/t/8/assets/product.star-wars.darkside-emblem.png"
+                            width="3%"
+                            style={user === "esila" ? {cursor: "pointer"} : {}}
+                            onClick={() => {
+                                if (user === "esila") {
+                                    const newLight = destinyPool.light + 1;
+                                    const newDark = destinyPool.dark - 1;
+                                    updateDestinyPool(newLight, newDark);
+                                }
+                            }}
+                        />
+                    )
+                })}
+                <div>
+                    <DiceRoller
+                        rollType={"skillroll"}
+                        diceString="1f"
+                        diceSource={`Destiny Point Roll`}
+                        diceUser={characterName || "anonymous"}
+                    />
+                </div>
+            </div>
             {user === "esila" &&
-                <>
+                <div className="admin_settings">
                     <label>Light Side Points</label>
                     <input
                         type="number"
@@ -97,9 +140,9 @@ function DestinyPool() {
                         }}
                     />
                     <button
-                        onClick={() => updateDestinyPool()}
+                        onClick={() => updateDestinyPool(destinyPool.light, destinyPool.dark)}
                     >Save Destiny</button>
-                </>
+                </div>
             }
         </div>
     ):
