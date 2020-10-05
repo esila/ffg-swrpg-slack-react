@@ -77,7 +77,9 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
     ];
     const mapList = [
         ["Range Bands", "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg"],
+        ["Krayt Fang", "https://s3.amazonaws.com/files.d20.io/images/3475756/Nfgcn3lIJFm3InNj5YLGXQ/original.png"],
         ["Mos Shuuta Streets", "https://kainrath.files.wordpress.com/2014/05/mos-shuuta-streets-expanded-small.jpg"],
+        ["Teemo's Palace", "https://vignette.wikia.nocookie.net/starwars/images/9/9b/Teemos_palace.png"],
     ];
 
     const user = useContext(UserContext);
