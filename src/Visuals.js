@@ -6,7 +6,7 @@ import {
     deleteFabricObject as deleteFabricObjectMutation,
     updateFabricObject as updateFabricObjectMutation
 } from "./graphql/mutations";
-import {onUpdateFabricObject} from "./graphql/subscriptions";
+import {onCreateFabricObject, onUpdateFabricObject} from "./graphql/subscriptions";
 import {listFabricObjects} from "./graphql/queries";
 import { UserContext} from "./App";
 import backgroundImage from "./backgroundMap";
@@ -17,6 +17,7 @@ function Visuals() {
 
     useEffect(() => {
         fetchFabricObjects();
+        subscribeCreateFabricObjects();
         subscribeFabricObjects();
     }, []);
 
@@ -35,9 +36,23 @@ function Visuals() {
         })
     }
 
+    async function subscribeCreateFabricObjects() {
+        await API.graphql(graphqlOperation(onCreateFabricObject)).subscribe({
+            next: subonCreateFabricObject => {
+                console.log(`subscribed message: ${JSON.stringify(subonCreateFabricObject.value.data.onCreateFabricObject)}`);
+                //setFabricObjects([subonCreateFabricObject.value.data.onCreateFabricObject]);
+                fetchFabricObjects();
+            }
+        })
+    }
+
     return fabricObjects.length > 0 ? (
         <div>
-            <MapCanvas fabricObjects={fabricObjects} background={background} setBackground={setBackground}/>
+            <MapCanvas
+                fabricObjects={fabricObjects}
+                background={background}
+                setBackground={setBackground}
+            />
         </div>
     ):
         <div></div>
@@ -54,22 +69,21 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
     }, [fabricObjects, background]);
 
     function initCanvas() {
+        console.log("INIT CANVAS");
         const canvas = canvasState || new fabric.Canvas(canvasEl.current);
         let canvasDict = {};
 
         const fabricData = fabricObjects.map((elem, idx) => {
-            console.log(elem);
             canvasDict[elem.fabricId] = elem.id;
             return elem.data;
         });
         const backgroundData = {...backgroundImage, src: background };
-        //console.log(`BackgroundData: ${JSON.stringify(backgroundData)}`);
-        //console.log(`{"objects": [${fabricData}], "backgroundImage": ${JSON.stringify(backgroundData)}}`);
         canvas.loadFromJSON(`{"objects": [${fabricData}], "backgroundImage": ${JSON.stringify(backgroundData)}}`);
-        //console.log(`CANVAS: ${JSON.stringify(canvas.toJSON(['fabricId']))}`);
 
-        !canvasState && canvas.on({
+        canvas.off('object:modified');
+        canvas.on({
             'object:modified': (e) => {
+                console.log("Object modified");
                 const fabricId = e.target.toJSON(['fabricId']).fabricId;
                 const graphId = canvasDict[fabricId];
                 const resp = updateFabricObject(graphId, JSON.stringify(e.target.toJSON(['fabricId'])));
@@ -86,41 +100,48 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
     }
 
     function addToCanvas() {
-        const canvas = canvasState || new fabric.Canvas(canvasEl.current);
-        canvasState && canvas.on({
-            'object:added': (e) => {
-                const fabricId = `${Date.now()}`;
-                if (!e.target.fabricId) {
-                    e.target.set('fabricId', fabricId);
-                    e.target.toJSON = (function(toJSON) {
-                        return function() {
-                            return fabric.util.object.extend(toJSON.call(this), {
-                                fabricId: this.fabricId,
-                            });
-                        };
-                    })(e.target.toJSON);
-                }
-                console.log(JSON.stringify(e.target));
-                const resp = createFabricObject(fabricId, JSON.stringify(e.target));
-                console.log(`RESP: ${JSON.stringify(resp)}`);
-            }
-        });
-
-        canvasState && fabric.Image.fromURL('http://kndr.io/ts/swt1/i/BothanMale-Ota2.png', function(myImg) {
-            //i create an extra var for to change some image properties
-             const img1 = myImg.set({
-                 left:0,
-                 top: 0,
-                 scaleX: .4,
-                 scaleY: .4,
-             });
-             canvas.add(img1);
-        });
-
-        // UseEffect's cleanup function
-        return () => {
-          canvas.dispose();
+        const bothan = {
+            "type": "image",
+            "version": "4.2.0",
+            "originX": "left",
+            "originY": "top",
+            "left": 0,
+            "top": 0,
+            "width": 330,
+            "height": 330,
+            "fill": "rgb(0,0,0)",
+            "stroke": null,
+            "strokeWidth": 0,
+            "strokeDashArray": null,
+            "strokeLineCap": "butt",
+            "strokeDashOffset": 0,
+            "strokeLineJoin": "miter",
+            "strokeMiterLimit": 4,
+            "scaleX": 0.4,
+            "scaleY": 0.4,
+            "angle": 0,
+            "flipX": false,
+            "flipY": false,
+            "opacity": 1,
+            "shadow": null,
+            "visible": true,
+            "backgroundColor": "",
+            "fillRule": "nonzero",
+            "paintFirst": "fill",
+            "globalCompositeOperation": "source-over",
+            "skewX": 0,
+            "skewY": 0,
+            "cropX": 0,
+            "cropY": 0,
+            "src": "http://kndr.io/ts/swt1/i/BothanMale-Ota2.png",
+            "crossOrigin": null,
+            "filters": [],
+            "fabricId": ""
         };
+        const fabricId = `${Date.now()}`;
+        const fabObj = {...bothan, fabricId: fabricId};
+        const resp = createFabricObject(fabricId, JSON.stringify(fabObj));
+        console.log(`RESP: ${JSON.stringify(resp)}`);
     }
 
     async function createFabricObject(fabricId, fabricData) {
@@ -142,7 +163,13 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
     }
 
     async function deleteFabricObject({ id }) {
-        await API.graphql({ query: deleteFabricObjectMutation, variables: { input: { id } }});
+        await API.graphql({ query: deleteFabricObjectMutation, variables: { input: { id } }})
+            .then(success => {
+                console.log(`SUCCESS`);
+            },
+                error => {
+                console.log(`ERROR`)
+                })
     }
 
     async function updateFabricObject(graphId, fabricData) {
@@ -173,7 +200,10 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                         className="chat__delete"
                         onClick={(event) => {
                             event.preventDefault();
-                            fabricObjects.forEach((obj) => { deleteFabricObject({id: obj.id}); })
+                            fabricObjects.forEach((obj) => {
+                                console.log(`DELETE: ${obj.id}`);
+                                deleteFabricObject({id: obj.id});
+                            })
                         }}
                     >
                         DELETE ALL
