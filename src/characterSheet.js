@@ -13,7 +13,8 @@ import './sheet-style.css';
 import { listCharacterSheets } from './graphql/queries';
 import {
     createCharacterSheet as createCharacterSheetMutation,
-    updateCharacterSheet as updateCharacterSheetMutation
+    updateCharacterSheet as updateCharacterSheetMutation,
+    deleteCharacterSheet as deleteCharacterSheetMutation, deleteFabricObject as deleteFabricObjectMutation
 } from "./graphql/mutations";
 
 function CharacterSheet(){
@@ -26,6 +27,7 @@ function CharacterSheet(){
     };
     const [characterSheets, setCharacterSheets] = useState([]);
     const [state, setState] = useState({...initState, ...player_name, user: user});
+    const [activeIndex, setActiveIndex] = useState(0);
     const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons, talents} = state;
 
     useEffect(() => {
@@ -36,21 +38,26 @@ function CharacterSheet(){
         const apiData = await API.graphql({ query: listCharacterSheets, variables: { filter: {user: {eq: user}}} });
         setCharacterSheets(apiData.data.listCharacterSheets.items);
         //console.log(apiData.data.listCharacterSheets.items[0]);
-        const {createdAt, updatedAt, ...rest} = apiData.data.listCharacterSheets.items[0];
-        //console.log("REST");
-        //console.log(JSON.stringify(rest));
+        const newData = apiData.data.listCharacterSheets.items && apiData.data.listCharacterSheets.items[0];
+        if (newData) {
+            console.log("newData: ", newData);
+            //console.log(JSON.stringify(rest));
 
-        const initTalents = rest.talents || initState.talents;
-        //console.log(`rest talents: ${JSON.stringify(rest.talents)}`);
-        //console.log(`init talents: ${JSON.stringify(initState.talents)}`);
-        const newRest = {...rest, talents: initTalents };
-        //console.log("NEWREST");
-        //console.log(JSON.stringify(newRest));
-        setState(newRest);
+            const initTalents = newData.talents || initState.talents;
+            //console.log(`rest talents: ${JSON.stringify(rest.talents)}`);
+            //console.log(`init talents: ${JSON.stringify(initState.talents)}`);
+            const newRest = {...newData, talents: initTalents};
+            //console.log("NEWREST");
+            //console.log(JSON.stringify(newRest));
+            setState(newRest);
+        } else {
+            setState({...initState, ...player_name, user: user});
+        }
     }
 
     async function createCharacterSheet() {
         if (!character.name || !character.player_name) return;
+        console.log("Create character sheet: ", state);
         await API.graphql({ query: createCharacterSheetMutation, variables: { input: state } });
         fetchCharacterSheets();
     }
@@ -63,12 +70,46 @@ function CharacterSheet(){
         fetchCharacterSheets();
     }
 
+    async function deleteCharacterSheet({ id }) {
+        setActiveIndex(0);
+        await API.graphql({ query: deleteCharacterSheetMutation, variables: { input: { id } }})
+            .then(success => {
+                console.log(`SUCCESS`);
+            },
+                error => {
+                console.log(`ERROR`)
+                });
+        fetchCharacterSheets();
+    }
+
     function handleSubmit(event) {
         event.preventDefault();
-        characterSheets.length > 0 && characterSheets[0].id ? updateCharacterSheet(characterSheets[0].id) : createCharacterSheet()
+        characterSheets.length > 0 && characterSheets[activeIndex] && characterSheets[activeIndex].id ? updateCharacterSheet(characterSheets[activeIndex].id) : createCharacterSheet()
     }
 
     return characterSheets.length > 0 ? (
+        <>
+        <div className="character_select">
+            <a
+                href="#"
+                onClick={() => {
+                    setActiveIndex();
+                    setState({...initState, ...player_name, user: user});
+                }}
+            >New Character Sheet |</a>
+            {characterSheets.map((cs, cs_index) => {
+                return (
+                    <a key={cs_index} href="#" onClick={() => {
+                        setActiveIndex(cs_index);
+                        const {createdAt, updatedAt, ...rest} = characterSheets[cs_index];
+                        console.log("Curr CS: ", rest);
+                        //const initTalents = rest.talents || initState.talents;
+                        //const newRest = {...rest, talents: initTalents };
+                        setState(rest);
+                    }}>{cs.character.name} |</a>
+                )
+            })}
+        </div>
         <div className={"charsheet"}>
             <DestinyPool characterName={character.name}/>
             <form onSubmit={handleSubmit}>
@@ -95,9 +136,24 @@ function CharacterSheet(){
                     talents={talents}
                     setState={setState}
                 />
-                <p><button>Submit</button></p>
+                <p><button>Save</button></p>
+                <p><button
+                        className="chat__delete"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            console.log("DELETE CALLED FOR ACTIVE INDEX: ", activeIndex);
+                            console.log("DELETE CALLED FOR: ", characterSheets[activeIndex].character.name);
+                            const deleteId = characterSheets[activeIndex].id;
+                            if (!deleteId) return;
+                            deleteCharacterSheet({id: deleteId});
+                        }}
+                    >
+                        DELETE CHARACTER SHEET
+                    </button>
+                </p>
             </form>
         </div>
+        </>
     )
         :
         <div className={"charsheet"}>
@@ -125,7 +181,7 @@ function CharacterSheet(){
                     talents={talents}
                     setState={setState}
                 />
-                <p><button>Submit</button></p>
+                <p><button>Save</button></p>
             </form>
         </div>
 }
