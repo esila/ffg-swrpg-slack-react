@@ -59,9 +59,16 @@ function Visuals() {
 }
 
 function MapCanvas({ fabricObjects, background, setBackground }) {
+     const tokenList = [
+        ["Stormtrooper", "http://kndr.io/ts/swt1/i/StormtrooperMale_4.png"],
+        ["Lowhrick", "https://kndr.io/ts/swt1/i/WookieeMaleRoar.png"],
+        ["Sasha", "http://kndr.io/ts/swt1/i/HumanWomanRebelScout.png"],
+    ];
     const user = useContext(UserContext);
     const canvasEl = useRef(null);
     const [canvasState, setCanvasState] = useState();
+    const [token, setToken] = useState(tokenList[0][1]);
+
 
     useEffect(() => {
         initCanvas();
@@ -99,16 +106,15 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         };
     }
 
-    function addToCanvas() {
-        const bothan = {
+    function addToCanvas(tokenUrl) {
+        console.log("TOKEN URL: ", tokenUrl);
+        const tokenStub = {
             "type": "image",
             "version": "4.2.0",
             "originX": "left",
             "originY": "top",
             "left": 0,
             "top": 0,
-            "width": 330,
-            "height": 330,
             "fill": "rgb(0,0,0)",
             "stroke": null,
             "strokeWidth": 0,
@@ -133,13 +139,13 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
             "skewY": 0,
             "cropX": 0,
             "cropY": 0,
-            "src": "http://kndr.io/ts/swt1/i/BothanMale-Ota2.png",
+            "src": tokenUrl,
             "crossOrigin": null,
             "filters": [],
             "fabricId": ""
         };
         const fabricId = `${Date.now()}`;
-        const fabObj = {...bothan, fabricId: fabricId};
+        const fabObj = {...tokenStub, fabricId: fabricId};
         const resp = createFabricObject(fabricId, JSON.stringify(fabObj));
         console.log(`RESP: ${JSON.stringify(resp)}`);
     }
@@ -193,8 +199,21 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         <>
             {user === "esila" &&
                 <>
+                    <select
+                        name="token_select"
+                        onChange={event => {
+                            event.preventDefault();
+                            const { target: {value} } = event;
+                            setToken(value);
+                        }}
+                    >
+                        {tokenList.map((token, token_idx) => {
+                            const [name, value] = token;
+                            return <option key={token_idx} value={value}>{name}</option>
+                        })}
+                    </select>
                     <button
-                        onClick={() => addToCanvas()}
+                        onClick={() => addToCanvas(token)}
                     >Add Elements</button>
                     <button
                         className="chat__delete"
