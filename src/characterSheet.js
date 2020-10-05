@@ -41,12 +41,16 @@ function CharacterSheet(){
         const newData = apiData.data.listCharacterSheets.items && apiData.data.listCharacterSheets.items[0];
         if (newData) {
             console.log("newData: ", newData);
-            //console.log(JSON.stringify(rest));
-
-            const initTalents = newData.talents || initState.talents;
+            let restData = newData;
+            if (Object.keys(newData).includes("createdAt")) {
+                const {createdAt, updatedAt, ...rest} = newData;
+                restData = rest;
+            }
+            console.log(JSON.stringify(restData));
+            const initTalents = restData.talents || initState.talents;
             //console.log(`rest talents: ${JSON.stringify(rest.talents)}`);
             //console.log(`init talents: ${JSON.stringify(initState.talents)}`);
-            const newRest = {...newData, talents: initTalents};
+            const newRest = {...restData, talents: initTalents};
             //console.log("NEWREST");
             //console.log(JSON.stringify(newRest));
             setState(newRest);
