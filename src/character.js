@@ -58,11 +58,13 @@ function Character({character, setState}){
                                 type={"text"}
                                 setState={setState}
                             />
-                            {character.image_url &&
+                            <td rowSpan={4}>
+                                {character.image_url &&
                                 <div style={{textAlign: "center"}}>
                                     <img src={character.image_url}/>
                                 </div>
-                            }
+                                }
+                            </td>
                         </tr>
                         <tr>
                            <CharacterSelect
