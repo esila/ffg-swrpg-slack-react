@@ -6,7 +6,7 @@ import {
     deleteFabricObject as deleteFabricObjectMutation,
     updateFabricObject as updateFabricObjectMutation
 } from "./graphql/mutations";
-import {onCreateFabricObject, onUpdateFabricObject} from "./graphql/subscriptions";
+import {onCreateFabricObject, onDeleteFabricObject, onUpdateFabricObject} from "./graphql/subscriptions";
 import {listFabricObjects} from "./graphql/queries";
 import { UserContext} from "./App";
 import backgroundImage from "./backgroundMap";
@@ -18,7 +18,8 @@ function Visuals() {
     useEffect(() => {
         fetchFabricObjects();
         subscribeCreateFabricObjects();
-        subscribeFabricObjects();
+        subscribeUpdateFabricObjects();
+        subscribeDeleteFabricObjects();
     }, []);
 
     async function fetchFabricObjects() {
@@ -26,7 +27,7 @@ function Visuals() {
         setFabricObjects(apiData.data.listFabricObjects.items);
     }
 
-    async function subscribeFabricObjects() {
+    async function subscribeUpdateFabricObjects() {
         await API.graphql(graphqlOperation(onUpdateFabricObject)).subscribe({
             next: subonUpdateFabricObject => {
                 console.log(`subscribed message: ${JSON.stringify(subonUpdateFabricObject.value.data.onUpdateFabricObject)}`);
@@ -46,6 +47,16 @@ function Visuals() {
         })
     }
 
+    async function subscribeDeleteFabricObjects() {
+        await API.graphql(graphqlOperation(onDeleteFabricObject)).subscribe({
+            next: subonDeleteFabricObject => {
+                console.log(`subscribed message: ${JSON.stringify(subonDeleteFabricObject.value.data.onDeleteFabricObject)}`);
+                //setFabricObjects([subonDeleteFabricObject.value.data.onDeleteFabricObject]);
+                fetchFabricObjects();
+            }
+        })
+    }
+
     return fabricObjects.length > 0 ? (
         <div>
             <MapCanvas
@@ -59,16 +70,21 @@ function Visuals() {
 }
 
 function MapCanvas({ fabricObjects, background, setBackground }) {
-     const tokenList = [
+    const tokenList = [
         ["Stormtrooper", "http://kndr.io/ts/swt1/i/StormtrooperMale_4.png"],
         ["Lowhrick", "https://kndr.io/ts/swt1/i/WookieeMaleRoar.png"],
         ["Sasha", "http://kndr.io/ts/swt1/i/HumanWomanRebelScout.png"],
     ];
+    const mapList = [
+        ["Range Bands", "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg"],
+        ["Mos Shuuta Streets", "https://kainrath.files.wordpress.com/2014/05/mos-shuuta-streets-expanded-small.jpg"],
+    ];
+
     const user = useContext(UserContext);
     const canvasEl = useRef(null);
     const [canvasState, setCanvasState] = useState();
     const [token, setToken] = useState(tokenList[0][1]);
-
+    const [activeToken, setActiveToken] = useState();
 
     useEffect(() => {
         initCanvas();
@@ -88,6 +104,9 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         canvas.loadFromJSON(`{"objects": [${fabricData}], "backgroundImage": ${JSON.stringify(backgroundData)}}`);
 
         canvas.off('object:modified');
+        canvas.off('selection:created');
+        canvas.off('selection:updated');
+        canvas.off('selection:cleared');
         canvas.on({
             'object:modified': (e) => {
                 console.log("Object modified");
@@ -96,7 +115,25 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                 const resp = updateFabricObject(graphId, JSON.stringify(e.target.toJSON(['fabricId'])));
                 //console.log(`UPDATE RESP: ${JSON.stringify(resp)}`);
                 //console.log(JSON.stringify(e.target.toJSON(['fabricId'])));
-            }
+            },
+            'selection:created': (e) => {
+                console.log("Object selection created");
+                const fabricId = e.target.toJSON(['fabricId']).fabricId;
+                const graphId = canvasDict[fabricId];
+                console.log(graphId);
+                setActiveToken(graphId);
+            },
+            'selection:updated': (e) => {
+                console.log("Object selection updated");
+                const fabricId = e.target.toJSON(['fabricId']).fabricId;
+                const graphId = canvasDict[fabricId];
+                console.log(graphId);
+                setActiveToken(graphId);
+            },
+            'selection:cleared': (e) => {
+                console.log("Object selection cleared");
+                setActiveToken();
+            },
         });
 
         setCanvasState(canvas);
@@ -180,7 +217,7 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
 
     async function updateFabricObject(graphId, fabricData) {
         //console.log("GOT HERE");
-        //console.log(`UPDATE INPUT: ${JSON.stringify(fabricData)} / ${graphId}`);
+        console.log(`UPDATE INPUT: ${JSON.stringify(fabricData)} / ${graphId}`);
         if (!fabricData || !graphId) return;
         //console.log("GOT PAST DATA TYPE");
         await API.graphql({query: updateFabricObjectMutation, variables: {
@@ -227,15 +264,32 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                     >
                         DELETE ALL
                     </button>
-
+                    <button
+                        className="chat__delete"
+                        onClick={(event) => {
+                            event.preventDefault();
+                            console.log("DELETE CALLED FOR: ", activeToken);
+                            if (!activeToken) return;
+                            deleteFabricObject({id: activeToken});
+                        }}
+                    >
+                        DELETE ACTIVE TOKEN
+                    </button>
                 </>
             }
-            <button
-                onClick={() => setBackground("https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg")}
-            >Range Bands</button>
-            <button
-                onClick={() => setBackground("https://kainrath.files.wordpress.com/2014/05/mos-shuuta-streets-expanded-small.jpg")}
-            >Mos Shuuta Streets</button>
+            <select
+                name="map_select"
+                onChange={event => {
+                    event.preventDefault();
+                    const { target: {value} } = event;
+                    setBackground(value);
+                }}
+            >
+                {mapList.map((map, map_idx) => {
+                    const [name, value] = map;
+                    return <option key={map_idx} value={value}>{name}</option>
+                })}
+            </select>
             <canvas ref={canvasEl} id="my-fabric-canvas" width="1920" height="1080" />
         </>
     ):
