@@ -29,7 +29,7 @@ function CharacterSheet(){
     const [characterSheets, setCharacterSheets] = useState([]);
     const [state, setState] = useState({...initState, ...player_name, user: user});
     const [activeIndex, setActiveIndex] = useState(0);
-    const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons, talents} = state;
+    const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons, talents, vehicles} = state;
 
     useEffect(() => {
         fetchCharacterSheets();
@@ -49,9 +49,10 @@ function CharacterSheet(){
             }
             //console.log(JSON.stringify(restData));
             const initTalents = restData.talents || initState.talents;
+            const initVehicles = restData.vehicles || initState.vehicles;
             //console.log(`rest talents: ${JSON.stringify(rest.talents)}`);
             //console.log(`init talents: ${JSON.stringify(initState.talents)}`);
-            const newRest = {...restData, talents: initTalents};
+            const newRest = {...restData, talents: initTalents, vehicles: initVehicles};
             //console.log("NEWREST");
             //console.log(JSON.stringify(newRest));
             setState(newRest);
@@ -137,7 +138,7 @@ function CharacterSheet(){
                     combatSkills={combatSkills}
                     setState={setState}
                 />
-                <Vehicles vehicles={"foobar"} setState={setState} />
+                <Vehicles vehicles={vehicles} setState={setState} />
                 <Talents
                     talents={talents}
                     setState={setState}
@@ -183,7 +184,7 @@ function CharacterSheet(){
                     combatSkills={combatSkills}
                     setState={setState}
                 />
-                <Vehicles vehicles={"foobar"} setState={setState} />
+                <Vehicles vehicles={vehicles} setState={setState} />
                 <Talents
                     talents={talents}
                     setState={setState}

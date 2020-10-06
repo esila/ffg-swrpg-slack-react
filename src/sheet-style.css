@@ -1786,7 +1786,9 @@ table.sheet-ship tr:hover td {
 
 .sheet-ship-defense label {
     color: #fff;
-    text-align: center
+    text-align: center;
+    line-height: 20px;
+    font-weight: bold;
 }
 
 .sheet-planetary-vehicle-defense label {

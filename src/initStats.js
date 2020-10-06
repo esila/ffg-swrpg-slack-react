@@ -226,6 +226,47 @@ const talentStub = {
 };
 const talents = [talentStub];
 
+const vehicleStub = {
+    starship: {
+        defense: {
+            silhouette: 0,
+            armor: 0,
+            speed: {
+                max: 0,
+                current: 0
+            },
+            hull_trauma: {
+                threshold: 0,
+                current: 0
+            },
+            handling: 0,
+            system_strain: {
+                threshold: 0,
+                current: 0
+            },
+            fore: 0,
+            port: 0,
+            starboard: 0,
+            aft: 0
+        },
+        name: "",
+        hull_type: "",
+        manufacturer: "",
+        hyperdrive_primary_class: "",
+        hyperdrive_backup_class: "",
+        consumables: "",
+        book_page: "",
+        restricted: "no",
+        hard_points: 0,
+        sensor_range: "none",
+        ship_complement: "",
+        navicomputer: "",
+        rarity: "",
+        value: ""
+    },
+    planetary: {}
+};
+
 const initState = {
     character: initCharacter,
     characteristics: initCharacteristicsState,
@@ -235,6 +276,7 @@ const initState = {
     soakWounds: initSoakWounds,
     weapons: weapons,
     talents: talents,
+    vehicles: vehicleStub,
 };
 
 export default initState;
