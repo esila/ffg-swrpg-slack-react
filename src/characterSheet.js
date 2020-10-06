@@ -9,6 +9,7 @@ import Skills from './skills'
 import Weapons from './weapons'
 import Talents from './talents';
 import DestinyPool from './destiny';
+import Vehicles from './vehicles';
 import './sheet-style.css';
 import { listCharacterSheets } from './graphql/queries';
 import {
@@ -46,7 +47,7 @@ function CharacterSheet(){
                 const {createdAt, updatedAt, ...rest} = newData;
                 restData = rest;
             }
-            console.log(JSON.stringify(restData));
+            //console.log(JSON.stringify(restData));
             const initTalents = restData.talents || initState.talents;
             //console.log(`rest talents: ${JSON.stringify(rest.talents)}`);
             //console.log(`init talents: ${JSON.stringify(initState.talents)}`);
@@ -136,6 +137,7 @@ function CharacterSheet(){
                     combatSkills={combatSkills}
                     setState={setState}
                 />
+                <Vehicles vehicles={"foobar"} setState={setState} />
                 <Talents
                     talents={talents}
                     setState={setState}
@@ -181,6 +183,7 @@ function CharacterSheet(){
                     combatSkills={combatSkills}
                     setState={setState}
                 />
+                <Vehicles vehicles={"foobar"} setState={setState} />
                 <Talents
                     talents={talents}
                     setState={setState}

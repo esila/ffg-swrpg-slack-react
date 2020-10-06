@@ -471,7 +471,7 @@ input.sheet-tab-new:checked + span {
 /* END TAB CODE */
 
 div.sheet-tab-content {
-    display: none;
+    /*display: none;*/
     border-top: 1px solid #444;
     margin-top: 2px;
 }
@@ -1682,6 +1682,7 @@ input.sheet-view-attachments:checked ~ .sheet-attachments {
 
 table.sheet-ship tr td {
     border: none;
+    text-align: center;
     background-color: transparent;
 }
 
@@ -1713,12 +1714,17 @@ table.sheet-ship tr:hover td {
     /* background-image: url('http://i.imgur.com/FxUooOF.png'); */
     /* Threshold / Current - Border */
     background-image: url('http://i.imgur.com/cODj4n5.png'); /* Threshold / Current - Border */
-    background-position: center 0px;
+    background-position: center 10px;
     background-repeat: no-repeat;
     vertical-align: top;
     width: 33%; /*153px;*/
     height: 87px;
     text-align: center;
+}
+
+.sheet-ship-char-thre-bg .sheet-label-title {
+    line-height: 45px;
+    font-weight: bold;
 }
 
 .sheet-ship-char-thre-bg-speed {
@@ -1727,11 +1733,16 @@ table.sheet-ship tr:hover td {
     background-image: url('http://i.imgur.com/cODj4n5.png'); /* Threshold / Current - Border */
     background-position: center 25px;
     background-repeat: no-repeat;
-    vertical-align: top;
+    vertical-align: middle;
     width: 33%; /*153px;*/
     height: 87px;
     text-align: center;
     padding-top: 28px;
+}
+
+.sheet-ship-char-thre-bg-speed .sheet-label-title {
+    line-height: 47px;
+    font-weight: bold;
 }
 
 .sheet-ship-char-bg {
@@ -1742,7 +1753,7 @@ table.sheet-ship tr:hover td {
     background-repeat: no-repeat;
     width: 99px;
     height: 66px;
-    vertical-align: top;
+    vertical-align: middle;
     padding-top: 40px;
 }
 
@@ -1759,7 +1770,7 @@ table.sheet-ship tr:hover td {
 .sheet-ship-char-bg.sheet-armor {
     width: 26%;
     padding-top: 3px;
-    background-position: center 0;
+    background-position: center 35px;
 }
 
 .sheet-ship [type=number] {
