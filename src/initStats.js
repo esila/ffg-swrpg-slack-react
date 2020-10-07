@@ -226,6 +226,36 @@ const talentStub = {
 };
 const talents = [talentStub];
 
+const vehicleWeaponStub = {
+    character_name: "",
+    weapon_name: "",
+    arc_fore: false,
+    arc_starboard: false,
+    arc_aft: false,
+    arc_port: false,
+    critical: 0,
+    damage: 0,
+    range: "Close",
+    dice: "",
+    special: "",
+    skill: "Gunnery",
+    book_page: "",
+    rarity: "",
+    restricted: "No",
+    value: ""
+};
+
+const vehicleAttachmentStub = {
+    name: "",
+    hard_points: 0,
+    base_modifiers: "",
+    modifications: "",
+    book_page: "",
+    rarity: "",
+    restricted: "No",
+    value: ""
+};
+
 const vehicleStub = {
     starship: {
         defense: {
@@ -262,7 +292,9 @@ const vehicleStub = {
         ship_complement: "",
         navicomputer: "",
         rarity: "",
-        value: ""
+        value: "",
+        weapons: [vehicleWeaponStub],
+        attachments: [vehicleAttachmentStub]
     },
     planetary: {}
 };
