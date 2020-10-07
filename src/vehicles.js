@@ -209,6 +209,99 @@ function Vehicles({ vehicles, setState }){
                         </table>
                     </div>
                 </div>
+                <div className="sheet-row">
+                    <div className="sheet-small-12 sheet-column">
+                        <h3 className="sheet-section-header">Starship Weapons</h3>
+                        <input name="attr_starship-Weapons" value="1"
+                               style={{width: "250px", height: "30px", margin: "-44px -20px 0 297px", float: "left"}}
+                               className="sheet-toggle sheet-weapon-section-toggle" type="checkbox" checked="checked"/>
+                        <div className="sheet-weapon-section">
+                            <table cellSpacing="0" cellPadding="0" border="0">
+                                <thead>
+                                <tr>
+                                    <th>Character Name</th>
+                                    <th>Weapon Name</th>
+                                    <th>Arc</th>
+                                    <th>Crit</th>
+                                    <th>Dmg</th>
+                                    <th colSpan="2">Range/Skill</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input name='attr_spaceWeaponCharacterName' type="text"/></td>
+                                    <td><input name='attr_spaceWeaponName' type="text"/></td>
+                                    <td className="sheet-firearc-field">
+                                        <input name='attr_space-fireArcFore' type="checkbox"
+                                               className="sheet-fireArcFore" title="Fore"/>
+                                        <input name='attr_space-fireArcStarboard' type="checkbox"
+                                               className="sheet-fireArcStarboard" title="Starboard"/>
+                                        <input name='attr_space-fireArcAft' type="checkbox"
+                                               className="sheet-fireArcAft" title="Aft"/>
+                                        <input name='attr_space-fireArcPort' type="checkbox"
+                                               className="sheet-fireArcPort" title="Port"/>
+                                        <span className="sheet-fireArcForeImg"></span>
+                                        <span className="sheet-fireArcStarboardImg"></span>
+                                        <span className="sheet-fireArcAftImg"></span>
+                                        <span className="sheet-fireArcPortImg"></span>
+                                    </td>
+                                    <td style={{width: "50px"}}><input name='attr_spaceWeaponCrit' type="number" max="99"
+                                                                  min="0" value="0"/></td>
+                                    <td style={{width: "50px"}}><input name='attr_spaceWeaponDmg' type="number" max="99"
+                                                                  min="0" value="0"/></td>
+                                    <td style={{width: "150px"}}>
+                                        <select name='attr_spaceWeaponRange'>
+                                            <option value="Close">Close</option>
+                                            <option value="Short">Short</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Long">Long</option>
+                                            <option value="Extreme">Extreme</option>
+                                        </select>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td><label style={{display: "inline-block", width: "25%"}}>Dice:</label><input
+                                        style={{display: "inline-block", width: "74%"}} name='attr_spaceWeaponDice'
+                                        type="text"/></td>
+                                    <td colSpan="4"><label style={{display: "inline-block", width: "25%"}}>Special:</label><input
+                                        style={{display: "inline-block", width: "74%"}} name='attr_spaceWeaponSpecial'
+                                        type="text"/></td>
+                                    <td>
+                                        <select name='attr_spaceWeaponSkill'>
+                                            <option value="skill:agility,rankGunnery">Gunnery</option>
+                                            <option value="skill:agility,rankHeavy">Ranged - Heavy</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button type='roll' name='roll_space-shipWeapon'
+                                                value='!eed rollPlayer(character:@{spaceWeaponCharacterName}|encum|@{spaceWeaponSkill}) label(Weapon:@{spaceWeaponName}|Vehicle:@{transport-space-name}|Damage:@{spaceWeaponDmg}|Critical:@{spaceWeaponCrit}|Range:@{spaceweaponrange}|Qualities:@{spaceWeaponSpecial}) combat(vehicle) @{spaceWeaponDice} @{dicePool} (gmdice)'></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Book &amp; Page:</label></td>
+                                    <td><input name='attr_space-weapon_bookpage' type="text"/></td>
+                                    <td><label>Rarity</label></td>
+                                    <td><input name='attr_space-weapon_rarity' type="number" min="1" max="10"/></td>
+                                    <td><label>Restricted:</label></td>
+                                    <td>
+                                        <select name='attr_space-weapon_restrict'>
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Value:</label></td>
+                                    <td><input name='attr_space-weapon_value' type="text"/></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <br/>
+                        </div>
+                    </div>
+                    <div className="sheet-clear"></div>
+                </div>
             </div>
         </div>
     )
