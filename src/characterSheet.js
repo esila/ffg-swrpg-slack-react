@@ -90,6 +90,7 @@ function CharacterSheet(){
 
     function handleSubmit(event) {
         event.preventDefault();
+        console.log(state);
         characterSheets.length > 0 && characterSheets[activeIndex] && characterSheets[activeIndex].id ? updateCharacterSheet(characterSheets[activeIndex].id) : createCharacterSheet()
     }
 

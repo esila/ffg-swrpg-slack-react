@@ -39,6 +39,61 @@ export const onCreateCharacterSheet = /* GraphQL */ `
         xp_cost
         summary
       }
+      vehicles {
+        starship {
+          name
+          hull_type
+          manufacturer
+          hyperdrive_primary_class
+          hyperdrive_backup_class
+          consumables
+          book_page
+          restricted
+          hard_points
+          sensor_range
+          ship_complement
+          navicomputer
+          rarity
+          value
+          starship_attachments {
+            name
+            hard_points
+            base_modifiers
+            modifications
+            book_page
+            rarity
+            restricted
+            value
+          }
+          starship_weapons {
+            character_name
+            weapon_name
+            arc_fore
+            arc_starboard
+            arc_aft
+            arc_port
+            critical
+            damage
+            range
+            dice
+            special
+            skill
+            book_page
+            rarity
+            restricted
+            value
+          }
+          starship_defense {
+            silhouette
+            armor
+            handling
+            fore
+            port
+            starboard
+            aft
+          }
+        }
+      }
       soakWounds {
         soak
         force_rating {
@@ -385,6 +440,61 @@ export const onUpdateCharacterSheet = /* GraphQL */ `
         xp_cost
         summary
       }
+      vehicles {
+        starship {
+          name
+          hull_type
+          manufacturer
+          hyperdrive_primary_class
+          hyperdrive_backup_class
+          consumables
+          book_page
+          restricted
+          hard_points
+          sensor_range
+          ship_complement
+          navicomputer
+          rarity
+          value
+          starship_attachments {
+            name
+            hard_points
+            base_modifiers
+            modifications
+            book_page
+            rarity
+            restricted
+            value
+          }
+          starship_weapons {
+            character_name
+            weapon_name
+            arc_fore
+            arc_starboard
+            arc_aft
+            arc_port
+            critical
+            damage
+            range
+            dice
+            special
+            skill
+            book_page
+            rarity
+            restricted
+            value
+          }
+          starship_defense {
+            silhouette
+            armor
+            handling
+            fore
+            port
+            starboard
+            aft
+          }
+        }
+      }
       soakWounds {
         soak
         force_rating {
@@ -730,6 +840,61 @@ export const onDeleteCharacterSheet = /* GraphQL */ `
         book_page
         xp_cost
         summary
+      }
+      vehicles {
+        starship {
+          name
+          hull_type
+          manufacturer
+          hyperdrive_primary_class
+          hyperdrive_backup_class
+          consumables
+          book_page
+          restricted
+          hard_points
+          sensor_range
+          ship_complement
+          navicomputer
+          rarity
+          value
+          starship_attachments {
+            name
+            hard_points
+            base_modifiers
+            modifications
+            book_page
+            rarity
+            restricted
+            value
+          }
+          starship_weapons {
+            character_name
+            weapon_name
+            arc_fore
+            arc_starboard
+            arc_aft
+            arc_port
+            critical
+            damage
+            range
+            dice
+            special
+            skill
+            book_page
+            rarity
+            restricted
+            value
+          }
+          starship_defense {
+            silhouette
+            armor
+            handling
+            fore
+            port
+            starboard
+            aft
+          }
+        }
       }
       soakWounds {
         soak

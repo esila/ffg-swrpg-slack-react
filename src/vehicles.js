@@ -1,9 +1,9 @@
 import React from "react";
 
 function Vehicles({ vehicles, setState }){
-    const starship_defense = vehicles.starship.defense;
-    const starship_weapons = vehicles.starship.weapons;
-    const starship_attachments = vehicles.starship.attachments;
+    const starship_defense = vehicles.starship.starship_defense;
+    const starship_weapons = vehicles.starship.starship_weapons;
+    const starship_attachments = vehicles.starship.starship_attachments;
 
     function handleDefenseKeys(e, vehicle_type) {
         e.preventDefault();
@@ -14,8 +14,8 @@ function Vehicles({ vehicles, setState }){
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    defense: {
-                        ...prev.vehicles[vehicle_type].defense,
+                    starship_defense: {
+                        ...prev.vehicles[vehicle_type].starship_defense,
                         [name]: parseInt(value)
                     }
                 }
@@ -33,10 +33,10 @@ function Vehicles({ vehicles, setState }){
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    defense: {
-                        ...prev.vehicles[vehicle_type].defense,
+                    starship_defense: {
+                        ...prev.vehicles[vehicle_type].starship_defense,
                         [attr]: {
-                            ...prev.vehicles[vehicle_type].defense[attr],
+                            ...prev.vehicles[vehicle_type].starship_defense[attr],
                             [thresh_curr]: parseInt(value)
                         }
                     }
@@ -58,7 +58,7 @@ function Vehicles({ vehicles, setState }){
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    weapons: items
+                    starship_weapons: items
                 }
             }
         }))
@@ -77,7 +77,7 @@ function Vehicles({ vehicles, setState }){
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    attachments: items
+                    starship_attachments: items
                 }
             }
         }))
@@ -97,7 +97,7 @@ function Vehicles({ vehicles, setState }){
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    weapons: items
+                    starship_weapons: items
                 }
             }
         }))
@@ -130,8 +130,8 @@ function Vehicles({ vehicles, setState }){
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    weapons: [
-                        ...prev.vehicles[vehicle_type].weapons,
+                    starship_weapons: [
+                        ...prev.vehicles[vehicle_type].starship_weapons,
                         vehicleWeaponStub
                     ]
                 }
@@ -141,14 +141,14 @@ function Vehicles({ vehicles, setState }){
 
     function removeVehicleWeapon(event, vehicle_type, idx) {
         event.preventDefault();
-        vehicles[vehicle_type].weapons.splice(idx, 1);
+        vehicles[vehicle_type].starship_weapons.splice(idx, 1);
         setState(prev => ({
             ...prev,
             vehicles: {
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    weapons: vehicles[vehicle_type].weapons
+                    starship_weapons: vehicles[vehicle_type].starship_weapons
                 }
             }
         }));
@@ -173,8 +173,8 @@ function Vehicles({ vehicles, setState }){
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    attachments: [
-                        ...prev.vehicles[vehicle_type].attachments,
+                    starship_attachments: [
+                        ...prev.vehicles[vehicle_type].starship_attachments,
                         vehicleAttachmentStub
                     ]
                 }
@@ -184,20 +184,18 @@ function Vehicles({ vehicles, setState }){
 
     function removeVehicleAttachment(event, vehicle_type, idx) {
         event.preventDefault();
-        vehicles[vehicle_type].attachments.splice(idx, 1);
+        vehicles[vehicle_type].starship_attachments.splice(idx, 1);
         setState(prev => ({
             ...prev,
             vehicles: {
                 ...prev.vehicles,
                 [vehicle_type]: {
                     ...prev.vehicles[vehicle_type],
-                    attachments: vehicles[vehicle_type].attachments
+                    starship_attachments: vehicles[vehicle_type].starship_attachments
                 }
             }
         }));
     }
-    console.log("VEHICLES");
-    console.log(vehicles);
     return (
         <div className="sheet-tab-content sheet-tab-ship-sheet">
             <div className="sheet-tab-content sheet-tab-transport-space">

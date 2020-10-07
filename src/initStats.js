@@ -258,7 +258,7 @@ const vehicleAttachmentStub = {
 
 const vehicleStub = {
     starship: {
-        defense: {
+        starship_defense: {
             silhouette: 0,
             armor: 0,
             speed: {
@@ -293,10 +293,9 @@ const vehicleStub = {
         navicomputer: "",
         rarity: "",
         value: "",
-        weapons: [vehicleWeaponStub],
-        attachments: [vehicleAttachmentStub]
-    },
-    planetary: {}
+        starship_weapons: [vehicleWeaponStub],
+        starship_attachments: [vehicleAttachmentStub]
+    }
 };
 
 const initState = {
