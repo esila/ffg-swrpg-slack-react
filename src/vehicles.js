@@ -45,6 +45,64 @@ function Vehicles({ vehicles, setState }){
         }))
     }
 
+    function handleWeapon(e, vehicle_type, weapon_idx) {
+        e.preventDefault();
+        const { target: {value, name} } = e;
+        let items = [...starship_weapons];
+        let item = {...items[weapon_idx]};
+        item[name] = value;
+        items[weapon_idx] = item;
+        setState(prev => ({
+            ...prev,
+            vehicles: {
+                ...prev.vehicles,
+                [vehicle_type]: {
+                    ...prev.vehicles[vehicle_type],
+                    weapons: items
+                }
+            }
+        }))
+    }
+
+    function handleAttachment(e, vehicle_type, attachment_idx) {
+        e.preventDefault();
+        const { target: {value, name} } = e;
+        let items = [...starship_attachments];
+        let item = {...items[attachment_idx]};
+        item[name] = value;
+        items[attachment_idx] = item;
+        setState(prev => ({
+            ...prev,
+            vehicles: {
+                ...prev.vehicles,
+                [vehicle_type]: {
+                    ...prev.vehicles[vehicle_type],
+                    attachments: items
+                }
+            }
+        }))
+    }
+
+    function handleWeaponCheckbox(e, vehicle_type, weapon_idx) {
+        const target = e.target;
+        const value = target.checked;
+        const name = target.name;
+        let items = [...starship_weapons];
+        let item = {...items[weapon_idx]};
+        item[name] = value;
+        items[weapon_idx] = item;
+        setState(prev => ({
+            ...prev,
+            vehicles: {
+                ...prev.vehicles,
+                [vehicle_type]: {
+                    ...prev.vehicles[vehicle_type],
+                    weapons: items
+                }
+            }
+        }))
+    }
+
     function addVehicleWeapon(event, vehicle_type) {
         event.preventDefault();
 
@@ -310,7 +368,7 @@ function Vehicles({ vehicles, setState }){
                         <h3 className="sheet-section-header">Starship Weapons</h3>
                         {starship_weapons && starship_weapons.map((weapon, weapon_idx) => {
                             return (
-                                <div className="sheet-weapon-section">
+                                <div key={weapon_idx} className="sheet-weapon-section">
                                     <table cellSpacing="0" cellPadding="0" border="0">
                                         <thead>
                                         <tr>
@@ -324,28 +382,86 @@ function Vehicles({ vehicles, setState }){
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td><input name='attr_spaceWeaponCharacterName' type="text"/></td>
-                                            <td><input name='attr_spaceWeaponName' type="text"/></td>
+                                            <td>
+                                                <input
+                                                    name="character_name"
+                                                    type="text"
+                                                    value={weapon.character_name}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    name="weapon_name"
+                                                    type="text"
+                                                    value={weapon.weapon_name}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
                                             <td className="sheet-firearc-field">
-                                                <input name='attr_space-fireArcFore' type="checkbox"
-                                                       className="sheet-fireArcFore" title="Fore"/>
-                                                <input name='attr_space-fireArcStarboard' type="checkbox"
-                                                       className="sheet-fireArcStarboard" title="Starboard"/>
-                                                <input name='attr_space-fireArcAft' type="checkbox"
-                                                       className="sheet-fireArcAft" title="Aft"/>
-                                                <input name='attr_space-fireArcPort' type="checkbox"
-                                                       className="sheet-fireArcPort" title="Port"/>
+                                                <input
+                                                    name="arc_fore"
+                                                    type="checkbox"
+                                                    className="sheet-fireArcFore"
+                                                    title="Fore"
+                                                    checked={weapon.arc_fore}
+                                                    onChange={(e) => { handleWeaponCheckbox(e, "starship", weapon_idx) }}
+                                                />
+                                                <input
+                                                    name="arc_starboard"
+                                                    type="checkbox"
+                                                    className="sheet-fireArcStarboard"
+                                                    title="Starboard"
+                                                    checked={weapon.arc_starboard}
+                                                    onChange={(e) => { handleWeaponCheckbox(e, "starship", weapon_idx) }}
+                                                />
+                                                <input
+                                                    name="arc_aft"
+                                                    type="checkbox"
+                                                    className="sheet-fireArcAft"
+                                                    title="Aft"
+                                                    checked={weapon.arc_aft}
+                                                    onChange={(e) => { handleWeaponCheckbox(e, "starship", weapon_idx) }}
+                                                />
+                                                <input
+                                                    name="arc_port"
+                                                    type="checkbox"
+                                                    className="sheet-fireArcPort"
+                                                    title="Port"
+                                                    checked={weapon.arc_port}
+                                                    onChange={(e) => { handleWeaponCheckbox(e, "starship", weapon_idx) }}
+                                                />
                                                 <span className="sheet-fireArcForeImg"></span>
                                                 <span className="sheet-fireArcStarboardImg"></span>
                                                 <span className="sheet-fireArcAftImg"></span>
                                                 <span className="sheet-fireArcPortImg"></span>
                                             </td>
-                                            <td style={{width: "50px"}}><input name='attr_spaceWeaponCrit' type="number" max="99"
-                                                                          min="0" value="0"/></td>
-                                            <td style={{width: "50px"}}><input name='attr_spaceWeaponDmg' type="number" max="99"
-                                                                          min="0" value="0"/></td>
+                                            <td style={{width: "50px"}}>
+                                                <input
+                                                    name="critical"
+                                                    type="number"
+                                                    max="99"
+                                                    min="0"
+                                                    value={weapon.critical}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
+                                            <td style={{width: "50px"}}>
+                                                <input
+                                                    name="damage"
+                                                    type="number"
+                                                    max="99"
+                                                    min="0"
+                                                    value={weapon.damage}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
                                             <td style={{width: "150px"}}>
-                                                <select name='attr_spaceWeaponRange'>
+                                                <select
+                                                    name="range"
+                                                    value={weapon.range}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                >
                                                     <option value="Close">Close</option>
                                                     <option value="Short">Short</option>
                                                     <option value="Medium">Medium</option>
@@ -356,31 +472,69 @@ function Vehicles({ vehicles, setState }){
                                             <td>&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td><label style={{display: "inline-block", width: "25%"}}>Dice:</label><input
-                                                style={{display: "inline-block", width: "74%"}} name='attr_spaceWeaponDice'
-                                                type="text"/></td>
-                                            <td colSpan="4"><label style={{display: "inline-block", width: "25%"}}>Special:</label><input
-                                                style={{display: "inline-block", width: "74%"}} name='attr_spaceWeaponSpecial'
-                                                type="text"/></td>
                                             <td>
-                                                <select name='attr_spaceWeaponSkill'>
-                                                    <option value="skill:agility,rankGunnery">Gunnery</option>
-                                                    <option value="skill:agility,rankHeavy">Ranged - Heavy</option>
+                                                <label style={{display: "inline-block", width: "25%"}}>Dice:</label>
+                                                <input
+                                                    style={{display: "inline-block", width: "74%"}}
+                                                    name="dice"
+                                                    type="text"
+                                                    value={weapon.dice}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
+                                            <td colSpan="4">
+                                                <label style={{display: "inline-block", width: "25%"}}>Special:</label>
+                                                <input
+                                                    style={{display: "inline-block", width: "74%"}}
+                                                    name="special"
+                                                    type="text"
+                                                    value={weapon.special}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <select
+                                                    name="skill"
+                                                    value={weapon.skill}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                >
+                                                    <option value="Gunnery">Gunnery</option>
+                                                    <option value="RangedHeavy">Ranged - Heavy</option>
                                                 </select>
                                             </td>
                                             <td>
-                                                <button type='roll' name='roll_space-shipWeapon'
-                                                        value='!eed rollPlayer(character:@{spaceWeaponCharacterName}|encum|@{spaceWeaponSkill}) label(Weapon:@{spaceWeaponName}|Vehicle:@{transport-space-name}|Damage:@{spaceWeaponDmg}|Critical:@{spaceWeaponCrit}|Range:@{spaceweaponrange}|Qualities:@{spaceWeaponSpecial}) combat(vehicle) @{spaceWeaponDice} @{dicePool} (gmdice)'></button>
+                                                <button type="roll" name="roll_space-shipWeapon"
+                                                        value="!eed rollPlayer(character:@{spaceWeaponCharacterName}|encum|@{spaceWeaponSkill}) label(Weapon:@{spaceWeaponName}|Vehicle:@{transport-space-name}|Damage:@{spaceWeaponDmg}|Critical:@{spaceWeaponCrit}|Range:@{spaceweaponrange}|Qualities:@{spaceWeaponSpecial}) combat(vehicle) @{spaceWeaponDice} @{dicePool} (gmdice)"></button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td><label>Book &amp; Page:</label></td>
-                                            <td><input name='attr_space-weapon_bookpage' type="text"/></td>
+                                            <td>
+                                                <input
+                                                    name="book_page"
+                                                    type="text"
+                                                    value={weapon.book_page}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
                                             <td><label>Rarity</label></td>
-                                            <td><input name='attr_space-weapon_rarity' type="number" min="1" max="10"/></td>
+                                            <td>
+                                                <input
+                                                    name="rarity"
+                                                    type="number"
+                                                    min="1"
+                                                    max="10"
+                                                    value={weapon.rarity}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
                                             <td><label>Restricted:</label></td>
                                             <td>
-                                                <select name='attr_space-weapon_restrict'>
+                                                <select
+                                                    name="restricted"
+                                                    value={weapon.restricted}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                >
                                                     <option value="no">No</option>
                                                     <option value="yes">Yes</option>
                                                 </select>
@@ -388,7 +542,14 @@ function Vehicles({ vehicles, setState }){
                                         </tr>
                                         <tr>
                                             <td><label>Value:</label></td>
-                                            <td><input name='attr_space-weapon_value' type="text"/></td>
+                                            <td>
+                                                <input
+                                                    name="value"
+                                                    type="text"
+                                                    value={weapon.value}
+                                                    onChange={(e) => { handleWeapon(e, "starship", weapon_idx) }}
+                                                />
+                                            </td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -406,7 +567,7 @@ function Vehicles({ vehicles, setState }){
                         <h3 className="sheet-section-header">Starship Attachments</h3>
                         {starship_attachments && starship_attachments.map((attachment, attachment_idx) => {
                             return (
-                                <div className="sheet-attachments-section">
+                                <div key={attachment_idx} className="sheet-attachments-section">
                                     <table cellSpacing="0" cellPadding="0" border="0">
                                         <tbody>
                                         <tr>
@@ -421,27 +582,82 @@ function Vehicles({ vehicles, setState }){
                                         <table cellSpacing="0" cellPadding="0" border="0">
                                             <tbody>
                                             <tr>
-                                                <td style={{width: "25%"}}><input name='attr_SpaceAttachName' type="text"/></td>
-                                                <td style={{width: "25%"}}><input name='attr_SpaceAttachHP' type="text"/></td>
-                                                <td style={{width: "25%"}}><input name='attr_SpaceAttachBaseMod' type="text"/></td>
-                                                <td style={{width: "25%"}}><input name='attr_SpaceAttachMod' type="text"/></td>
+                                                <td style={{width: "25%"}}>
+                                                    <input
+                                                        name="name"
+                                                        type="text"
+                                                        value={attachment.name}
+                                                        onChange={(e) => { handleAttachment(e, "starship", attachment_idx) }}
+                                                    />
+                                                </td>
+                                                <td style={{width: "25%"}}>
+                                                    <input
+                                                        name="hard_points"
+                                                        type="text"
+                                                        value={attachment.hard_points}
+                                                        onChange={(e) => { handleAttachment(e, "starship", attachment_idx) }}
+                                                    />
+                                                </td>
+                                                <td style={{width: "25%"}}>
+                                                    <input
+                                                        name="base_modifiers"
+                                                        type="text"
+                                                        value={attachment.base_modifiers}
+                                                        onChange={(e) => { handleAttachment(e, "starship", attachment_idx) }}
+                                                    />
+                                                </td>
+                                                <td style={{width: "25%"}}>
+                                                    <input
+                                                        name="modifications"
+                                                        type="text"
+                                                        value={attachment.modifications}
+                                                        onChange={(e) => { handleAttachment(e, "starship", attachment_idx) }}
+                                                    />
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><label>Book &amp; Page:</label></td>
-                                                <td><input name='attr_space-attach_bookpage' type="text"/></td>
+                                                <td>
+                                                    <input
+                                                        name="book_page"
+                                                        type="text"
+                                                        value={attachment.book_page}
+                                                        onChange={(e) => { handleAttachment(e, "starship", attachment_idx) }}
+                                                    />
+                                                </td>
                                                 <td><label>Rarity</label></td>
-                                                <td><input name='attr_space-attach_rarity' type="number" min="1" max="10"/></td>
+                                                <td>
+                                                    <input
+                                                        name="rarity"
+                                                        type="number"
+                                                        min="1"
+                                                        max="10"
+                                                        value={attachment.rarity}
+                                                        onChange={(e) => { handleAttachment(e, "starship", attachment_idx) }}
+                                                    />
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><label>Restricted:</label></td>
                                                 <td>
-                                                    <select name='attr_space-attach_restrict'>
+                                                    <select
+                                                        name="restricted"
+                                                        value={attachment.restricted}
+                                                        onChange={(e) => { handleAttachment(e, "starship", attachment_idx) }}
+                                                    >
                                                         <option value="no">No</option>
                                                         <option value="yes">Yes</option>
                                                     </select>
                                                 </td>
                                                 <td><label>Value:</label></td>
-                                                <td><input name='attr_space-attach_value' type="text"/></td>
+                                                <td>
+                                                    <input
+                                                        name="value"
+                                                        type="text"
+                                                        value={attachment.value}
+                                                        onChange={(e) => { handleAttachment(e, "starship", attachment_idx) }}
+                                                    />
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
