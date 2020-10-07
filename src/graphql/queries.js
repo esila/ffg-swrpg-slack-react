@@ -91,6 +91,18 @@ export const getCharacterSheet = /* GraphQL */ `
             port
             starboard
             aft
+            system_strain {
+              threshold
+              current
+            }
+            hull_trauma {
+              threshold
+              current
+            }
+            speed {
+              max
+              current
+            }
           }
         }
       }
@@ -461,6 +473,55 @@ export const listCharacterSheets = /* GraphQL */ `
             navicomputer
             rarity
             value
+            starship_attachments {
+              name
+              hard_points
+              base_modifiers
+              modifications
+              book_page
+              rarity
+              restricted
+              value
+            }
+            starship_weapons {
+              character_name
+              weapon_name
+              arc_fore
+              arc_starboard
+              arc_aft
+              arc_port
+              critical
+              damage
+              range
+              dice
+              special
+              skill
+              book_page
+              rarity
+              restricted
+              value
+            }
+            starship_defense {
+              silhouette
+              armor
+              handling
+              fore
+              port
+              starboard
+              aft
+              system_strain {
+                threshold
+                current
+              }
+              hull_trauma {
+                threshold
+                current
+              }
+              speed {
+                max
+                current
+              }
+            }
           }
         }
         soakWounds {

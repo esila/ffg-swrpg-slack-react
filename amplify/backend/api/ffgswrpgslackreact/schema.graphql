@@ -3,7 +3,7 @@ type CharacterSheet @model {
   user: String!
   weapons: [Weapons ]
   talents: [Talents ]
-  vehicles: [Vehicles]
+  vehicles: Vehicles
   soakWounds: SoakWounds
   knowledgeSkills: KnowledgeSkills
   combatSkills: CombatSkills

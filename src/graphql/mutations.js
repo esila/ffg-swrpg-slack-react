@@ -94,6 +94,18 @@ export const createCharacterSheet = /* GraphQL */ `
             port
             starboard
             aft
+            system_strain {
+              threshold
+              current
+            }
+            hull_trauma {
+              threshold
+              current
+            }
+            speed {
+              max
+              current
+            }
           }
         }
       }
@@ -498,6 +510,18 @@ export const updateCharacterSheet = /* GraphQL */ `
             port
             starboard
             aft
+            system_strain {
+              threshold
+              current
+            }
+            hull_trauma {
+              threshold
+              current
+            }
+            speed {
+              max
+              current
+            }
           }
         }
       }
@@ -902,6 +926,18 @@ export const deleteCharacterSheet = /* GraphQL */ `
             port
             starboard
             aft
+            system_strain {
+              threshold
+              current
+            }
+            hull_trauma {
+              threshold
+              current
+            }
+            speed {
+              max
+              current
+            }
           }
         }
       }
