@@ -10,6 +10,7 @@ import Weapons from './weapons'
 import Talents from './talents';
 import DestinyPool from './destiny';
 import Vehicles from './vehicles';
+import { AppBar, Tabs, Tab } from "@material-ui/core";
 import './sheet-style.css';
 import { listCharacterSheets } from './graphql/queries';
 import {
@@ -65,6 +66,7 @@ function CharacterSheet(){
         if (!character.name || !character.player_name) return;
         console.log("Create character sheet: ", state);
         await API.graphql({ query: createCharacterSheetMutation, variables: { input: state } });
+        setActiveIndex(0);
         fetchCharacterSheets();
     }
 
@@ -94,29 +96,35 @@ function CharacterSheet(){
         characterSheets.length > 0 && characterSheets[activeIndex] && characterSheets[activeIndex].id ? updateCharacterSheet(characterSheets[activeIndex].id) : createCharacterSheet()
     }
 
+    function handleTabChange(e, v) {
+        e.preventDefault();
+        if (v === -1) {
+            setActiveIndex(-1);
+            setState({...initState, ...player_name, user: user});
+        } else {
+            setActiveIndex(v);
+            const {createdAt, updatedAt, ...rest} = characterSheets[v];
+            console.log("Curr CS: ", rest);
+            setState(rest);
+        }
+    }
+
     return characterSheets.length > 0 ? (
         <>
         <div className="character_select">
-            <a
-                href="#"
-                onClick={() => {
-                    setActiveIndex();
-                    setState({...initState, ...player_name, user: user});
-                }}
-            >New Character Sheet |</a>
-            {characterSheets.map((cs, cs_index) => {
-                return (
-                    <a key={cs_index} href="#" onClick={() => {
-                        setActiveIndex(cs_index);
-                        const {createdAt, updatedAt, ...rest} = characterSheets[cs_index];
-                        console.log("Curr CS: ", rest);
-                        //const initTalents = rest.talents || initState.talents;
-                        //const newRest = {...rest, talents: initTalents };
-                        setState(rest);
-                    }}>{cs.character.name} |</a>
-                )
-            })}
-
+            <AppBar position="static" color="default">
+                <Tabs
+                    value={activeIndex}
+                    onChange={handleTabChange}
+                    aria-label="simple tabs example"
+                    variant="fullWidth"
+                >
+                    <Tab value={-1} label="New Character Sheet"/>
+                    {characterSheets.map((cs, cs_index) => {
+                        return <Tab value={cs_index} label={cs.character.name}/>
+                    })}
+                </Tabs>
+            </AppBar>
         </div>
         <div className={"charsheet"}>
             <DestinyPool characterName={character.name}/>
