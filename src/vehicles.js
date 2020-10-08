@@ -1,9 +1,23 @@
 import React from "react";
+import DiceRoller from './diceRoller'
 
-function Vehicles({ vehicles, setState }){
+function Vehicles({ vehicles, setState, characteristics, combatSkills }){
     const starship_defense = vehicles.starship.starship_defense;
     const starship_weapons = vehicles.starship.starship_weapons;
     const starship_attachments = vehicles.starship.starship_attachments;
+
+    const getDerivedWeaponSkills = (skill) => {
+        const derivedMap = {
+            Gunnery: ["Agility", combatSkills],
+            RangedHeavy: ["Agility", combatSkills],
+        };
+        const [characteristicKey, skillGroup] = derivedMap[skill];
+        const characteristic = characteristics[characteristicKey];
+        const rank = skillGroup[skill].rank;
+        return characteristic === rank ?
+          `${rank}p`
+          : `${Math.min(characteristic, rank)}p ${Math.abs(characteristic - rank)}a`
+    };
 
     function handleDefenseKeys(e, vehicle_type) {
         e.preventDefault();
@@ -501,8 +515,18 @@ function Vehicles({ vehicles, setState }){
                                                 </select>
                                             </td>
                                             <td>
-                                                <button type="roll" name="roll_space-shipWeapon"
-                                                        value="!eed rollPlayer(character:@{spaceWeaponCharacterName}|encum|@{spaceWeaponSkill}) label(Weapon:@{spaceWeaponName}|Vehicle:@{transport-space-name}|Damage:@{spaceWeaponDmg}|Critical:@{spaceWeaponCrit}|Range:@{spaceweaponrange}|Qualities:@{spaceWeaponSpecial}) combat(vehicle) @{spaceWeaponDice} @{dicePool} (gmdice)"></button>
+                                                <DiceRoller
+                                                    rollType={"weaponroll"}
+                                                    diceSource={weapon.weapon_name}
+                                                    diceMessage={{
+                                                        Damage: weapon.damage,
+                                                        Critical: weapon.critical,
+                                                        Range: weapon.range,
+                                                        Special: weapon.special,
+                                                    }}
+                                                    diceUser={weapon.character_name || "anonymous"}
+                                                    diceString={`${getDerivedWeaponSkills(weapon.skill)} ${weapon.dice}`}
+                                                />
                                             </td>
                                         </tr>
                                         <tr>

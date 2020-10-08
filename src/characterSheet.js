@@ -143,7 +143,7 @@ function CharacterSheet(){
                     talents={talents}
                     setState={setState}
                 />
-                <Vehicles vehicles={vehicles} setState={setState} />
+                <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
                 <p><button>Save</button></p>
                 <p><button
                         className="chat__delete"
@@ -189,7 +189,7 @@ function CharacterSheet(){
                     talents={talents}
                     setState={setState}
                 />
-                <Vehicles vehicles={vehicles} setState={setState} />
+                <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
                 <p><button>Save</button></p>
             </form>
         </div>
