@@ -2,6 +2,7 @@ import React from "react";
 import DiceRoller from './diceRoller'
 
 function Vehicles({ vehicles, setState, characteristics, combatSkills }){
+    const starship_details = vehicles.starship;
     const starship_defense = vehicles.starship.starship_defense;
     const starship_weapons = vehicles.starship.starship_weapons;
     const starship_attachments = vehicles.starship.starship_attachments;
@@ -18,6 +19,21 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills }){
           `${rank}p`
           : `${Math.min(characteristic, rank)}p ${Math.abs(characteristic - rank)}a`
     };
+
+    function handleVehicleDetails(e, vehicle_type) {
+        e.preventDefault();
+        const { target: {value, name} } = e;
+        setState(prev => ({
+            ...prev,
+            vehicles: {
+                ...prev.vehicles,
+                [vehicle_type]: {
+                    ...prev.vehicles[vehicle_type],
+                    [name]: name === "hard_points" ? parseInt(value) : value
+                }
+            }
+        }))
+    }
 
     function handleDefenseKeys(e, vehicle_type) {
         e.preventDefault();
@@ -374,6 +390,174 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills }){
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div className="sheet-row">
+                    <div className="sheet-small-12 sheet-column">
+                        <h3 className="sheet-section-header">Space Vehicle Details</h3>
+                        <div className="sheet-details-section">
+                            <table cellSpacing="0" cellPadding="0" border="0">
+                                <tbody>
+                                <tr>
+                                    <td><label>Name:</label></td>
+                                    <td>
+                                        <input
+                                            name="name"
+                                            type="text"
+                                            value={starship_details.name}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                    <td><label>Hard Points:</label></td>
+                                    <td>
+                                        <input
+                                            name="hard_points"
+                                            type="number"
+                                            min="0"
+                                            max="9"
+                                            value={starship_details.hard_points}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Hull Type/Class:</label></td>
+                                    <td>
+                                        <input
+                                            name="hull_type"
+                                            type="text"
+                                            value={starship_details.hull_type}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                    <td><label>Sensor Range:</label></td>
+                                    <td>
+                                        <select
+                                            name="sensor_range"
+                                            value={starship_details.sensor_range}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        >
+                                            <option value="none">None</option>
+                                            <option value="Close">Close</option>
+                                            <option value="Short">Short</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="Long">Long</option>
+                                            <option value="Extreme">Extreme</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Manufacturer:</label></td>
+                                    <td>
+                                        <input
+                                            name="attr_transport-space-manufact"
+                                            type="text"
+                                        />
+                                    </td>
+                                    <td><label>Ship's Complement:</label></td>
+                                    <td>
+                                        <input
+                                            name="ship_complement"
+                                            type="text"
+                                            value={starship_details.ship_complement}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Hyperdrive Primary Class:</label></td>
+                                    <td>
+                                        <input
+                                            name="hyperdrive_primary_class"
+                                            type="number"
+                                            min="0"
+                                            max="20"
+                                            value={starship_details.hyperdrive_primary_class}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                    <td><label>Hyperdrive Backup Class:</label></td>
+                                    <td>
+                                        <input
+                                            name="hyperdrive_backup_class"
+                                            type="number"
+                                            min="0"
+                                            max="20"
+                                            value={starship_details.hyperdrive_backup_class}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Consumables:</label></td>
+                                    <td>
+                                        <input
+                                            name="consumables"
+                                            type="text"
+                                            value={starship_details.consumables}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                    <td><label>Navicomputer:</label></td>
+                                    <td>
+                                        <select
+                                            name="navicomputer"
+                                            value={starship_details.navicomputer}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        >
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Book &amp; Page:</label></td>
+                                    <td>
+                                        <input
+                                            name="book_page"
+                                            type="text"
+                                            value={starship_details.book_page}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                    <td><label>Rarity</label></td>
+                                    <td>
+                                        <input
+                                            name="rarity"
+                                            type="number"
+                                            min="1"
+                                            max="10"
+                                            value={starship_details.rarity}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><label>Restricted:</label></td>
+                                    <td>
+                                        <select
+                                            name="restricted"
+                                            value={starship_details.restricted}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        >
+                                            <option value="no">No</option>
+                                            <option value="yes">Yes</option>
+                                        </select>
+                                    </td>
+                                    <td><label>Value:</label></td>
+                                    <td>
+                                        <input
+                                            name="value"
+                                            type="text"
+                                            value={starship_details.value}
+                                            onChange={(e) => { handleVehicleDetails(e, "starship") }}
+                                        />
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div className="sheet-clear"></div>
                 </div>
                 <div className="sheet-row">
                     <div className="sheet-small-12 sheet-column">
