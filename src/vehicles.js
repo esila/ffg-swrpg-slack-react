@@ -230,7 +230,7 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills }){
         <div className="sheet-tab-content sheet-tab-ship-sheet">
             <br/>
             <input type="radio" name="attr_v-sheet" className="sheet-tab-new sheet-tab-transport-space" value="1"
-                   checked="checked"/>
+                   defaultChecked="checked"/>
             <span className="sheet-tab-new">&emsp;Starship&emsp;</span>
             <input type="radio" name="attr_v-sheet" className="sheet-tab-new sheet-tab-transport-planetary" value="2"/>
             <span className="sheet-tab-new">&emsp;Planetary&emsp;</span>

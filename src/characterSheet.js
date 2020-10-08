@@ -123,7 +123,7 @@ function CharacterSheet(){
             <input type="radio" name="attr_gmdicepool" className="sheet-player" value="1" defaultChecked="checked"
                    style={{display: "none"}}/>
             <input type="radio" name="attr_pcgm" className="sheet-tab-new sheet-tab-character-sheet sheet-player-sheet"
-                   value="1" defaultChecked=""/>
+                   value="1" defaultChecked="checked"/>
             <span className="sheet-tab-new sheet-player-sheet">Character Sheet</span>
             <input type="radio" name="attr_pcgm" className="sheet-tab-new sheet-tab-ship-sheet sheet-player-sheet"
                    value="2" defaultChecked=""/>
