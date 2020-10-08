@@ -71,9 +71,13 @@ function Visuals() {
 
 function MapCanvas({ fabricObjects, background, setBackground }) {
     const tokenList = [
-        ["Stormtrooper", "http://kndr.io/ts/swt1/i/StormtrooperMale_4.png"],
+        ["Stormtrooper", "https://kndr.io/ts/swt1/i/StormtrooperMale_4.png"],
+        ["Gamorrean Thug", "https://kndr.io/ts/swt1/i/GamorreanMale.png"],
+        ["Imperial TIE Pilot", "https://kndr.io/ts/swt1/i/HumanMaleTiepilot_3.png"],
+        ["Spaceport Security Droid", "https://kndr.io/ts/swt1/i/DroidMaintenanceWorker.png"],
+        ["Trex Trandoshan Slaver", "https://kndr.io/ts/swt1/i/TrandoshanMale_6.png"],
         ["Lowhrick", "https://kndr.io/ts/swt1/i/WookieeMaleRoar.png"],
-        ["Sasha", "http://kndr.io/ts/swt1/i/HumanWomanRebelScout.png"],
+        ["Sasha", "https://kndr.io/ts/swt1/i/HumanWomanRebelScout.png"],
     ];
     const mapList = [
         ["Range Bands", "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg"],

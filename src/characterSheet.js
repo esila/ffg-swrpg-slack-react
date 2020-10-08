@@ -40,7 +40,7 @@ function CharacterSheet(){
         const apiData = await API.graphql({ query: listCharacterSheets, variables: { filter: {user: {eq: user}}} });
         setCharacterSheets(apiData.data.listCharacterSheets.items);
         //console.log(apiData.data.listCharacterSheets.items[0]);
-        const newData = apiData.data.listCharacterSheets.items && apiData.data.listCharacterSheets.items[0];
+        const newData = apiData.data.listCharacterSheets.items && apiData.data.listCharacterSheets.items[activeIndex || 0];
         if (newData) {
             console.log("newData: ", newData);
             let restData = newData;
