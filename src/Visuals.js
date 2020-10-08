@@ -74,7 +74,7 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         ["Stormtrooper", "https://kndr.io/ts/swt1/i/StormtrooperMale_4.png"],
         ["Gamorrean Thug", "https://kndr.io/ts/swt1/i/GamorreanMale.png"],
         ["Imperial TIE Pilot", "https://kndr.io/ts/swt1/i/HumanMaleTiepilot_3.png"],
-        ["Spaceport Security Droid", "https://kndr.io/ts/swt1/i/DroidMaintenanceWorker.png"],
+        ["Spaceport Security Droid", "https://kndr.io/ts/swt1/i/DroidHk-47.png"],
         ["Trex Trandoshan Slaver", "https://kndr.io/ts/swt1/i/TrandoshanMale_6.png"],
         ["Lowhrick", "https://kndr.io/ts/swt1/i/WookieeMaleRoar.png"],
         ["Sasha", "https://kndr.io/ts/swt1/i/HumanWomanRebelScout.png"],
