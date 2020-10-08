@@ -471,7 +471,7 @@ input.sheet-tab-new:checked + span {
 /* END TAB CODE */
 
 div.sheet-tab-content {
-    /*display: none;*/
+    display: none;
     border-top: 1px solid #444;
     margin-top: 2px;
 }

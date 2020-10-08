@@ -116,50 +116,61 @@ function CharacterSheet(){
                     }}>{cs.character.name} |</a>
                 )
             })}
+
         </div>
         <div className={"charsheet"}>
             <DestinyPool characterName={character.name}/>
-            <form onSubmit={handleSubmit}>
-                <Character character={character} setState={setState} />
-                <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
-                <Characteristics characteristics={characteristics} setState={setState} />
-                <Skills
-                    character={character}
-                    characteristics={characteristics}
-                    generalSkills={generalSkills}
-                    combatSkills={combatSkills}
-                    knowledgeSkills={knowledgeSkills}
-                    setState={setState}
-                />
-                <Weapons
-                    character={character}
-                    weapons={weapons}
-                    characteristics={characteristics}
-                    generalSkills={generalSkills}
-                    combatSkills={combatSkills}
-                    setState={setState}
-                />
-                <Talents
-                    talents={talents}
-                    setState={setState}
-                />
-                <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
-                <p><button>Save</button></p>
-                <p><button
-                        className="chat__delete"
-                        onClick={(event) => {
-                            event.preventDefault();
-                            console.log("DELETE CALLED FOR ACTIVE INDEX: ", activeIndex);
-                            console.log("DELETE CALLED FOR: ", characterSheets[activeIndex].character.name);
-                            const deleteId = characterSheets[activeIndex].id;
-                            if (!deleteId) return;
-                            deleteCharacterSheet({id: deleteId});
-                        }}
-                    >
-                        DELETE CHARACTER SHEET
-                    </button>
-                </p>
-            </form>
+            <input type="radio" name="attr_gmdicepool" className="sheet-player" value="1" defaultChecked="checked"
+                   style={{display: "none"}}/>
+            <input type="radio" name="attr_pcgm" className="sheet-tab-new sheet-tab-character-sheet sheet-player-sheet"
+                   value="1" defaultChecked=""/>
+            <span className="sheet-tab-new sheet-player-sheet">Character Sheet</span>
+            <input type="radio" name="attr_pcgm" className="sheet-tab-new sheet-tab-ship-sheet sheet-player-sheet"
+                   value="2" defaultChecked=""/>
+            <span className="sheet-tab-new sheet-player-sheet">Vehicle Sheet</span>
+            <div className="charsheet sheet-tab-content sheet-tab-character-sheet">
+                <form onSubmit={handleSubmit}>
+                    <Character character={character} setState={setState} />
+                    <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
+                    <Characteristics characteristics={characteristics} setState={setState} />
+                    <Skills
+                        character={character}
+                        characteristics={characteristics}
+                        generalSkills={generalSkills}
+                        combatSkills={combatSkills}
+                        knowledgeSkills={knowledgeSkills}
+                        setState={setState}
+                    />
+                    <Weapons
+                        character={character}
+                        weapons={weapons}
+                        characteristics={characteristics}
+                        generalSkills={generalSkills}
+                        combatSkills={combatSkills}
+                        setState={setState}
+                    />
+                    <Talents
+                        talents={talents}
+                        setState={setState}
+                    />
+                    <p><button>Save</button></p>
+                    <p><button
+                            className="chat__delete"
+                            onClick={(event) => {
+                                event.preventDefault();
+                                console.log("DELETE CALLED FOR ACTIVE INDEX: ", activeIndex);
+                                console.log("DELETE CALLED FOR: ", characterSheets[activeIndex].character.name);
+                                const deleteId = characterSheets[activeIndex].id;
+                                if (!deleteId) return;
+                                deleteCharacterSheet({id: deleteId});
+                            }}
+                        >
+                            DELETE CHARACTER SHEET
+                        </button>
+                    </p>
+                </form>
+            </div>
+            <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
         </div>
         </>
     )
