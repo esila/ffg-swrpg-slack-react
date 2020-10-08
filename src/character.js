@@ -61,7 +61,7 @@ function Character({character, setState}){
                             <td rowSpan={4}>
                                 {character.image_url &&
                                 <div style={{textAlign: "center"}}>
-                                    <img src={character.image_url}/>
+                                    <img src={character.image_url} height="150px"/>
                                 </div>
                                 }
                             </td>
