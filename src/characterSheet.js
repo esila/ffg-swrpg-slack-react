@@ -79,7 +79,7 @@ function CharacterSheet(){
                 console.log(`SUCCESS: ${success}`);
             },
                 error => {
-                console.log(`ERROR: ${error}`)
+                console.log(`ERROR: ${JSON.stringify(error)}`)
                 });
         fetchCharacterSheets();
     }
@@ -127,7 +127,7 @@ function CharacterSheet(){
                 >
                     <Tab value={-1} label="New Character Sheet"/>
                     {characterSheets.map((cs, cs_index) => {
-                        return <Tab value={cs_index} label={cs.character.name}/>
+                        return <Tab key={cs_index} value={cs_index} label={cs.character.name}/>
                     })}
                 </Tabs>
             </AppBar>

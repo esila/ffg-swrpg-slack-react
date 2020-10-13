@@ -331,6 +331,12 @@ type Character { name: String
   motivations_2_category: String
   motivations_2_type: String
   motivations_2_description: String
+  obligations_1_type: String
+  obligations_1_magnitude: Int
+  obligations_1_details: String
+  obligations_2_type: String
+  obligations_2_magnitude: Int
+  obligations_2_details: String
   specializations: [Specializations ] }
 
 

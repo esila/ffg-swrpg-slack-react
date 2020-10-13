@@ -404,6 +404,12 @@ export const getCharacterSheet = /* GraphQL */ `
         motivations_2_category
         motivations_2_type
         motivations_2_description
+        obligations_1_type
+        obligations_1_magnitude
+        obligations_1_details
+        obligations_2_type
+        obligations_2_magnitude
+        obligations_2_details
         specializations {
           name
           in_career
@@ -822,6 +828,12 @@ export const listCharacterSheets = /* GraphQL */ `
           motivations_2_category
           motivations_2_type
           motivations_2_description
+          obligations_1_type
+          obligations_1_magnitude
+          obligations_1_details
+          obligations_2_type
+          obligations_2_magnitude
+          obligations_2_details
           specializations {
             name
             in_career
