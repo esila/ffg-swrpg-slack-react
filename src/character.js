@@ -179,6 +179,312 @@ function Character({character, setState}){
                     </table>
                 </div>
                 <div className="sheet-clear"></div>
+                <div class="sheet-section-spacer sheet-career-toggle-small"></div>
+
+                <b>Description</b><input name="attr_character-Description" value="1" checked="checked" style={{width: "96px", margin: "-13px -20px 0 -80px"}} class="sheet-toggle sheet-description-toggle-small" type="checkbox"/><span></span>
+                <div class="sheet-description-toggle-small">
+                    <div class="sheet-small-6 sheet-column">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <thead>
+                            <tr><th colspan="2">Description</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                            <CharacterInput
+                                character={character}
+                                characterKey={"gender"}
+                                type={"text"}
+                                setState={setState}
+                            />
+                            </tr>
+                            <tr>
+                            <CharacterInput
+                                character={character}
+                                characterKey={"age"}
+                                type={"text"}
+                                setState={setState}
+                            />
+                            </tr>
+                            <tr>
+                            <CharacterInput
+                                character={character}
+                                characterKey={"height"}
+                                type={"text"}
+                                setState={setState}
+                            />
+                            </tr>
+                            <tr>
+                            <CharacterInput
+                                character={character}
+                                characterKey={"build"}
+                                type={"text"}
+                                setState={setState}
+                            />
+                            </tr>
+                            <tr>
+                            <CharacterInput
+                                character={character}
+                                characterKey={"hair"}
+                                type={"text"}
+                                setState={setState}
+                            />
+                            </tr>
+                            <tr>
+                            <CharacterInput
+                                character={character}
+                                characterKey={"eyes"}
+                                type={"text"}
+                                setState={setState}
+                            />
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="sheet-small-6 sheet-column">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <thead>
+                            <tr><th>Notable Features</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr><td>
+                                <textarea
+                                    rows="4"
+                                    name="notable_features"
+                                    onChange={event => {
+                                        event.preventDefault();
+                                        const { target: {name, value} } = event;
+                                        setState(prev => ({
+                                            ...prev,
+                                            character: {
+                                                ...prev.character,
+                                                [name]: value
+                                            }
+                                        }))}
+                                    }
+                                >
+                                </textarea>
+                            </td></tr>
+                            </tbody>
+                        </table>
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <thead>
+                            <tr><th>Other</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr><td>
+                                <textarea
+                                    rows="4"
+                                    name="other"
+                                    onChange={event => {
+                                        event.preventDefault();
+                                        const { target: {name, value} } = event;
+                                        setState(prev => ({
+                                            ...prev,
+                                            character: {
+                                                ...prev.character,
+                                                [name]: value
+                                            }
+                                        }))}
+                                    }
+                                >
+                                </textarea>
+                            </td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="sheet-clear"></div>
+                <div class="sheet-section-spacer sheet-description-toggle-small"></div>
+
+                <b>Motivations</b><input name="attr_character-Motivations" value="1" checked="checked" style={{width: "96px", margin: "-13px -20px 0 -80px"}} class="sheet-toggle sheet-motivation-toggle-small" type="checkbox"/><span></span>
+                <div class="sheet-motivation-toggle-small">
+                    <div class="sheet-small-12 sheet-column">
+                        <table cellspacing="0" cellpadding="0" border="0">
+                            <thead>
+                            <tr><th colspan="6">Motivations</th></tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <CharacterInput
+                                    character={character}
+                                    characterKey={"motivations_1_category"}
+                                    type={"text"}
+                                    setState={setState}
+                                />
+                                <CharacterInput
+                                    character={character}
+                                    characterKey={"motivations_1_type"}
+                                    type={"text"}
+                                    setState={setState}
+                                />
+                                <td><label>Description:</label></td>
+                                <td>
+                                    <textarea
+                                        rows="2"
+                                        name="motivations_1_description"
+                                        onChange={event => {
+                                            event.preventDefault();
+                                            const { target: {name, value} } = event;
+                                            setState(prev => ({
+                                                ...prev,
+                                                character: {
+                                                    ...prev.character,
+                                                    [name]: value
+                                                }
+                                            }))}
+                                        }
+                                    >
+                                    </textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <CharacterInput
+                                    character={character}
+                                    characterKey={"motivations_2_category"}
+                                    type={"text"}
+                                    setState={setState}
+                                />
+                                <CharacterInput
+                                    character={character}
+                                    characterKey={"motivations_2_type"}
+                                    type={"text"}
+                                    setState={setState}
+                                />
+                                <td><label>Description:</label></td>
+                                <td>
+                                    <textarea
+                                        rows="2"
+                                        name="motivations_2_description"
+                                        onChange={event => {
+                                            event.preventDefault();
+                                            const { target: {name, value} } = event;
+                                            setState(prev => ({
+                                                ...prev,
+                                                character: {
+                                                    ...prev.character,
+                                                    [name]: value
+                                                }
+                                            }))}
+                                        }
+                                    >
+                                    </textarea>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="sheet-clear"></div>
+                </div>
+            </div>
+            <div class="sheet-clear"></div>
+            <div class="sheet-clear"></div>
+            <div class="sheet-section-spacer sheet-character-toggle-small"></div>
+
+            <b>Game Mechanics</b><input name="attr_character-Game-Mechanics" value="1" checked="checked" style={{width: "131px", margin: "-13px -20px 0 -115px"}} class="sheet-toggle sheet-game-mechanics-toggle-small" type="checkbox"/><span></span>
+            <div class="sheet-game-mechanics-toggle-small">
+                <div class="sheet-row">
+                    <div class="sheet-small-12 sheet-column">
+                        <h3 class="sheet-section-header">Game Mechanics</h3>
+                        <input name="attr_character-Game-Mechanics" value="1" style={{width: "250px", height: "30px", margin: "-44px -20px 0 297px", float: "left"}} class="sheet-toggle sheet-mechanics-section-toggle" type="checkbox" checked="checked"/>
+                        <div class="sheet-mechanics-section">
+                            <b>Obligation</b><input name="attr_character-Obligation" value="1" checked="checked" style={{width: "78px", margin: "-13px -20px 0 -62px"}} class="sheet-toggle sheet-obligation-toggle-small" type="checkbox"/><span></span>
+                            <div class="sheet-obligation-toggle-small">
+                                <table cellspacing="0" cellpadding="0" border="0">
+                                    <thead>
+                                    <tr><th colspan="4">Obligations</th></tr>
+                                    </thead>
+                                </table>
+                                <br />
+                                <fieldset class="repeating_obligation">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td><label>Type:</label></td>
+                                            <td><input type="text" name="attr_obligationtype1" /></td>
+                                            <td><label>Magnitude:</label></td>
+                                            <td><input type="number" name="attr_obligationmag1" min="0" value="0" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Details:</label></td>
+                                            <td colspan="3"><textarea rows="3" name="attr_obligationcomp1"></textarea></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                </fieldset>
+                            </div>
+                            <div class="sheet-clear"></div>
+                            <div class="sheet-section-spacer sheet-obligation-toggle-small"></div>
+
+                            <b>Duty</b><input name="attr_character-Duty" value="1" checked="checked" style={{width: "96px", margin: "-13px -20px 0 -80px"}} class="sheet-toggle sheet-duty-toggle-small" type="checkbox"/><span></span>
+                            <div class="sheet-duty-toggle-small">
+                                <table cellspacing="0" cellpadding="0" border="0">
+                                    <thead>
+                                    <tr><th colspan="4">Duty</th></tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td style={{width: "50%"}}><label style={{textAlign: "right"}}>Contribution Rank:</label></td>
+                                        <td style={{width: "50%"}}><input type="number" name="attr_contributionRank" min="0" value="0" /></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <br />
+                                <fieldset class="repeating_duty">
+                                    <table cellspacing="0" cellpadding="0" border="0">
+                                        <tbody>
+                                        <tr>
+                                            <td style={{width: "25%"}}><label>Type:</label></td>
+                                            <td style={{width: "25%"}}><input type="text" name="attr_dutytype1" /></td>
+                                            <td style={{width: "25%"}}><label>Magnitude:</label></td>
+                                            <td style={{width: "25%"}}><input type="number" name="attr_dutymag1" min="0" value="0" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td style={{width: "25%"}}><label>Description:</label></td>
+                                            <td style={{width: "75%"}} colspan="3"><textarea rows="3" name="attr_dutydesc1"></textarea></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                </fieldset>
+                            </div>
+                            <div class="sheet-clear"></div>
+                            <div class="sheet-section-spacer sheet-duty-toggle-small"></div>
+
+                            <b>Morality</b><input name="attr_character-Morality" value="1" checked="checked" style={{width: "96px", margin: "-13px -20px 0 -80px"}} class="sheet-toggle sheet-morality-toggle-small" type="checkbox"/><span></span>
+                            <div class="sheet-morality-toggle-small">
+                                <table cellspacing="0" cellpadding="0" border="0">
+                                    <thead>
+                                    <tr><th colspan="4">Morality</th></tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td colspan="2"><label style={{textAlign: "right"}}>Morality:</label></td>
+                                        <td colspan="2"><input type="number" name="attr_morality" max="100" min="0" value="50" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2"><label>Conflict:</label></td>
+                                        <td colspan="2"><input type="number" name="attr_conflict" min="0" value="0" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Emotional Strength(s):</label></td>
+                                        <td><textarea rows="2" name="attr_emotestrengt"></textarea></td>
+                                        <td><label>Emotional Weakness(es):</label></td>
+                                        <td><textarea rows="2" name="attr_emoteweakness"></textarea></td>
+                                    </tr>
+                                    <tr>
+                                        <td><label>Description:</label></td>
+                                        <td><textarea rows="3" name="attr_emotestrengthdesc"></textarea></td>
+                                        <td><label>Description:</label></td>
+                                        <td><textarea rows="3" name="attr_emoteweaknessdec"></textarea></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sheet-clear"></div>
+                </div>
             </div>
         </div>
     )
@@ -192,6 +498,14 @@ const CharacterInput = ({character, characterKey, type, setState}) => {
         total_xp: "Total XP",
         available_xp: "Available XP",
         image_url: "Image URL",
+        gender: "Gender",
+        age: "Age",
+        height: "Height",
+        build: "Build",
+        hair: "Hair",
+        eyes: "Eyes",
+        motivations_1_category: "Category",
+        motivations_1_type: "Type",
     };
     return (
         <>

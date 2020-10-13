@@ -74,7 +74,13 @@ function CharacterSheet(){
         if (!character.name || !character.player_name) return;
         //console.log("UPDATE: ", state);
         //console.log(JSON.stringify(state));
-        await API.graphql({ query: updateCharacterSheetMutation, variables: { input: { id, ...state } }});
+        await API.graphql({ query: updateCharacterSheetMutation, variables: { input: { id, ...state } }})
+            .then(success => {
+                console.log(`SUCCESS: ${success}`);
+            },
+                error => {
+                console.log(`ERROR: ${error}`)
+                });
         fetchCharacterSheets();
     }
 
