@@ -138,29 +138,51 @@ function CharacterSheet(){
             <span className="sheet-tab-new sheet-player-sheet">Vehicle Sheet</span>
             <div className="charsheet sheet-tab-content sheet-tab-character-sheet">
                 <form onSubmit={handleSubmit}>
-                    <Character character={character} setState={setState} />
                     <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
-                    <Characteristics characteristics={characteristics} setState={setState} />
-                    <Skills
-                        character={character}
-                        characteristics={characteristics}
-                        generalSkills={generalSkills}
-                        combatSkills={combatSkills}
-                        knowledgeSkills={knowledgeSkills}
-                        setState={setState}
-                    />
-                    <Weapons
-                        character={character}
-                        weapons={weapons}
-                        characteristics={characteristics}
-                        generalSkills={generalSkills}
-                        combatSkills={combatSkills}
-                        setState={setState}
-                    />
-                    <Talents
-                        talents={talents}
-                        setState={setState}
-                    />
+                    <div className="sheet-clear"></div>
+
+                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-character" value="1"
+                           defaultChecked="checked"/>
+                    <span className="sheet-tab-new">&emsp;Character Info&emsp;</span>
+                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-skills" value="2"/>
+                    <span className="sheet-tab-new">&emsp; &emsp;Skills&emsp; &emsp;</span>
+                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-talents" value="3"/>
+                    <span className="sheet-tab-new">&emsp; &emsp;Combat&emsp; &emsp;</span>
+                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-weapons" value="4"/>
+                    <span className="sheet-tab-new">&emsp;Item Inventory&emsp;</span>
+                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-critical" value="5"/>
+                    <span className="sheet-tab-new">&emsp;Critical Injuries&emsp;</span>
+                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-notes" value="6"/>
+                    <span className="sheet-tab-new">&emsp; &emsp;Notes&emsp; &emsp;</span>
+
+                    <div className="sheet-tab-content sheet-tab-character">
+                        <Character character={character} setState={setState} />
+                    </div>
+                    <div className="sheet-tab-content sheet-tab-skills">
+                        <Characteristics characteristics={characteristics} setState={setState} />
+                        <Skills
+                            character={character}
+                            characteristics={characteristics}
+                            generalSkills={generalSkills}
+                            combatSkills={combatSkills}
+                            knowledgeSkills={knowledgeSkills}
+                            setState={setState}
+                        />
+                    </div>
+                    <div className="sheet-tab-content sheet-tab-talents">
+                        <Weapons
+                            character={character}
+                            weapons={weapons}
+                            characteristics={characteristics}
+                            generalSkills={generalSkills}
+                            combatSkills={combatSkills}
+                            setState={setState}
+                        />
+                        <Talents
+                            talents={talents}
+                            setState={setState}
+                        />
+                    </div>
                     <p><button>Save</button></p>
                     <p><button
                             className="chat__delete"
@@ -194,8 +216,8 @@ function CharacterSheet(){
             <span className="sheet-tab-new sheet-player-sheet">Vehicle Sheet</span>
             <div className="charsheet sheet-tab-content sheet-tab-character-sheet">
                 <form onSubmit={handleSubmit}>
-                    <Character character={character} setState={setState} />
                     <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
+                    <Character character={character} setState={setState} />
                     <Characteristics characteristics={characteristics} setState={setState} />
                     <Skills
                         character={character}
