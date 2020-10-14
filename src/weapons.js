@@ -414,6 +414,7 @@ const WeaponSelect = ({weapons, weapon_idx, weaponKey, setState, options, value,
         <td>
             <select
                 name={`weapon_${weapon_idx}_${weaponKey}`}
+                value={weapons[weapon_idx][weaponKey]}
                 onChange={event => {
                     event.preventDefault();
                     const { target: {value} } = event;
