@@ -154,12 +154,6 @@ function CharacterSheet(){
                     <span className="sheet-tab-new">&emsp; &emsp;Skills&emsp; &emsp;</span>
                     <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-talents" value="3"/>
                     <span className="sheet-tab-new">&emsp; &emsp;Combat&emsp; &emsp;</span>
-                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-weapons" value="4"/>
-                    <span className="sheet-tab-new">&emsp;Item Inventory&emsp;</span>
-                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-critical" value="5"/>
-                    <span className="sheet-tab-new">&emsp;Critical Injuries&emsp;</span>
-                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-notes" value="6"/>
-                    <span className="sheet-tab-new">&emsp; &emsp;Notes&emsp; &emsp;</span>
 
                     <div className="sheet-tab-content sheet-tab-character">
                         <Character character={character} setState={setState} />
