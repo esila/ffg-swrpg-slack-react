@@ -403,14 +403,12 @@ function Character({character, setState}){
                                                 character={character}
                                                 characterKey={"obligations_1_type"}
                                                 type={"text"}
-                                                value={character.obligations_1_type || ""}
                                                 setState={setState}
                                             />
                                             <CharacterInput
                                                 character={character}
                                                 characterKey={"obligations_1_magnitude"}
                                                 type={"number"}
-                                                value={character.obligations_1_magnitude || 0}
                                                 setState={setState}
                                             />
                                         </tr>
@@ -441,14 +439,12 @@ function Character({character, setState}){
                                                 character={character}
                                                 characterKey={"obligations_2_type"}
                                                 type={"text"}
-                                                value={character.obligations_2_type || ""}
                                                 setState={setState}
                                             />
                                             <CharacterInput
                                                 character={character}
                                                 characterKey={"obligations_2_magnitude"}
                                                 type={"number"}
-                                                value={character.obligations_2_magnitude || 0}
                                                 setState={setState}
                                             />
                                         </tr>
@@ -519,7 +515,7 @@ const CharacterInput = ({character, characterKey, type, setState}) => {
                 <input
                     type={type}
                     name={`character_${characterKey}`}
-                    value={`${character[characterKey]}`}
+                    value={character[characterKey] || ""}
                     readOnly={characterKey === "player_name"}
                     onChange={event => {
                         event.preventDefault();
