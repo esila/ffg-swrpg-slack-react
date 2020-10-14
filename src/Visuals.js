@@ -75,9 +75,10 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         ["Gamorrean Thug", "https://kndr.io/ts/swt1/i/GamorreanMale.png"],
         ["Imperial TIE Pilot", "https://kndr.io/ts/swt1/i/HumanMaleTiepilot_3.png"],
         ["Spaceport Security Droid", "https://kndr.io/ts/swt1/i/DroidHk-47.png"],
-        ["Trex Trandoshan Slaver", "https://kndr.io/ts/swt1/i/TrandoshanMale_6.png"],
+        ["Trex Trandoshan Slaver", "https://kndr.io/ts/swt1/i/TrandoshanMale_12.png"],
         ["Lowhrick", "https://kndr.io/ts/swt1/i/WookieeMaleRoar.png"],
         ["Sasha", "https://kndr.io/ts/swt1/i/HumanWomanRebelScout.png"],
+        ["Pash", "https://kndr.io/ts/swt1/i/HumanMaleBlasterSmugglerGoggles.png"],
     ];
     const mapList = [
         ["Range Bands", "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg"],
