@@ -134,6 +134,7 @@ function Character({character, setState}){
                             <tr>
                                 <th>Specializations</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -160,9 +161,7 @@ function Character({character, setState}){
                                             setState={setState}
                                             options={{Yes: "yes", No: "no"}}
                                         />
-                                    </tr>
-                                    <tr>
-                                        <td>
+                                        <td style={{float: "right"}}>
                                             <button onClick={(event) => { removeSpecialization(event, specialization_idx) }}>Delete Specialization</button>
                                         </td>
                                     </tr>
