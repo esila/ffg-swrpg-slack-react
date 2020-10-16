@@ -10,7 +10,9 @@ import Weapons from './weapons'
 import Talents from './talents';
 import DestinyPool from './destiny';
 import Vehicles from './vehicles';
-import { AppBar, Tabs, Tab } from "@material-ui/core";
+import {
+    AppBar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Tabs, Tab
+} from "@material-ui/core";
 import './sheet-style.css';
 import { listCharacterSheets } from './graphql/queries';
 import {
@@ -18,6 +20,7 @@ import {
     updateCharacterSheet as updateCharacterSheetMutation,
     deleteCharacterSheet as deleteCharacterSheetMutation, deleteFabricObject as deleteFabricObjectMutation
 } from "./graphql/mutations";
+import DiceModal from "./diceModal";
 
 function CharacterSheet(){
     const user = useContext(UserContext);
@@ -31,6 +34,17 @@ function CharacterSheet(){
     const [state, setState] = useState({...initState, ...player_name, user: user});
     const [activeIndex, setActiveIndex] = useState(0);
     const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons, talents, vehicles} = state;
+
+    // Dice Modal State
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(() => {
         fetchCharacterSheets();
@@ -167,6 +181,10 @@ function CharacterSheet(){
                             combatSkills={combatSkills}
                             knowledgeSkills={knowledgeSkills}
                             setState={setState}
+                            open={open}
+                            setOpen={setOpen}
+                            handleClickOpen={handleClickOpen}
+                            handleClose={handleClose}
                         />
                     </div>
                     <div className="sheet-tab-content sheet-tab-talents">
@@ -202,6 +220,7 @@ function CharacterSheet(){
                 </form>
             </div>
             <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
+            <DiceModal open={open} setOpen={setOpen} handleClose={handleClose} handleClickOpen={handleClickOpen} />
         </div>
         </>
     )
@@ -227,6 +246,10 @@ function CharacterSheet(){
                         combatSkills={combatSkills}
                         knowledgeSkills={knowledgeSkills}
                         setState={setState}
+                        open={open}
+                        setOpen={setOpen}
+                        handleClickOpen={handleClickOpen}
+                        handleClose={handleClose}
                     />
                     <Weapons
                         character={character}

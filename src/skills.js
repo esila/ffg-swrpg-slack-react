@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import DiceRoller from './diceRoller'
 import SheetTips from './sheetTips'
 import toolTips from './toolTips'
 
-function Skills({ character, characteristics, generalSkills, combatSkills, knowledgeSkills, setState }){
+function Skills({ character, characteristics, generalSkills, combatSkills, knowledgeSkills, setState, open, setOpen, handleClickOpen, handleClose }){
     return (
         <div className="sheet-row">
             <div className="sheet-small-12 sheet-column">
@@ -15,6 +15,10 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     skillsLegend="General Skills"
                     skillsKey="generalSkills"
                     setState={setState}
+                    open={open}
+                    setOpen={setOpen}
+                    handleClickOpen={handleClickOpen}
+                    handleClose={handleClose}
                 />
                 <SkillsSection
                     character={character}
@@ -23,6 +27,10 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     skillsLegend="Combat Skills"
                     skillsKey="combatSkills"
                     setState={setState}
+                    open={open}
+                    setOpen={setOpen}
+                    handleClickOpen={handleClickOpen}
+                    handleClose={handleClose}
                 />
                 <SkillsSection
                     character={character}
@@ -31,13 +39,17 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     skillsLegend="KnowledgeSkills"
                     skillsKey="knowledgeSkills"
                     setState={setState}
+                    open={open}
+                    setOpen={setOpen}
+                    handleClickOpen={handleClickOpen}
+                    handleClose={handleClose}
                 />
             </div>
         </div>
     )
 }
 
-function SkillsSection({ character, characteristics, skills, skillsLegend, skillsKey, setState }){
+function SkillsSection({ character, characteristics, skills, skillsLegend, skillsKey, setState, open, setOpen, handleClickOpen, handleClose }){
 
     function getDerivedDiceIcons(characteristic, rank) {
       return characteristic === rank ?
@@ -182,6 +194,10 @@ function SkillsSection({ character, characteristics, skills, skillsLegend, skill
                                     diceSource={`Skills: ${elem}`}
                                     diceUser={character.name || "anonymous"}
                                 />
+                                <button
+                                    onClick={() => handleClickOpen()}
+                                >Modal</button>
+
                             </td>
                         </tr>
                     )
