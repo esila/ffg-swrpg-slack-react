@@ -165,6 +165,7 @@ function Character({character, setState}){
                                             <button onClick={(event) => { removeSpecialization(event, specialization_idx) }}>Delete Specialization</button>
                                         </td>
                                     </tr>
+                                    <tr><td colSpan={3}><hr/></td></tr>
                                     </React.Fragment>
 
                                 )
