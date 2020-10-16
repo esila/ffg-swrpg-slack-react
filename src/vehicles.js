@@ -766,11 +766,11 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills }){
                                         </tbody>
                                     </table>
                                     <br/>
-                                    <button onClick={(event) => { removeVehicleWeapon(event, "starship", weapon_idx) }}>Delete Weapon</button>
+                                    <button style={{float: "right"}} onClick={(event) => { removeVehicleWeapon(event, "starship", weapon_idx) }}>Delete Weapon</button>
                                 </div>
                             )
                         })}
-                        <button onClick={(event) => { addVehicleWeapon(event, "starship") }}>Add</button>
+                        <button onClick={(event) => { addVehicleWeapon(event, "starship") }}>Add Weapon</button>
                     </div>
                     <div className="sheet-clear"></div>
                 </div>
@@ -873,13 +873,13 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills }){
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <button onClick={(event) => { removeVehicleAttachment(event, "starship", attachment_idx) }}>Delete Attachment</button>
+                                        <button style={{float: "right"}} onClick={(event) => { removeVehicleAttachment(event, "starship", attachment_idx) }}>Delete Attachment</button>
                                         <br/>
                                     </fieldset>
                                 </div>
                             )
                         })}
-                        <button onClick={(event) => { addVehicleAttachment(event, "starship") }}>Add</button>
+                        <button onClick={(event) => { addVehicleAttachment(event, "starship") }}>Add Attachment</button>
                     </div>
                     <div className="sheet-clear"></div>
                 </div>

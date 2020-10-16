@@ -309,6 +309,7 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
                                                     <th>Base Modifiers</th>
                                                     <th>Modifications</th>
                                                     <th>Book &amp; Page</th>
+                                                    <th></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -368,10 +369,8 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
                                                                     attachment_idx={attach_idx}
                                                                 />
                                                             </td>
-                                                        </tr>
-                                                        <tr>
                                                             <td>
-                                                                <button onClick={(event) => { removeAttachment(event, weapon_idx, attach_idx) }}>Delete Attachment</button>
+                                                                <button style={{float: "right"}} onClick={(event) => { removeAttachment(event, weapon_idx, attach_idx) }}>Delete Attachment</button>
                                                             </td>
                                                         </tr>
                                                         </React.Fragment>
@@ -386,11 +385,11 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
                                             </table>
                                         </div>
                                     </div>
-                                    <button onClick={(event) => { removeWeapon(event, weapon_idx) }}>Delete Weapon</button>
+                                    <button style={{float: "right"}} onClick={(event) => { removeWeapon(event, weapon_idx) }}>Delete Weapon</button>
                                 </div>
                             )
                         })}
-                        <button onClick={(event) => { addWeapon(event) }}>Add</button>
+                        <button onClick={(event) => { addWeapon(event) }}>Add Weapon</button>
                         <div className="sheet-clear" ></div>
                     </fieldset>
                 </div> <div className="sheet-clear"></div>

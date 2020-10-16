@@ -183,9 +183,11 @@ function CharacterSheet(){
                             setState={setState}
                         />
                     </div>
-                    <p><button>Save</button></p>
-                    <p><button
+                    <hr/>
+                    <button>Save Character Sheet</button>
+                    <button
                             className="chat__delete"
+                            style={{float: "right"}}
                             onClick={(event) => {
                                 event.preventDefault();
                                 console.log("DELETE CALLED FOR ACTIVE INDEX: ", activeIndex);
@@ -197,7 +199,6 @@ function CharacterSheet(){
                         >
                             DELETE CHARACTER SHEET
                         </button>
-                    </p>
                 </form>
             </div>
             <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
