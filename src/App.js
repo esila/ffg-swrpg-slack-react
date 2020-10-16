@@ -5,7 +5,7 @@ import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 import CharacterSheet from './characterSheet';
 import Visuals from "./Visuals";
 import './App.css';
-import {AppBar, Tab, Tabs} from "@material-ui/core";
+import {AppBar, Tab, Tabs, Toolbar} from "@material-ui/core";
 
 const UserContext = React.createContext("");
 
@@ -34,15 +34,18 @@ function InitApp() {
             <div className="App">
                 <div className="top__nav">
                     <AppBar position="static">
-                        <Tabs
-                            value={activeTab}
-                            onChange={handleTabChange}
-                            aria-label="simple tabs example"
-                        >
-                            <Tab value={"charactersheet"} label="Character Sheet"/>
-                            <Tab value={"visuals"} label="Visuals"/>
+                        <Toolbar>
+                            <Tabs
+                                value={activeTab}
+                                onChange={handleTabChange}
+                                aria-label="simple tabs example"
+                            >
+                                <Tab value={"charactersheet"} label="Character Sheet"/>
+                                <Tab value={"visuals"} label="Visuals"/>
+                            </Tabs>
+                            <div style={{flex: 1}}></div>
                             <AmplifySignOut />
-                        </Tabs>
+                        </Toolbar>
                     </AppBar>
                 </div>
                 <Switch>
