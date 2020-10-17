@@ -1,9 +1,8 @@
 import React from "react";
-import DiceRoller from './diceRoller'
 
-function Weapons({ character, weapons, characteristics, generalSkills, combatSkills, setState }){
+function Weapons({ character, weapons, characteristics, generalSkills, combatSkills, setState, handleClickOpen }){
 
-    const getDerivedWeaponSkills = (skill) => {
+    function getDerivedDicePool(skill) {
         const derivedMap = {
             Brawl: ["Brawn", combatSkills],
             Gunnery: ["Agility", combatSkills],
@@ -19,9 +18,13 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
         const characteristic = characteristics[characteristicKey];
         const rank = skillGroup[skill].rank;
         return characteristic === rank ?
-          `${rank}p`
-          : `${Math.min(characteristic, rank)}p ${Math.abs(characteristic - rank)}a`
-    };
+            {proficiency: rank}
+            :
+            {
+                proficiency: Math.min(characteristic, rank),
+                ability: Math.abs(characteristic - rank)
+            }
+    }
 
     function addWeapon(event) {
         event.preventDefault();
@@ -124,17 +127,22 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
                                                             }
                                                             {title === "Encum" &&
                                                                 <td>
-                                                                    <DiceRoller
-                                                                        rollType={"weaponroll"}
-                                                                        diceSource={weapons[weapon_idx].make_model}
-                                                                        diceMessage={{
-                                                                            Damage: damage,
-                                                                            Critical: critical,
-                                                                            Range: range,
-                                                                            Qualities: qualities,
-                                                                        }}
-                                                                        diceUser={character.name || "anonymous"}
-                                                                        diceString={`${getDerivedWeaponSkills(weapons[weapon_idx].skill)} ${modifiers}`}/>
+                                                                    <button
+                                                                        onClick={() => handleClickOpen(
+                                                                            {
+                                                                                dicePool: getDerivedDicePool(weapons[weapon_idx].skill),
+                                                                                roll_type: "weaponroll",
+                                                                                roll_source: weapons[weapon_idx].make_model,
+                                                                                roll_user: character.name || "anonymous",
+                                                                                roll_message: {
+                                                                                    Damage: damage,
+                                                                                    Critical: critical,
+                                                                                    Range: range,
+                                                                                    Qualities: qualities,
+                                                                                },
+                                                                            }
+                                                                        )}
+                                                                    >Check</button>
                                                                 </td>
                                                             }
                                                             <td>

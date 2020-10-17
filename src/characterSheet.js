@@ -218,6 +218,7 @@ function CharacterSheet(){
                             generalSkills={generalSkills}
                             combatSkills={combatSkills}
                             setState={setState}
+                            handleClickOpen={handleClickOpen}
                         />
                         <Talents
                             talents={talents}
@@ -245,11 +246,9 @@ function CharacterSheet(){
             <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
             <DiceModal
                 open={open}
-                setOpen={setOpen}
                 diceCheck={diceCheck}
                 setDiceCheck={setDiceCheck}
                 handleClose={handleClose}
-                handleClickOpen={handleClickOpen}
             />
         </div>
         </>

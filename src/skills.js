@@ -1,9 +1,8 @@
 import React, {useState} from "react";
-import DiceRoller from './diceRoller'
 import SheetTips from './sheetTips'
 import toolTips from './toolTips'
 
-function Skills({ character, characteristics, generalSkills, combatSkills, knowledgeSkills, setState, open, setOpen, dicePool, setDicePool, handleClickOpen, handleClose }){
+function Skills({ character, characteristics, generalSkills, combatSkills, knowledgeSkills, setState, handleClickOpen }){
     return (
         <div className="sheet-row">
             <div className="sheet-small-12 sheet-column">
@@ -15,12 +14,7 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     skillsLegend="General Skills"
                     skillsKey="generalSkills"
                     setState={setState}
-                    open={open}
-                    setOpen={setOpen}
-                    dicePool={dicePool}
-                    setDicePool={setDicePool}
                     handleClickOpen={handleClickOpen}
-                    handleClose={handleClose}
                 />
                 <SkillsSection
                     character={character}
@@ -29,12 +23,7 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     skillsLegend="Combat Skills"
                     skillsKey="combatSkills"
                     setState={setState}
-                    open={open}
-                    setOpen={setOpen}
-                    dicePool={dicePool}
-                    setDicePool={setDicePool}
                     handleClickOpen={handleClickOpen}
-                    handleClose={handleClose}
                 />
                 <SkillsSection
                     character={character}
@@ -43,19 +32,14 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     skillsLegend="KnowledgeSkills"
                     skillsKey="knowledgeSkills"
                     setState={setState}
-                    open={open}
-                    setOpen={setOpen}
-                    dicePool={dicePool}
-                    setDicePool={setDicePool}
                     handleClickOpen={handleClickOpen}
-                    handleClose={handleClose}
                 />
             </div>
         </div>
     )
 }
 
-function SkillsSection({ character, characteristics, skills, skillsLegend, skillsKey, setState, open, setOpen, dicePool, setDicePool, handleClickOpen, handleClose }){
+function SkillsSection({ character, characteristics, skills, skillsLegend, skillsKey, setState, handleClickOpen }){
 
     function getDerivedDiceIcons(characteristic, rank) {
       return characteristic === rank ?
@@ -64,12 +48,6 @@ function SkillsSection({ character, characteristics, skills, skillsLegend, skill
               {sheetClass: "sheet-yd", sheetAttr: "attr_y", value: Math.min(characteristic, rank)},
               {sheetClass: "sheet-gd", sheetAttr: "attr_g", value: Math.abs(characteristic - rank)}
             ]
-    }
-
-    function getDerivedDiceString(characteristic, rank) {
-      return characteristic === rank ?
-          `${rank}p`
-          : `${Math.min(characteristic, rank)}p ${Math.abs(characteristic - rank)}a`
     }
 
     function getDerivedDicePool(characteristic, rank) {
