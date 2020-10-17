@@ -3,7 +3,7 @@ import DiceRoller from './diceRoller'
 import SheetTips from './sheetTips'
 import toolTips from './toolTips'
 
-function Skills({ character, characteristics, generalSkills, combatSkills, knowledgeSkills, setState, open, setOpen, handleClickOpen, handleClose }){
+function Skills({ character, characteristics, generalSkills, combatSkills, knowledgeSkills, setState, open, setOpen, dicePool, setDicePool, handleClickOpen, handleClose }){
     return (
         <div className="sheet-row">
             <div className="sheet-small-12 sheet-column">
@@ -17,6 +17,8 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     setState={setState}
                     open={open}
                     setOpen={setOpen}
+                    dicePool={dicePool}
+                    setDicePool={setDicePool}
                     handleClickOpen={handleClickOpen}
                     handleClose={handleClose}
                 />
@@ -29,6 +31,8 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     setState={setState}
                     open={open}
                     setOpen={setOpen}
+                    dicePool={dicePool}
+                    setDicePool={setDicePool}
                     handleClickOpen={handleClickOpen}
                     handleClose={handleClose}
                 />
@@ -41,6 +45,8 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
                     setState={setState}
                     open={open}
                     setOpen={setOpen}
+                    dicePool={dicePool}
+                    setDicePool={setDicePool}
                     handleClickOpen={handleClickOpen}
                     handleClose={handleClose}
                 />
@@ -49,7 +55,7 @@ function Skills({ character, characteristics, generalSkills, combatSkills, knowl
     )
 }
 
-function SkillsSection({ character, characteristics, skills, skillsLegend, skillsKey, setState, open, setOpen, handleClickOpen, handleClose }){
+function SkillsSection({ character, characteristics, skills, skillsLegend, skillsKey, setState, open, setOpen, dicePool, setDicePool, handleClickOpen, handleClose }){
 
     function getDerivedDiceIcons(characteristic, rank) {
       return characteristic === rank ?
@@ -64,6 +70,16 @@ function SkillsSection({ character, characteristics, skills, skillsLegend, skill
       return characteristic === rank ?
           `${rank}p`
           : `${Math.min(characteristic, rank)}p ${Math.abs(characteristic - rank)}a`
+    }
+
+    function getDerivedDicePool(characteristic, rank) {
+      return characteristic === rank ?
+          {proficiency: rank}
+          :
+          {
+              proficiency: Math.min(characteristic, rank),
+              ability: Math.abs(characteristic - rank)
+          }
     }
 
     return(
@@ -195,7 +211,7 @@ function SkillsSection({ character, characteristics, skills, skillsLegend, skill
                                     diceUser={character.name || "anonymous"}
                                 />
                                 <button
-                                    onClick={() => handleClickOpen()}
+                                    onClick={() => handleClickOpen(getDerivedDicePool(characteristics[skills[elem].characteristic], skills[elem].rank))}
                                 >Modal</button>
 
                             </td>

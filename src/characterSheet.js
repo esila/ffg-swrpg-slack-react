@@ -30,6 +30,15 @@ function CharacterSheet(){
             player_name: user
         }
     };
+    const initDicePool = {
+        ability: 0,
+        proficiency: 0,
+        boost: 0,
+        difficulty: 0,
+        challenge: 0,
+        setback: 0,
+        force: 0
+    };
     const [characterSheets, setCharacterSheets] = useState([]);
     const [state, setState] = useState({...initState, ...player_name, user: user});
     const [activeIndex, setActiveIndex] = useState(0);
@@ -37,12 +46,16 @@ function CharacterSheet(){
 
     // Dice Modal State
     const [open, setOpen] = useState(false);
+    const [dicePool, setDicePool] = useState(initDicePool);
 
-    const handleClickOpen = () => {
+    const handleClickOpen = (selectedDicePool) => {
+        const currentDicePool = dicePool;
+        setDicePool({...currentDicePool, ...selectedDicePool});
         setOpen(true);
     };
 
     const handleClose = () => {
+        setDicePool(initDicePool);
         setOpen(false);
     };
 
@@ -183,6 +196,8 @@ function CharacterSheet(){
                             setState={setState}
                             open={open}
                             setOpen={setOpen}
+                            dicePool={dicePool}
+                            setDicePool={setDicePool}
                             handleClickOpen={handleClickOpen}
                             handleClose={handleClose}
                         />
@@ -220,7 +235,14 @@ function CharacterSheet(){
                 </form>
             </div>
             <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
-            <DiceModal open={open} setOpen={setOpen} handleClose={handleClose} handleClickOpen={handleClickOpen} />
+            <DiceModal
+                open={open}
+                setOpen={setOpen}
+                dicePool={dicePool}
+                setDicePool={setDicePool}
+                handleClose={handleClose}
+                handleClickOpen={handleClickOpen}
+            />
         </div>
         </>
     )
