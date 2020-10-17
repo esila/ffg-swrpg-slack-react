@@ -202,17 +202,17 @@ function SkillsSection({ character, characteristics, skills, skillsLegend, skill
                                   />
                             </td>
                             <td>
-                                <DiceRoller
-                                    rollType={"skillroll"}
-                                    diceString={
-                                        `${getDerivedDiceString(characteristics[skills[elem].characteristic], skills[elem].rank)} ${skills[elem].extraDice}`
-                                    }
-                                    diceSource={`Skills: ${elem}`}
-                                    diceUser={character.name || "anonymous"}
-                                />
                                 <button
-                                    onClick={() => handleClickOpen(getDerivedDicePool(characteristics[skills[elem].characteristic], skills[elem].rank))}
-                                >Modal</button>
+                                    onClick={() => handleClickOpen(
+                                        {
+                                            dicePool: getDerivedDicePool(characteristics[skills[elem].characteristic], skills[elem].rank),
+                                            roll_type: "skillroll",
+                                            roll_source: `Skills: ${elem}`,
+                                            roll_user: character.name || "anonymous",
+                                            roll_message: {},
+                                        }
+                                    )}
+                                >Check</button>
 
                             </td>
                         </tr>

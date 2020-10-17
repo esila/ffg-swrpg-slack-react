@@ -10,8 +10,9 @@ import Weapons from './weapons'
 import Talents from './talents';
 import DestinyPool from './destiny';
 import Vehicles from './vehicles';
+import DiceModal from "./diceModal";
 import {
-    AppBar, Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Tabs, Tab
+    AppBar, Tabs, Tab
 } from "@material-ui/core";
 import './sheet-style.css';
 import { listCharacterSheets } from './graphql/queries';
@@ -20,7 +21,6 @@ import {
     updateCharacterSheet as updateCharacterSheetMutation,
     deleteCharacterSheet as deleteCharacterSheetMutation, deleteFabricObject as deleteFabricObjectMutation
 } from "./graphql/mutations";
-import DiceModal from "./diceModal";
 
 function CharacterSheet(){
     const user = useContext(UserContext);
@@ -39,6 +39,13 @@ function CharacterSheet(){
         setback: 0,
         force: 0
     };
+    const initDiceCheck = {
+        dicePool: initDicePool,
+        roll_message: {},
+        roll_source: "",
+        roll_user: "",
+        roll_type: ""
+    };
     const [characterSheets, setCharacterSheets] = useState([]);
     const [state, setState] = useState({...initState, ...player_name, user: user});
     const [activeIndex, setActiveIndex] = useState(0);
@@ -46,16 +53,17 @@ function CharacterSheet(){
 
     // Dice Modal State
     const [open, setOpen] = useState(false);
-    const [dicePool, setDicePool] = useState(initDicePool);
+    const [diceCheck, setDiceCheck] = useState(initDiceCheck);
 
-    const handleClickOpen = (selectedDicePool) => {
-        const currentDicePool = dicePool;
-        setDicePool({...currentDicePool, ...selectedDicePool});
+    const handleClickOpen = (selectedDiceCheck) => {
+        const dicePool = {...diceCheck.dicePool, ...selectedDiceCheck.dicePool};
+        const {roll_source, roll_user, roll_message, roll_type} = selectedDiceCheck;
+        setDiceCheck({ dicePool, roll_source, roll_user, roll_message, roll_type });
         setOpen(true);
     };
 
     const handleClose = () => {
-        setDicePool(initDicePool);
+        setDiceCheck(initDiceCheck);
         setOpen(false);
     };
 
@@ -196,8 +204,8 @@ function CharacterSheet(){
                             setState={setState}
                             open={open}
                             setOpen={setOpen}
-                            dicePool={dicePool}
-                            setDicePool={setDicePool}
+                            diceCheck={diceCheck}
+                            setDiceCheck={setDiceCheck}
                             handleClickOpen={handleClickOpen}
                             handleClose={handleClose}
                         />
@@ -238,8 +246,8 @@ function CharacterSheet(){
             <DiceModal
                 open={open}
                 setOpen={setOpen}
-                dicePool={dicePool}
-                setDicePool={setDicePool}
+                diceCheck={diceCheck}
+                setDiceCheck={setDiceCheck}
                 handleClose={handleClose}
                 handleClickOpen={handleClickOpen}
             />
