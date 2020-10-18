@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {
-    Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Grid
+    Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Grid, Divider
 } from "@material-ui/core";
 import './sheet-style.css';
 
@@ -47,8 +47,6 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
         const {target: {name, value}} = e;
         let { ability, proficiency, difficulty, challenge } = diceCheck.dicePool;
         if (name === "positiveUpgrade") {
-            console.log("Current dicepool: ", diceCheck.dicePool);
-            console.log("Current value ", positiveUpgrade);
             // Upgrade any ability die to proficiency
             if (value > positiveUpgrade && ability) {
                 ability--;
@@ -75,8 +73,6 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
             return;
         }
         if (name === "negativeUpgrade") {
-            console.log("Current dicepool: ", diceCheck.dicePool);
-            console.log("Current value ", negativeUpgrade);
             // Upgrade any difficulty die to challenge
             if (value > negativeUpgrade && difficulty) {
                 difficulty--;
@@ -121,7 +117,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                         choose to upgrade and downgrade the current dicepool.
                     </DialogContentText>
                     <Grid container spacing={3}>
-                        <Grid item xs={6}>
+                        <Grid item xs style={{textAlign: "center"}}>
                             {positiveDice.map((type, type_idx) => {
                                 return (
                                     <>
@@ -149,7 +145,18 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                                 onChange={(e) => toggleDicePool(e)}
                             />
                         </Grid>
-                        <Grid item xs={6}>
+                        <Grid item xs style={{textAlign: "center"}}>
+                            <TextField
+                                margin="dense"
+                                label="Force"
+                                name="force"
+                                type="number"
+                                variant="outlined"
+                                value={dicePool.force}
+                                onChange={(e) => toggleDicePool(e)}
+                            />
+                        </Grid>
+                        <Grid item xs style={{textAlign: "center"}}>
                             {negativeDice.map((type, type_idx) => {
                                 return (
                                     <>
