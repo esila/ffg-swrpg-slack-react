@@ -4,6 +4,7 @@ import { API } from 'aws-amplify';
 import { UserContext } from './App';
 import Character from './character'
 import Characteristics from './characteristics'
+import Critical from './critical'
 import SoakWoundsDefense from './soakWoundsDefense'
 import Skills from './skills'
 import Weapons from './weapons'
@@ -189,6 +190,8 @@ function CharacterSheet(){
                     <span className="sheet-tab-new">&emsp; &emsp;Skills&emsp; &emsp;</span>
                     <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-talents" value="3"/>
                     <span className="sheet-tab-new">&emsp; &emsp;Combat&emsp; &emsp;</span>
+                    <input type="radio" name="attr_sheet" className="sheet-tab-new sheet-tab-critical" value="5"/>
+                    <span className="sheet-tab-new">&emsp;Critical Injuries&emsp;</span>
 
                     <div className="sheet-tab-content sheet-tab-character">
                         <Character character={character} setState={setState} />
@@ -224,6 +227,9 @@ function CharacterSheet(){
                             talents={talents}
                             setState={setState}
                         />
+                    </div>
+                    <div className="sheet-tab-content sheet-tab-critical">
+                        <Critical/>
                     </div>
                     <hr/>
                     <button>Save Character Sheet</button>

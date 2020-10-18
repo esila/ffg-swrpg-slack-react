@@ -300,7 +300,8 @@ const vehicleStub = {
         rarity: "",
         value: "",
         starship_weapons: [vehicleWeaponStub],
-        starship_attachments: [vehicleAttachmentStub]
+        starship_attachments: [vehicleAttachmentStub],
+        critical_injuries: []
     }
 };
 
@@ -314,6 +315,7 @@ const initState = {
     weapons: weapons,
     talents: talents,
     vehicles: vehicleStub,
+    critical_injuries: []
 };
 
 export default initState;

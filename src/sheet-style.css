@@ -1203,11 +1203,11 @@ label.sheet-label-current {
 }
 
 .sheet-critical {
-    display: none;
+    display: block;
 }
 
 .sheet-checkbox-criton {
-    display: none;
+    display: block;
 }
 
 .sheet-checkbox-criton:checked + .sheet-critical {

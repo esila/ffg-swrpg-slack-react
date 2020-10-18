@@ -4,6 +4,7 @@ type CharacterSheet @model {
   weapons: [Weapons ]
   talents: [Talents ]
   vehicles: Vehicles
+  critical_injuries: [CriticalInjuries ]
   soakWounds: SoakWounds
   knowledgeSkills: KnowledgeSkills
   combatSkills: CombatSkills
@@ -418,6 +419,13 @@ type Starship { name: String
   starship_defense: StarshipDefense }
 
 type Vehicles { starship: Starship }
+
+type CriticalInjuries {
+  percent: [Int ],
+  severity: Int,
+  name: String,
+  result: String
+}
 
 # Types with identical fields:
 # Encumberance Strain Wounds
