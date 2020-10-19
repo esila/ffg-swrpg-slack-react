@@ -106,6 +106,12 @@ export const getCharacterSheet = /* GraphQL */ `
           }
         }
       }
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
       soakWounds {
         soak
         force_rating {
@@ -529,6 +535,12 @@ export const listCharacterSheets = /* GraphQL */ `
               }
             }
           }
+        }
+        critical_injuries {
+          percent
+          severity
+          name
+          result
         }
         soakWounds {
           soak

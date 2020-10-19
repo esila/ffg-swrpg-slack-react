@@ -1254,7 +1254,7 @@ button.sheet-btn-roll-crit[type=roll] {
 }
 
 button.sheet-btn-roll-crit[type=roll]::before {
-    content: 't ';
+    content: '';
     font-size: 18px;
     color: #fff;
 }

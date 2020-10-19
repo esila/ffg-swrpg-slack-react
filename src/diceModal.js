@@ -120,7 +120,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                         <Grid item xs style={{textAlign: "center"}}>
                             {positiveDice.map((type, type_idx) => {
                                 return (
-                                    <>
+                                    <React.Fragment key={type_idx}>
                                         <TextField
                                             key={type_idx}
                                             margin="dense"
@@ -132,7 +132,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                                             onChange={(e) => toggleDicePool(e)}
                                         />
                                         <br/>
-                                    </>
+                                    </React.Fragment>
                                 )
                             })}
                             <TextField
@@ -159,7 +159,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                         <Grid item xs style={{textAlign: "center"}}>
                             {negativeDice.map((type, type_idx) => {
                                 return (
-                                    <>
+                                    <React.Fragment key={type_idx}>
                                         <TextField
                                             key={type_idx}
                                             margin="dense"
@@ -171,7 +171,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                                             onChange={(e) => toggleDicePool(e)}
                                         />
                                         <br/>
-                                    </>
+                                    </React.Fragment>
                                 )
                             })}
                             <TextField

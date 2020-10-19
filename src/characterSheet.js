@@ -50,7 +50,10 @@ function CharacterSheet(){
     const [characterSheets, setCharacterSheets] = useState([]);
     const [state, setState] = useState({...initState, ...player_name, user: user});
     const [activeIndex, setActiveIndex] = useState(0);
-    const {character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons, talents, vehicles} = state;
+    const {
+        character, soakWounds, characteristics, generalSkills, combatSkills, knowledgeSkills, weapons, talents,
+        vehicles, critical_injuries
+    } = state;
 
     // Dice Modal State
     const [open, setOpen] = useState(false);
@@ -229,7 +232,7 @@ function CharacterSheet(){
                         />
                     </div>
                     <div className="sheet-tab-content sheet-tab-critical">
-                        <Critical/>
+                        <Critical critical_injuries={critical_injuries} setState={setState}/>
                     </div>
                     <hr/>
                     <button>Save Character Sheet</button>

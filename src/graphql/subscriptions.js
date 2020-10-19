@@ -106,6 +106,12 @@ export const onCreateCharacterSheet = /* GraphQL */ `
           }
         }
       }
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
       soakWounds {
         soak
         force_rating {
@@ -525,6 +531,12 @@ export const onUpdateCharacterSheet = /* GraphQL */ `
           }
         }
       }
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
       soakWounds {
         soak
         force_rating {
@@ -943,6 +955,12 @@ export const onDeleteCharacterSheet = /* GraphQL */ `
             }
           }
         }
+      }
+      critical_injuries {
+        percent
+        severity
+        name
+        result
       }
       soakWounds {
         soak
