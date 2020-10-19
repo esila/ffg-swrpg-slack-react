@@ -232,7 +232,7 @@ function CharacterSheet(){
                         />
                     </div>
                     <div className="sheet-tab-content sheet-tab-critical">
-                        <Critical critical_injuries={critical_injuries} setState={setState}/>
+                        <Critical character={character} critical_injuries={critical_injuries} setState={setState}/>
                     </div>
                     <hr/>
                     <button>Save Character Sheet</button>

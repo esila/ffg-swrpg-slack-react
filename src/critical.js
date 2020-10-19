@@ -180,7 +180,29 @@ const critTable = [
     }
 ];
 
-function Critical({ critical_injuries, setState }) {
+function Critical({ character, critical_injuries, setState }) {
+
+    const handleRoll = (roll_source, roll_message) => {
+        //const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/${roll_type}`;
+        const roll_user = character.name || "anonymous";
+        const API_ADDRESS = `http://127.0.0.1:5000/criticalroll`;
+        const data = { roll_source, roll_message, roll_user };
+        console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
+        fetch(API_ADDRESS, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then((res) => {
+                res.json()
+                    .then((allResp) => {
+                        console.log(allResp);
+                    })
+            });
+    };
+
     function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -193,6 +215,16 @@ function Critical({ critical_injuries, setState }) {
         const roll = getRandomInt(1,100);
         const fullRoll = roll + offset;
         const criticalInjury = critTable.find(elem => fullRoll >= elem.percent[0] && fullRoll <= elem.percent[1]);
+
+        // Populate our roll_message dict
+        const roll_message = {
+            Previous_Criticals: `${(critical_injuries && critical_injuries.length) || 0} x 10`,
+            Dice_Roll: roll,
+            Total: fullRoll,
+            [criticalInjury.name]: criticalInjury.result
+        };
+        const roll_source = "Character Critical";
+        handleRoll(roll_source, roll_message)
         if (!critical_injuries) {
             setState(prev => ({
                 ...prev,
