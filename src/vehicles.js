@@ -1,11 +1,28 @@
 import React from "react";
 import DiceRoller from './diceRoller'
 
-function Vehicles({ vehicles, setState, characteristics, combatSkills }){
+function Vehicles({ vehicles, setState, characteristics, combatSkills, handleClickOpen }){
     const starship_details = vehicles.starship;
     const starship_defense = vehicles.starship.starship_defense;
     const starship_weapons = vehicles.starship.starship_weapons;
     const starship_attachments = vehicles.starship.starship_attachments;
+
+    function getDerivedDicePool(skill) {
+        const derivedMap = {
+            Gunnery: ["Agility", combatSkills],
+            RangedHeavy: ["Agility", combatSkills],
+        };
+        const [characteristicKey, skillGroup] = derivedMap[skill];
+        const characteristic = characteristics[characteristicKey];
+        const rank = skillGroup[skill].rank;
+        return characteristic === rank ?
+            {proficiency: rank}
+            :
+            {
+                proficiency: Math.min(characteristic, rank),
+                ability: Math.abs(characteristic - rank)
+            }
+    }
 
     const getDerivedWeaponSkills = (skill) => {
         const derivedMap = {
@@ -705,18 +722,22 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills }){
                                                 </select>
                                             </td>
                                             <td>
-                                                <DiceRoller
-                                                    rollType={"weaponroll"}
-                                                    diceSource={weapon.weapon_name}
-                                                    diceMessage={{
-                                                        Damage: weapon.damage,
-                                                        Critical: weapon.critical,
-                                                        Range: weapon.range,
-                                                        Special: weapon.special,
-                                                    }}
-                                                    diceUser={weapon.character_name || "anonymous"}
-                                                    diceString={`${getDerivedWeaponSkills(weapon.skill)} ${weapon.dice}`}
-                                                />
+                                                <button
+                                                    onClick={() => handleClickOpen(
+                                                        {
+                                                            dicePool: getDerivedDicePool(weapon.skill),
+                                                            roll_type: "weaponroll",
+                                                            roll_source: weapon.weapon_name,
+                                                            roll_user: weapon.character_name || "anonymous",
+                                                            roll_message: {
+                                                                Damage: weapon.damage,
+                                                                Critical: weapon.critical,
+                                                                Range: weapon.range,
+                                                                Qualities: weapon.special,
+                                                            },
+                                                        }
+                                                    )}
+                                                >Check</button>
                                             </td>
                                         </tr>
                                         <tr>

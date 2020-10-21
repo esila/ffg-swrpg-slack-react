@@ -252,7 +252,13 @@ function CharacterSheet(){
                         </button>
                 </form>
             </div>
-            <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
+            <Vehicles
+                vehicles={vehicles}
+                characteristics={characteristics}
+                combatSkills={combatSkills}
+                setState={setState}
+                handleClickOpen={handleClickOpen}
+            />
             <DiceModal
                 open={open}
                 diceCheck={diceCheck}
