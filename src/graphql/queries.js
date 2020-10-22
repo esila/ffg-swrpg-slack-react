@@ -55,6 +55,12 @@ export const getCharacterSheet = /* GraphQL */ `
           navicomputer
           rarity
           value
+          critical_injuries {
+            percent
+            severity
+            name
+            result
+          }
           starship_attachments {
             name
             hard_points
@@ -490,6 +496,12 @@ export const listCharacterSheets = /* GraphQL */ `
             navicomputer
             rarity
             value
+            critical_injuries {
+              percent
+              severity
+              name
+              result
+            }
             starship_attachments {
               name
               hard_points

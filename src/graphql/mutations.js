@@ -58,6 +58,12 @@ export const createCharacterSheet = /* GraphQL */ `
           navicomputer
           rarity
           value
+          critical_injuries {
+            percent
+            severity
+            name
+            result
+          }
           starship_attachments {
             name
             hard_points
@@ -491,6 +497,12 @@ export const updateCharacterSheet = /* GraphQL */ `
           navicomputer
           rarity
           value
+          critical_injuries {
+            percent
+            severity
+            name
+            result
+          }
           starship_attachments {
             name
             hard_points
@@ -924,6 +936,12 @@ export const deleteCharacterSheet = /* GraphQL */ `
           navicomputer
           rarity
           value
+          critical_injuries {
+            percent
+            severity
+            name
+            result
+          }
           starship_attachments {
             name
             hard_points

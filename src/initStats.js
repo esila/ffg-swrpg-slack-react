@@ -29,10 +29,10 @@ const initCharacter = {
     motivations_2_type: "",
     motivations_2_description: "",
     obligations_1_type: "",
-    obligations_1_magnitude: "",
+    obligations_1_magnitude: 0,
     obligations_1_details: "",
     obligations_2_type: "",
-    obligations_2_magnitude: "",
+    obligations_2_magnitude: 0,
     obligations_2_details: "",
 };
 

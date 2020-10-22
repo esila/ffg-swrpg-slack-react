@@ -418,6 +418,7 @@ type Starship { name: String
   navicomputer: String
   rarity: String
   value: String
+  critical_injuries: [CriticalInjuries ]
   starship_attachments: [StarshipAttachments ]
   starship_roles: [StarshipRoles]
   starship_weapons: [StarshipWeapons ]

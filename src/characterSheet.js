@@ -20,7 +20,7 @@ import { listCharacterSheets } from './graphql/queries';
 import {
     createCharacterSheet as createCharacterSheetMutation,
     updateCharacterSheet as updateCharacterSheetMutation,
-    deleteCharacterSheet as deleteCharacterSheetMutation, deleteFabricObject as deleteFabricObjectMutation
+    deleteCharacterSheet as deleteCharacterSheetMutation,
 } from "./graphql/mutations";
 
 function CharacterSheet(){
@@ -154,9 +154,10 @@ function CharacterSheet(){
         }
     }
 
-    return characterSheets.length > 0 ? (
+    return (
         <>
         <div className="character_select">
+            {characterSheets.length > 0 &&
             <AppBar position="static" color="default">
                 <Tabs
                     value={activeIndex}
@@ -170,6 +171,7 @@ function CharacterSheet(){
                     })}
                 </Tabs>
             </AppBar>
+            }
         </div>
         <div className={"charsheet"}>
             <DestinyPool characterName={character.name}/>
@@ -236,24 +238,26 @@ function CharacterSheet(){
                     </div>
                     <hr/>
                     <button>Save Character Sheet</button>
+                    {characterSheets.length > 0 &&
                     <button
-                            className="chat__delete"
-                            style={{float: "right"}}
-                            onClick={(event) => {
-                                event.preventDefault();
-                                const confirm = prompt("Enter 'DELETE' to confirm");
-                                if (confirm === "DELETE") {
-                                    console.log("DELETE CALLED FOR ACTIVE INDEX: ", activeIndex);
-                                    console.log("DELETE CALLED FOR: ", characterSheets[activeIndex].character.name);
-                                    const deleteId = characterSheets[activeIndex].id;
-                                    if (!deleteId) return;
-                                    deleteCharacterSheet({id: deleteId});
-                                } else {
-                                }
-                            }}
-                        >
-                            DELETE CHARACTER SHEET
-                        </button>
+                        className="chat__delete"
+                        style={{float: "right"}}
+                        onClick={(event) => {
+                            event.preventDefault();
+                            const confirm = prompt("Enter 'DELETE' to confirm");
+                            if (confirm === "DELETE") {
+                                console.log("DELETE CALLED FOR ACTIVE INDEX: ", activeIndex);
+                                console.log("DELETE CALLED FOR: ", characterSheets[activeIndex].character.name);
+                                const deleteId = characterSheets[activeIndex].id;
+                                if (!deleteId) return;
+                                deleteCharacterSheet({id: deleteId});
+                            } else {
+                            }
+                        }}
+                    >
+                        DELETE CHARACTER SHEET
+                    </button>
+                    }
                 </form>
             </div>
             <Vehicles
@@ -274,51 +278,7 @@ function CharacterSheet(){
             />
         </div>
         </>
-    )
-        :
-        <div className={"charsheet"}>
-            <input type="radio" name="attr_gmdicepool" className="sheet-player" value="1" defaultChecked="checked"
-                   style={{display: "none"}}/>
-            <input type="radio" name="attr_pcgm" className="sheet-tab-new sheet-tab-character-sheet sheet-player-sheet"
-                   value="1" defaultChecked="checked"/>
-            <span className="sheet-tab-new sheet-player-sheet">Character Sheet</span>
-            <input type="radio" name="attr_pcgm" className="sheet-tab-new sheet-tab-ship-sheet sheet-player-sheet"
-                   value="2" defaultChecked=""/>
-            <span className="sheet-tab-new sheet-player-sheet">Vehicle Sheet</span>
-            <div className="charsheet sheet-tab-content sheet-tab-character-sheet">
-                <form onSubmit={handleSubmit}>
-                    <SoakWoundsDefense soakWoundsDefense={soakWounds} setState={setState} />
-                    <Character character={character} setState={setState} />
-                    <Characteristics characteristics={characteristics} setState={setState} />
-                    <Skills
-                        character={character}
-                        characteristics={characteristics}
-                        generalSkills={generalSkills}
-                        combatSkills={combatSkills}
-                        knowledgeSkills={knowledgeSkills}
-                        setState={setState}
-                        open={open}
-                        setOpen={setOpen}
-                        handleClickOpen={handleClickOpen}
-                        handleClose={handleClose}
-                    />
-                    <Weapons
-                        character={character}
-                        weapons={weapons}
-                        characteristics={characteristics}
-                        generalSkills={generalSkills}
-                        combatSkills={combatSkills}
-                        setState={setState}
-                    />
-                    <Talents
-                        talents={talents}
-                        setState={setState}
-                    />
-                    <p><button>Save</button></p>
-                </form>
-            </div>
-            <Vehicles vehicles={vehicles} characteristics={characteristics} combatSkills={combatSkills} setState={setState} />
-        </div>
+    );
 }
 
 export default CharacterSheet;
