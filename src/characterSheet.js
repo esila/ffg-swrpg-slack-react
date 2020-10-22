@@ -253,6 +253,7 @@ function CharacterSheet(){
                 </form>
             </div>
             <Vehicles
+                handleSubmit={handleSubmit}
                 vehicles={vehicles}
                 characteristics={characteristics}
                 generalSkills={generalSkills}

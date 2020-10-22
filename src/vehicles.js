@@ -1,6 +1,6 @@
 import React from "react";
 
-function Vehicles({ vehicles, setState, characteristics, generalSkills, combatSkills, knowledgeSkills, handleClickOpen }){
+function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSkills, combatSkills, knowledgeSkills, handleClickOpen }){
     const starship_details = vehicles.starship;
     const starship_roles = vehicles.starship.starship_roles;
     const starship_defense = vehicles.starship.starship_defense;
@@ -1077,6 +1077,8 @@ function Vehicles({ vehicles, setState, characteristics, generalSkills, combatSk
                         })}
                         <button onClick={(event) => { addVehicleAttachment(event, "starship") }}>Add Attachment</button>
                     </div>
+                    <hr/>
+                    <button onClick={(event) => { handleSubmit(event);}}>Save Character Sheet</button>
                     <div className="sheet-clear"></div>
                 </div>
             </div>
