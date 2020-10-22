@@ -1,9 +1,11 @@
 import React from "react";
+import Critical from './critical';
 
 function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSkills, combatSkills, knowledgeSkills, handleClickOpen }){
     const starship_details = vehicles.starship;
     const starship_roles = vehicles.starship.starship_roles;
     const starship_defense = vehicles.starship.starship_defense;
+    const starship_criticals = vehicles.starship.critical_injuries;
     const starship_weapons = vehicles.starship.starship_weapons;
     const starship_attachments = vehicles.starship.starship_attachments;
 
@@ -20,7 +22,6 @@ function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSk
         Object.keys(knowledgeSkills).forEach((skill) => {
             knowledgeSkillsMap[knowledgeSkills[skill].name] = [knowledgeSkills[skill].characteristic, knowledgeSkills];
         });
-        console.log(generalSkillsMap);
         const derivedMap = {
             ...generalSkillsMap,
             ...combatSkillsMap,
@@ -1077,6 +1078,8 @@ function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSk
                         })}
                         <button onClick={(event) => { addVehicleAttachment(event, "starship") }}>Add Attachment</button>
                     </div>
+                    <div className="sheet-clear"></div>
+                    <Critical source_name={starship_details.name} critical_injuries={starship_criticals} type="Vehicle" setState={setState}/>
                     <hr/>
                     <button onClick={(event) => { handleSubmit(event);}}>Save Character Sheet</button>
                     <div className="sheet-clear"></div>

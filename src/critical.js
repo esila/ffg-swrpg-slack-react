@@ -1,6 +1,6 @@
 import React from 'react';
 
-const critTable = [
+const critCharacterTable = [
     {
         percent: [1, 5],
         severity: 1,
@@ -180,12 +180,132 @@ const critTable = [
     }
 ];
 
-function Critical({ character, critical_injuries, setState }) {
+const critVehicleTable = [
+    {
+        percent: [1, 9],
+        severity: 1,
+        name: 'Mechanical Stress',
+        result: 'Ship or vehicle suffers 1 system strain.'
+    },
+    {
+        percent: [10, 18],
+        severity: 1,
+        name: 'Jostled',
+        result: 'All crew members suffer 1 strain.'
+    },
+    {
+        percent: [19, 27],
+        severity: 1,
+        name: 'Losing Power, Shields',
+        result: 'Decrease defense in affected defense zone by 1 until repaired. If ship or vehicle has no defense, suffer 1 system strain.'
+    },
+    {
+        percent: [28, 36],
+        severity: 1,
+        name: 'Knocked Off Course',
+        result: 'On next turn, pilot cannot execute any maneuvers. Instead, must make a Piloting check, regain bearings and resume course. Difficulty depends on current speed.'
+    },
+    {
+        percent: [37, 45],
+        severity: 1,
+        name: 'Tailspin',
+        result: 'All firing from ship or vehicle suffers 2 setback dice until end of pilot\'s next turn.'
+    },
+    {
+        percent: [46, 54],
+        severity: 1,
+        name: 'Component Hit',
+        result: 'One component of the attacker\'s choice is knocked offline, and is rendered inoperable until the end of the following round. See page 245 CRB for Small/Large Vehicle and Ship Component tables. '
+    },
+    // --------------- severity : 2
+    {
+        percent: [55, 63],
+        severity: 2,
+        name: 'Shields Failing',
+        result: 'Decrease defense in all defense zones by 1 until repaired. If ship or vehicle has no defense, suffer 2 system strain.'
+    },
+    {
+        percent: [64, 72],
+        severity: 2,
+        name: 'Hyperdrive or Navicomputer Failure',
+        result: 'Cannot make any jump, hyperspace until repaired. If ship or vehicle has no hyperdrive, navigation systems fail leaving it unable, tell where it is or is going.'
+    },
+    {
+        percent: [73, 81],
+        severity: 2,
+        name: 'Power Fluctuations',
+        result: 'Pilot cannot voluntarily inflict system strain on the ship until repaired.'
+    },
+    // --------------- severity : 3
+    {
+        percent: [82, 90],
+        severity: 3,
+        name: 'Shields Down',
+        result: 'Decrease defense in affected defense zone, 0 and all other defense zones by 1 point until repaired. If ship or vehicle has no defense, suffer 4 system strain.'
+    },
+    {
+        percent: [91, 99],
+        severity: 3,
+        name: 'Engine Damaged',
+        result: 'Ship or vehicle\'s maximum speed reduced by 1,, a minimum of 1, until repaired.'
+    },
+    {
+        percent: [100, 108],
+        severity: 3,
+        name: 'Shield Overload',
+        result: 'Decrease defense in all defense zones, 0 until repaired. In addition, suffer 2 system strain. Cannot be repaired until end of encounter. If ship or vehicle has no defense, reduce armor by 1 until repaired.'
+    },
+    {
+        percent: [109, 117],
+        severity: 3,
+        name: 'Engines Down',
+        result: 'Ship or vehicle\'s maximum speed reduced, 0. In addition, ship or vehicle cannot execute maneuvers until repaired. Ship continues on course at current speed and cannot be stopped or course changed until repaired.'
+    },
+    {
+        percent: [118, 126],
+        severity: 3,
+        name: 'Major System Failure',
+        result: 'One component of the attacker\'s choice is heavily damages, and is inoperable until the critical hit is repaired. See page 245 CRB for Small/Large Vehicle and Ship Component tables. '
+    },
+    // --------------- severity : 4
+    {
+        percent: [127, 133],
+        severity: 4,
+        name: 'Major Hull Breach',
+        result: 'Ships and vehicles of silhouette 4 and smaller depressurize in a number of rounds equal, silhouette. Ships of silhouette 5 and larger don\'t completely depressurize, but parts do (specifics at GM discretion). Ships and vehicles operating in atmosphere instead suffer a Destabilized Critical.'
+    },
+    {
+        percent: [134, 138],
+        severity: 4,
+        name: 'Destabilised',
+        result: 'Reduce ship or vehicle\'s hull integrity threshold and system strain threshold, half original values until repaired.'
+    },
+    {
+        percent: [139, 144],
+        severity: 4,
+        name: 'Fire!',
+        result: 'Fire rages through ship or vehicle and it immediately takes 2 system strain. Fire can be extinguished with appropriate skill, Vigilance or Cool checks at GM\'s discretion. Takes one round per two silhouette, put out.'
+    },
+    {
+        percent: [145, 153],
+        severity: 4,
+        name: 'Breaking Up',
+        result: 'At the end of next round, ship is completely destroyed. Anyone aboard has one round, reach escape pod or bail out before they are lost.'
+    },
+    {
+        percent: [154, 300],
+        severity: 4,
+        name: 'Vaporized',
+        result: 'The ship or Vehicle is completely destroyed.'
+    }
+];
+
+function Critical({ source_name, critical_injuries, type, setState }) {
 
     const handleRoll = (roll_source, roll_message) => {
-        const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/criticalroll`;
-        //const API_ADDRESS = `http://127.0.0.1:5000/criticalroll`;
-        const roll_user = character.name || "anonymous";
+        //const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/criticalroll`;
+        const API_ADDRESS = `http://127.0.0.1:5000/criticalroll`;
+        const roll_user = source_name || "anonymous";
         const data = { roll_source, roll_message, roll_user };
         console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
         fetch(API_ADDRESS, {
@@ -211,6 +331,7 @@ function Critical({ character, critical_injuries, setState }) {
 
     const getCritical = (e) => {
         e.preventDefault();
+        const critTable = type === "Character" ? critCharacterTable : critVehicleTable;
         const offset = (critical_injuries && 10 * critical_injuries.length) || 0;
         const roll = getRandomInt(1,100);
         const fullRoll = roll + offset;
@@ -223,32 +344,79 @@ function Critical({ character, critical_injuries, setState }) {
             Total: fullRoll,
             [criticalInjury.name]: criticalInjury.result
         };
-        const roll_source = "Character Critical";
-        handleRoll(roll_source, roll_message)
+        const roll_source = `${type} Critical`;
+        handleRoll(roll_source, roll_message);
         if (!critical_injuries) {
+            if (type === "Character") {
+                setState(prev => ({
+                    ...prev,
+                    critical_injuries: [criticalInjury]
+                }));
+                return;
+            }
+            else if (type === "Vehicle") {
+                setState(prev => ({
+                    ...prev,
+                    vehicles: {
+                        ...prev.vehicles,
+                        starship: {
+                            ...prev.vehicles.starship,
+                            critical_injuries: [criticalInjury]
+                        }
+                    }
+                }));
+                return;
+            }
+        }
+        if (type === "Character") {
             setState(prev => ({
                 ...prev,
-                critical_injuries: [criticalInjury]
+                critical_injuries: [
+                    ...prev.critical_injuries,
+                    criticalInjury
+                ]
             }));
-            return;
         }
-        setState(prev => ({
-            ...prev,
-            critical_injuries: [
-                ...prev.critical_injuries,
-                criticalInjury
-            ]
-        }));
+        else if (type === "Vehicle") {
+            setState(prev => ({
+                ...prev,
+                vehicles: {
+                    ...prev.vehicles,
+                    starship: {
+                        ...prev.vehicles.starship,
+                        critical_injuries: [
+                            ...prev.vehicles.starship.critical_injuries,
+                            criticalInjury
+                        ]
+                    }
+                }
+            }))
+        }
     };
 
     function healCritical(event, idx) {
         event.preventDefault();
         critical_injuries.splice(idx, 1);
-        setState(prev => ({
-            ...prev,
-            critical_injuries: critical_injuries
-        }));
+        if (type === "Character") {
+            setState(prev => ({
+                ...prev,
+                critical_injuries: critical_injuries
+            }));
+        }
+        else if (type === "Vehicle") {
+            setState(prev => ({
+                ...prev,
+                vehicles: {
+                    ...prev.vehicles,
+                    starship: {
+                        ...prev.vehicles.starship,
+                        critical_injuries: critical_injuries
+                    }
+                }
+            }));
+        }
     }
+
     return (
         <div className="sheet-row sheet-show-critical-table">
             <div className="sheet-small-12 sheet-column">
@@ -276,7 +444,7 @@ function Critical({ character, critical_injuries, setState }) {
                             <input type="text" name="attr_character-critAddRangeNum" defaultValue=""/>
                         </td>
                         <td valign="bottom">
-                            <button type='roll' className="sheet-btn-add-crit">
+                            <button type='roll' className="sheet-btn-add-crit" onClick={(e) => {e.preventDefault()}}>
                                 Add Critical
                             </button>
                         </td>
@@ -296,7 +464,7 @@ function Critical({ character, critical_injuries, setState }) {
                                             type="text"
                                             name="attr_character-critName1"
                                             readOnly="readonly"
-                                            defaultValue={crit.name}
+                                            value={crit.name}
                                         />
                                     </td>
                                     <td width="30%">
@@ -304,18 +472,18 @@ function Critical({ character, critical_injuries, setState }) {
                                             type="text"
                                             name="attr_character-critRange1"
                                             readOnly="readonly"
-                                            defaultValue={JSON.stringify(crit.percent)}
+                                            value={JSON.stringify(crit.percent)}
                                         />
                                     </td>
                                     <td className="sheet-crit-dice-bg">
                                         <input type="hidden" name="attr_character-critDice1"/>
-                                        <input className="sheet-pd" defaultValue={crit.severity} type="hidden"
+                                        <input className="sheet-pd" value={crit.severity} type="hidden"
                                                name="attr_character-critSeverity1" readOnly="readOnly"/><span></span>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td colSpan="2" rowSpan="2">
-                            <textarea rows="3" name="attr_character-critSummary1" readOnly="readonly" defaultValue={crit.result}>
+                            <textarea rows="3" name="attr_character-critSummary1" readOnly="readonly" value={crit.result}>
                             </textarea>
                                     </td>
                                     <td>
