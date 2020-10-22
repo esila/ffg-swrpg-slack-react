@@ -68,6 +68,11 @@ export const createCharacterSheet = /* GraphQL */ `
             restricted
             value
           }
+          starship_roles {
+            character_name
+            role
+            skill
+          }
           starship_weapons {
             character_name
             weapon_name
@@ -496,6 +501,11 @@ export const updateCharacterSheet = /* GraphQL */ `
             restricted
             value
           }
+          starship_roles {
+            character_name
+            role
+            skill
+          }
           starship_weapons {
             character_name
             weapon_name
@@ -923,6 +933,11 @@ export const deleteCharacterSheet = /* GraphQL */ `
             rarity
             restricted
             value
+          }
+          starship_roles {
+            character_name
+            role
+            skill
           }
           starship_weapons {
             character_name

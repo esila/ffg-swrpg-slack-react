@@ -65,6 +65,11 @@ export const getCharacterSheet = /* GraphQL */ `
             restricted
             value
           }
+          starship_roles {
+            character_name
+            role
+            skill
+          }
           starship_weapons {
             character_name
             weapon_name
@@ -494,6 +499,11 @@ export const listCharacterSheets = /* GraphQL */ `
               rarity
               restricted
               value
+            }
+            starship_roles {
+              character_name
+              role
+              skill
             }
             starship_weapons {
               character_name

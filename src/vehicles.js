@@ -1,6 +1,6 @@
 import React from "react";
 
-function Vehicles({ vehicles, setState, characteristics, combatSkills, handleClickOpen }){
+function Vehicles({ vehicles, setState, characteristics, generalSkills, combatSkills, knowledgeSkills, handleClickOpen }){
     const starship_details = vehicles.starship;
     const starship_roles = vehicles.starship.starship_roles;
     const starship_defense = vehicles.starship.starship_defense;
@@ -8,9 +8,23 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
     const starship_attachments = vehicles.starship.starship_attachments;
 
     function getDerivedDicePool(skill) {
+        let generalSkillsMap = {};
+        let combatSkillsMap = {};
+        let knowledgeSkillsMap = {};
+        Object.keys(generalSkills).forEach((skill) => {
+            generalSkillsMap[generalSkills[skill].name] = [generalSkills[skill].characteristic, generalSkills];
+        });
+        Object.keys(combatSkills).forEach((skill) => {
+            combatSkillsMap[combatSkills[skill].name] = [combatSkills[skill].characteristic, combatSkills];
+        });
+        Object.keys(knowledgeSkills).forEach((skill) => {
+            knowledgeSkillsMap[knowledgeSkills[skill].name] = [knowledgeSkills[skill].characteristic, knowledgeSkills];
+        });
+        console.log(generalSkillsMap);
         const derivedMap = {
-            Gunnery: ["Agility", combatSkills],
-            RangedHeavy: ["Agility", combatSkills],
+            ...generalSkillsMap,
+            ...combatSkillsMap,
+            ...knowledgeSkillsMap
         };
         const [characteristicKey, skillGroup] = derivedMap[skill];
         const characteristic = characteristics[characteristicKey];
@@ -164,6 +178,19 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
             role: "",
             skill: "Astrogation"
         };
+        if (!starship_roles) {
+            setState(prev => ({
+                ...prev,
+                vehicles: {
+                    ...prev.vehicles,
+                    [vehicle_type]: {
+                        ...prev.vehicles[vehicle_type],
+                        starship_roles: [vehicleRoleStub]
+                    }
+                }
+            }));
+            return;
+        }
         setState(prev => ({
             ...prev,
             vehicles: {
@@ -652,9 +679,9 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
                                             </td>
                                             <td>
                                                 <input
-                                                    name="role_name"
+                                                    name="role"
                                                     type="text"
-                                                    value={role.role_name}
+                                                    value={role.role}
                                                     onChange={(e) => { handleRole(e, "starship", role_idx) }}
                                                 />
                                             </td>
@@ -664,8 +691,46 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
                                                     value={role.skill}
                                                     onChange={(e) => { handleRole(e, "starship", role_idx) }}
                                                 >
-                                                    <option value="Gunnery">Gunnery</option>
-                                                    <option value="RangedHeavy">Ranged - Heavy</option>
+                                                    <optgroup label="General Skills">
+                                                        <option value="Astrogation">Astrogation</option>
+                                                        <option value="Athletics">Athletics</option>
+                                                        <option value="Charm">Charm</option>
+                                                        <option value="Coercion">Coercion</option>
+                                                        <option value="Computers">Computers</option>
+                                                        <option value="Cool">Cool</option>
+                                                        <option value="Coordination">Coordination</option>
+                                                        <option value="Deception">Deception</option>
+                                                        <option value="Discipline">Discipline</option>
+                                                        <option value="Leadership">Leadership</option>
+                                                        <option value="Mechanics">Mechanics</option>
+                                                        <option value="Medicine">Medicine</option>
+                                                        <option value="Negotiation">Negotiation</option>
+                                                        <option value="Perception">Perception</option>
+                                                        <option value="PilotingPlanetary">Piloting (Planetary)</option>
+                                                        <option value="PilotingSpace">Piloting (Space)</option>
+                                                        <option value="Resilience">Resilience</option>
+                                                        <option value="Skulduggery">Skulduggery</option>
+                                                        <option value="Stealth">Stealth</option>
+                                                        <option value="Streetwise">Streetwise</option>
+                                                        <option value="Survival">Survival</option>
+                                                        <option value="Vigilance">Vigilance</option>
+                                                    </optgroup>
+                                                    <optgroup label="Combat Skills">
+                                                        <option value="Brawl">Brawl</option>
+                                                        <option value="Gunnery">Gunnery</option>
+                                                        <option value="Melee">Melee</option>
+                                                        <option value="Lightsaber">Lightsaber</option>
+                                                        <option value="RangedLight">Ranged (Light)</option>
+                                                        <option value="RangedHeavy">Ranged (Heavy)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Knowledge Skills">
+                                                        <option value="CoreWorlds">Core Worlds</option>
+                                                        <option value="Education">Education</option>
+                                                        <option value="Lore">Lore</option>
+                                                        <option value="OuterRim">Outer Rim</option>
+                                                        <option value="Underworld">Underworld</option>
+                                                        <option value="Xenology">Xenology</option>
+                                                    </optgroup>
                                                 </select>
                                             </td>
                                             <td>
@@ -673,15 +738,9 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
                                                     onClick={() => handleClickOpen(
                                                         {
                                                             dicePool: getDerivedDicePool(role.skill),
-                                                            roll_type: "roleroll",
-                                                            roll_source: role.role_name,
+                                                            roll_type: "skillroll",
+                                                            roll_source: `Skill - ${role.skill}`,
                                                             roll_user: role.character_name || "anonymous",
-                                                            roll_message: {
-                                                                Damage: role.damage,
-                                                                Critical: role.critical,
-                                                                Range: role.range,
-                                                                Qualities: role.special,
-                                                            },
                                                         }
                                                     )}
                                                 >Check</button>

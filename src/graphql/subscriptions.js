@@ -65,6 +65,11 @@ export const onCreateCharacterSheet = /* GraphQL */ `
             restricted
             value
           }
+          starship_roles {
+            character_name
+            role
+            skill
+          }
           starship_weapons {
             character_name
             weapon_name
@@ -490,6 +495,11 @@ export const onUpdateCharacterSheet = /* GraphQL */ `
             restricted
             value
           }
+          starship_roles {
+            character_name
+            role
+            skill
+          }
           starship_weapons {
             character_name
             weapon_name
@@ -914,6 +924,11 @@ export const onDeleteCharacterSheet = /* GraphQL */ `
             rarity
             restricted
             value
+          }
+          starship_roles {
+            character_name
+            role
+            skill
           }
           starship_weapons {
             character_name

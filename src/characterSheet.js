@@ -255,7 +255,9 @@ function CharacterSheet(){
             <Vehicles
                 vehicles={vehicles}
                 characteristics={characteristics}
+                generalSkills={generalSkills}
                 combatSkills={combatSkills}
+                knowledgeSkills={knowledgeSkills}
                 setState={setState}
                 handleClickOpen={handleClickOpen}
             />

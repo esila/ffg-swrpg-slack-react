@@ -183,9 +183,9 @@ const critTable = [
 function Critical({ character, critical_injuries, setState }) {
 
     const handleRoll = (roll_source, roll_message) => {
-        //const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/${roll_type}`;
+        const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/criticalroll`;
+        //const API_ADDRESS = `http://127.0.0.1:5000/criticalroll`;
         const roll_user = character.name || "anonymous";
-        const API_ADDRESS = `http://127.0.0.1:5000/criticalroll`;
         const data = { roll_source, roll_message, roll_user };
         console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
         fetch(API_ADDRESS, {
