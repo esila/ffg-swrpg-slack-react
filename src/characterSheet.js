@@ -241,11 +241,15 @@ function CharacterSheet(){
                             style={{float: "right"}}
                             onClick={(event) => {
                                 event.preventDefault();
-                                console.log("DELETE CALLED FOR ACTIVE INDEX: ", activeIndex);
-                                console.log("DELETE CALLED FOR: ", characterSheets[activeIndex].character.name);
-                                const deleteId = characterSheets[activeIndex].id;
-                                if (!deleteId) return;
-                                deleteCharacterSheet({id: deleteId});
+                                const confirm = prompt("Enter 'DELETE' to confirm");
+                                if (confirm === "DELETE") {
+                                    console.log("DELETE CALLED FOR ACTIVE INDEX: ", activeIndex);
+                                    console.log("DELETE CALLED FOR: ", characterSheets[activeIndex].character.name);
+                                    const deleteId = characterSheets[activeIndex].id;
+                                    if (!deleteId) return;
+                                    deleteCharacterSheet({id: deleteId});
+                                } else {
+                                }
                             }}
                         >
                             DELETE CHARACTER SHEET
