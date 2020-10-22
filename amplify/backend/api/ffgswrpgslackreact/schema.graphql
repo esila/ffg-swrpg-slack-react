@@ -383,6 +383,10 @@ type StarshipWeapons { character_name: String
   restricted: String
   value: String }
 
+type StarshipRoles { character_name: String
+  role: String
+  skill: String }
+
 type SystemStrain { threshold: Int current: Int }
 
 type HullTrauma { threshold: Int current: Int }
@@ -415,6 +419,7 @@ type Starship { name: String
   rarity: String
   value: String
   starship_attachments: [StarshipAttachments ]
+  starship_roles: [StarshipRoles]
   starship_weapons: [StarshipWeapons ]
   starship_defense: StarshipDefense }
 

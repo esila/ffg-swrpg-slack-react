@@ -1,8 +1,8 @@
 import React from "react";
-import DiceRoller from './diceRoller'
 
 function Vehicles({ vehicles, setState, characteristics, combatSkills, handleClickOpen }){
     const starship_details = vehicles.starship;
+    const starship_roles = vehicles.starship.starship_roles;
     const starship_defense = vehicles.starship.starship_defense;
     const starship_weapons = vehicles.starship.starship_weapons;
     const starship_attachments = vehicles.starship.starship_attachments;
@@ -23,19 +23,6 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
                 ability: Math.abs(characteristic - rank)
             }
     }
-
-    const getDerivedWeaponSkills = (skill) => {
-        const derivedMap = {
-            Gunnery: ["Agility", combatSkills],
-            RangedHeavy: ["Agility", combatSkills],
-        };
-        const [characteristicKey, skillGroup] = derivedMap[skill];
-        const characteristic = characteristics[characteristicKey];
-        const rank = skillGroup[skill].rank;
-        return characteristic === rank ?
-          `${rank}p`
-          : `${Math.min(characteristic, rank)}p ${Math.abs(characteristic - rank)}a`
-    };
 
     function handleVehicleDetails(e, vehicle_type) {
         e.preventDefault();
@@ -111,6 +98,25 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
         }))
     }
 
+     function handleRole(e, vehicle_type, role_idx) {
+        e.preventDefault();
+        const { target: {value, name} } = e;
+        let items = [...starship_roles];
+        let item = {...items[role_idx]};
+        item[name] = value;
+        items[role_idx] = item;
+        setState(prev => ({
+            ...prev,
+            vehicles: {
+                ...prev.vehicles,
+                [vehicle_type]: {
+                    ...prev.vehicles[vehicle_type],
+                    starship_roles: items
+                }
+            }
+        }))
+    }
+
     function handleAttachment(e, vehicle_type, attachment_idx) {
         e.preventDefault();
         const { target: {value, name} } = e;
@@ -148,6 +154,44 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
                 }
             }
         }))
+    }
+
+    function addVehicleRole(event, vehicle_type) {
+        event.preventDefault();
+
+        const vehicleRoleStub = {
+            character_name: "",
+            role: "",
+            skill: "Astrogation"
+        };
+        setState(prev => ({
+            ...prev,
+            vehicles: {
+                ...prev.vehicles,
+                [vehicle_type]: {
+                    ...prev.vehicles[vehicle_type],
+                    starship_roles: [
+                        ...prev.vehicles[vehicle_type].starship_roles,
+                        vehicleRoleStub
+                    ]
+                }
+            }
+        }))
+    }
+
+    function removeVehicleRole(event, vehicle_type, idx) {
+        event.preventDefault();
+        vehicles[vehicle_type].starship_roles.splice(idx, 1);
+        setState(prev => ({
+            ...prev,
+            vehicles: {
+                ...prev.vehicles,
+                [vehicle_type]: {
+                    ...prev.vehicles[vehicle_type],
+                    starship_roles: vehicles[vehicle_type].starship_roles
+                }
+            }
+        }));
     }
 
     function addVehicleWeapon(event, vehicle_type) {
@@ -579,6 +623,78 @@ function Vehicles({ vehicles, setState, characteristics, combatSkills, handleCli
                                 </tbody>
                             </table>
                         </div>
+                    </div>
+                    <div className="sheet-clear"></div>
+                </div>
+                 <div className="sheet-row">
+                    <div className="sheet-small-12 sheet-column">
+                        <h3 className="sheet-section-header">Starship Roles</h3>
+                        {starship_roles && starship_roles.map((role, role_idx) => {
+                            return (
+                                <div key={role_idx} className="sheet-role-section">
+                                    <table cellSpacing="0" cellPadding="0" border="0">
+                                        <thead>
+                                        <tr>
+                                            <th>Character Name</th>
+                                            <th>Role</th>
+                                            <th>Skill</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <input
+                                                    name="character_name"
+                                                    type="text"
+                                                    value={role.character_name}
+                                                    onChange={(e) => { handleRole(e, "starship", role_idx) }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <input
+                                                    name="role_name"
+                                                    type="text"
+                                                    value={role.role_name}
+                                                    onChange={(e) => { handleRole(e, "starship", role_idx) }}
+                                                />
+                                            </td>
+                                            <td>
+                                                <select
+                                                    name="skill"
+                                                    value={role.skill}
+                                                    onChange={(e) => { handleRole(e, "starship", role_idx) }}
+                                                >
+                                                    <option value="Gunnery">Gunnery</option>
+                                                    <option value="RangedHeavy">Ranged - Heavy</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button
+                                                    onClick={() => handleClickOpen(
+                                                        {
+                                                            dicePool: getDerivedDicePool(role.skill),
+                                                            roll_type: "roleroll",
+                                                            roll_source: role.role_name,
+                                                            roll_user: role.character_name || "anonymous",
+                                                            roll_message: {
+                                                                Damage: role.damage,
+                                                                Critical: role.critical,
+                                                                Range: role.range,
+                                                                Qualities: role.special,
+                                                            },
+                                                        }
+                                                    )}
+                                                >Check</button>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <br/>
+                                    <button style={{float: "right"}} onClick={(event) => { removeVehicleRole(event, "starship", role_idx) }}>Delete Role</button>
+                                </div>
+                            )
+                        })}
+                        <button onClick={(event) => { addVehicleRole(event, "starship") }}>Add Role</button>
                     </div>
                     <div className="sheet-clear"></div>
                 </div>

@@ -232,6 +232,12 @@ const talentStub = {
 };
 const talents = [talentStub];
 
+const vehicleRoleStub = {
+    character_name: "",
+    role: "",
+    skill: "Astrogation"
+};
+
 const vehicleWeaponStub = {
     character_name: "",
     weapon_name: "",
@@ -299,6 +305,7 @@ const vehicleStub = {
         navicomputer: "",
         rarity: "",
         value: "",
+        starship_roles: [vehicleRoleStub],
         starship_weapons: [vehicleWeaponStub],
         starship_attachments: [vehicleAttachmentStub],
         critical_injuries: []
