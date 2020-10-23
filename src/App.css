@@ -1,18 +1,9 @@
-.App {
-    display: block;
+body {
+    --slack-color: #3f0f40;
+    overflow: hidden;
 }
 
-.top__nav {
-    display: block;
-    margin-bottom: 40px;
-    flex: 1;
-}
-
-.top__nav .topnav_item {
-    padding: 5px 10px 5px 10px;
-    position: relative;
-}
-
-.top__nav .float-right {
-    float: right;
+.app__body{
+    display: flex;
+    height: 100vh;
 }
