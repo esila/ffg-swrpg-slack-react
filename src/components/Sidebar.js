@@ -13,6 +13,7 @@ import CharacterSheetModal from './CharacterSheetModal';
 
 function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
     const user = useContext(UserContext);
+    const currentCS = userCharacterSheets && userCharacterSheets[activeIndex];
     const characterName = userCharacterSheets && userCharacterSheets[activeIndex] && userCharacterSheets[activeIndex].character.name;
 
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -70,6 +71,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
             <CharacterSheetModal
                 open={csOpen}
                 handleClose={handleCloseCSModal}
+                currentCS={currentCS}
             />
             <SidebarOption Icon={BuildIcon} title="Skills" pathname="/skills" />
             <hr/>

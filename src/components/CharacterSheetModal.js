@@ -4,14 +4,25 @@ import {
     Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Grid,
 } from "@material-ui/core";
 
-function CharacterSheetModal({open, handleClose}) {
+function CharacterSheetModal({open, handleClose, currentCS}) {
 
     return (
         <div>
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="form-dialog-title"
+                fullWidth={true}
+                maxWidth={'md'}
+                PaperProps={{
+                    style: {
+                        maxHeight: "700px"
+                    },
+                }}
+            >
                 <DialogTitle id="form-dialog-title">Character Sheet</DialogTitle>
-                <DialogContent>
-                    <CharacterSheet/>
+                <DialogContent style={{position: "inherit"}}>
+                        <CharacterSheet currentCS={currentCS}/>
                 </DialogContent>
                 <DialogActions>
                     <Button
