@@ -39,7 +39,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
             });
         setPositiveUpgrade(0);
         setNegativeUpgrade(0);
-        handleClose();
+        handleClose(true);
     };
 
     const toggleDicePool = (e) => {

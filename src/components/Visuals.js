@@ -240,7 +240,7 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
             })
     }
     return fabricObjects.length > 0 ? (
-        <>
+        <div style={{height: "750px", overflow: "auto"}}>
             {user === "esila" &&
                 <>
                     <select
@@ -298,7 +298,7 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                 })}
             </select>
             <canvas ref={canvasEl} id="my-fabric-canvas" width="1920" height="1080" />
-        </>
+        </div>
     ):
         <div></div>
 }
