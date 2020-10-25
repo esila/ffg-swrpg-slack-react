@@ -75,14 +75,13 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
     return currentCS ? (
         <div className="sidebar">
             <div className="sidebar_header">
-                <div className="sidebar_info" onClick={handleUserMenuClick}>
+                <div className="sidebar_info" onClick={handleUserMenuClick} style={{cursor: "pointer"}}>
                     <h2>The Armorer</h2>
                     <h3>
                         <FiberManualRecordIcon/>
                         {characterName} | {user && user.replace(/["]+/g, '')}
                     </h3>
                 </div>
-                <CreateIcon/>
             </div>
             <Menu
                 id="simple-menu"
