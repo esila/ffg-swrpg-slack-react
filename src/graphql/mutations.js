@@ -1402,3 +1402,66 @@ export const deleteDestinyPool = /* GraphQL */ `
     }
   }
 `;
+export const createCharacterStatus = /* GraphQL */ `
+  mutation CreateCharacterStatus(
+    $input: CreateCharacterStatusInput!
+    $condition: ModelCharacterStatusConditionInput
+  ) {
+    createCharacterStatus(input: $input, condition: $condition) {
+      id
+      name
+      wounds
+      strain
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCharacterStatus = /* GraphQL */ `
+  mutation UpdateCharacterStatus(
+    $input: UpdateCharacterStatusInput!
+    $condition: ModelCharacterStatusConditionInput
+  ) {
+    updateCharacterStatus(input: $input, condition: $condition) {
+      id
+      name
+      wounds
+      strain
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCharacterStatus = /* GraphQL */ `
+  mutation DeleteCharacterStatus(
+    $input: DeleteCharacterStatusInput!
+    $condition: ModelCharacterStatusConditionInput
+  ) {
+    deleteCharacterStatus(input: $input, condition: $condition) {
+      id
+      name
+      wounds
+      strain
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

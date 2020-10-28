@@ -1375,3 +1375,57 @@ export const onDeleteDestinyPool = /* GraphQL */ `
     }
   }
 `;
+export const onCreateCharacterStatus = /* GraphQL */ `
+  subscription OnCreateCharacterStatus {
+    onCreateCharacterStatus {
+      id
+      name
+      wounds
+      strain
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCharacterStatus = /* GraphQL */ `
+  subscription OnUpdateCharacterStatus {
+    onUpdateCharacterStatus {
+      id
+      name
+      wounds
+      strain
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCharacterStatus = /* GraphQL */ `
+  subscription OnDeleteCharacterStatus {
+    onDeleteCharacterStatus {
+      id
+      name
+      wounds
+      strain
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

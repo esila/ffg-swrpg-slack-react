@@ -357,6 +357,15 @@ type DestinyPool
   dark: Int
 }
 
+type CharacterStatus
+@model {
+  id: ID!
+  name: String
+  wounds: Int
+  strain: Int
+  critical_injuries: [CriticalInjuries ]
+}
+
 type StarshipAttachments { name: String
   hard_points: Int
   base_modifiers: String

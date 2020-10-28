@@ -938,3 +938,50 @@ export const listDestinyPools = /* GraphQL */ `
     }
   }
 `;
+export const getCharacterStatus = /* GraphQL */ `
+  query GetCharacterStatus($id: ID!) {
+    getCharacterStatus(id: $id) {
+      id
+      name
+      wounds
+      strain
+      critical_injuries {
+        percent
+        severity
+        name
+        result
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCharacterStatuss = /* GraphQL */ `
+  query ListCharacterStatuss(
+    $filter: ModelCharacterStatusFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCharacterStatuss(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        name
+        wounds
+        strain
+        critical_injuries {
+          percent
+          severity
+          name
+          result
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
