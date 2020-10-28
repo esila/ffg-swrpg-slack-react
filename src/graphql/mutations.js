@@ -1410,6 +1410,7 @@ export const createCharacterStatus = /* GraphQL */ `
     createCharacterStatus(input: $input, condition: $condition) {
       id
       name
+      player_name
       wounds
       strain
       critical_injuries {
@@ -1431,6 +1432,7 @@ export const updateCharacterStatus = /* GraphQL */ `
     updateCharacterStatus(input: $input, condition: $condition) {
       id
       name
+      player_name
       wounds
       strain
       critical_injuries {
@@ -1452,6 +1454,7 @@ export const deleteCharacterStatus = /* GraphQL */ `
     deleteCharacterStatus(input: $input, condition: $condition) {
       id
       name
+      player_name
       wounds
       strain
       critical_injuries {

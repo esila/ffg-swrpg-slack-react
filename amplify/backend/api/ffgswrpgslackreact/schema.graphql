@@ -361,6 +361,7 @@ type CharacterStatus
 @model {
   id: ID!
   name: String
+  player_name: String
   wounds: Int
   strain: Int
   critical_injuries: [CriticalInjuries ]

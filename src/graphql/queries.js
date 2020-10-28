@@ -943,6 +943,7 @@ export const getCharacterStatus = /* GraphQL */ `
     getCharacterStatus(id: $id) {
       id
       name
+      player_name
       wounds
       strain
       critical_injuries {
@@ -970,6 +971,7 @@ export const listCharacterStatuss = /* GraphQL */ `
       items {
         id
         name
+        player_name
         wounds
         strain
         critical_injuries {

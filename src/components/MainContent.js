@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import { UserContext } from '../App';
+import CharacterStatus from './CharacterStatus';
 import Visuals from './Visuals';
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import './MainContent.css';
@@ -33,6 +34,7 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                             setTest(value);
                         }}
                     />}
+                    <CharacterStatus/>
                 </div>
                 <div className="maincontent__headerMid">
 

@@ -1380,6 +1380,7 @@ export const onCreateCharacterStatus = /* GraphQL */ `
     onCreateCharacterStatus {
       id
       name
+      player_name
       wounds
       strain
       critical_injuries {
@@ -1398,6 +1399,7 @@ export const onUpdateCharacterStatus = /* GraphQL */ `
     onUpdateCharacterStatus {
       id
       name
+      player_name
       wounds
       strain
       critical_injuries {
@@ -1416,6 +1418,7 @@ export const onDeleteCharacterStatus = /* GraphQL */ `
     onDeleteCharacterStatus {
       id
       name
+      player_name
       wounds
       strain
       critical_injuries {
