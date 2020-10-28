@@ -1,14 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom';
 import { UserContext } from '../App';
-import initState from '../initStats'
 import Visuals from './Visuals';
-import StarBorderOutlinedIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import './MainContent.css';
 
 function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
     const { characterSheets } = userCharacterSheets;
+    const [test, setTest] = useState(0);
     const location = useLocation().pathname.split('/')[1];
     const user = useContext(UserContext);
 
@@ -23,12 +22,20 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
         <div className="maincontent">
             <div className="maincontent__header">
                 <div className="maincontent__headerLeft">
-                    <h4 className="maincontent__channelName">
-                        <strong>  {`#STARWARS-RPG-${location}`}  </strong>
-                        <StarBorderOutlinedIcon/>
-                    </h4>
+                    <input
+                        name="test"
+                        value={test}
+                        type="number"
+                        step="1"
+                        onChange={(e) => {
+                            e.preventDefault();
+                            const { target: {value} } = e;
+                            setTest(value);
+                        }}
+                    />
                 </div>
                 <div className="maincontent__headerMid">
+
                     <p>Wound Threshold: 0 | 12</p>
                     <p>Strain Threshold: 0 | 15</p>
                 </div>

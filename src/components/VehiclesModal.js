@@ -7,7 +7,6 @@ import '../sheet-style.css';
 
 function VehiclesModal({open, handleClose, handleClickDiceModalOpen, currentCS}) {
 
-    console.log("vehicles modal");
     const setDummy = () => {};
     const { character, characteristics, generalSkills, combatSkills, knowledgeSkills, vehicles } = currentCS;
 
