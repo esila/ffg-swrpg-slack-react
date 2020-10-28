@@ -11,6 +11,7 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CharacterSheetModal from './CharacterSheetModal';
 import SkillsModal from './SkillsModal';
+import CombatModal from './CombatModal';
 import DiceModal from "../diceModal";
 
 function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
@@ -72,6 +73,14 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
     };
     const handleCloseSkillsModal = () => { setSkillsOpen(false) };
 
+    // Combat Modal State
+    const [combatOpen, setCombatOpen] = useState(false);
+    const handleOpenCombatModal = () => {
+        setCombatOpen(true);
+        setDiceModalContainerClose(() => handleCloseCombatModal);
+    };
+    const handleCloseCombatModal = () => { setCombatOpen(false) };
+
     return currentCS ? (
         <div className="sidebar">
             <div className="sidebar_header">
@@ -119,6 +128,12 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
                 currentCS={currentCS}
                 handleClickDiceModalOpen={handleClickDiceModalOpen}
             />
+            <CombatModal
+                open={combatOpen}
+                handleClose={handleCloseCombatModal}
+                currentCS={currentCS}
+                handleClickDiceModalOpen={handleClickDiceModalOpen}
+            />
             <DiceModal
                 open={diceModalOpen}
                 diceCheck={diceCheck}
@@ -127,7 +142,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
             />
             <SidebarOption Icon={BuildIcon} title="Skills" handleOpen={handleOpenSkillsModal}/>
             <hr/>
-            <SidebarOption Icon={AppsIcon} title="Combat"/>
+            <SidebarOption Icon={AppsIcon} title="Combat" handleOpen={handleOpenCombatModal}/>
             <hr/>
             <SidebarOption Icon={AppsIcon} title="Vehicles"/>
             <hr/>
