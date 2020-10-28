@@ -12,6 +12,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import CharacterSheetModal from './CharacterSheetModal';
 import SkillsModal from './SkillsModal';
 import CombatModal from './CombatModal';
+import VehiclesModal from './VehiclesModal';
 import DiceModal from "../diceModal";
 
 function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
@@ -81,6 +82,14 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
     };
     const handleCloseCombatModal = () => { setCombatOpen(false) };
 
+    // Vehicles Modal State
+    const [vehiclesOpen, setVehiclesOpen] = useState(false);
+    const handleOpenVehiclesModal = () => {
+        setVehiclesOpen(true);
+        setDiceModalContainerClose(() => handleCloseVehiclesModal);
+    };
+    const handleCloseVehiclesModal = () => { setVehiclesOpen(false) };
+
     return currentCS ? (
         <div className="sidebar">
             <div className="sidebar_header">
@@ -134,6 +143,12 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
                 currentCS={currentCS}
                 handleClickDiceModalOpen={handleClickDiceModalOpen}
             />
+            <VehiclesModal
+                open={vehiclesOpen}
+                handleClose={handleCloseVehiclesModal}
+                currentCS={currentCS}
+                handleClickDiceModalOpen={handleClickDiceModalOpen}
+            />
             <DiceModal
                 open={diceModalOpen}
                 diceCheck={diceCheck}
@@ -144,7 +159,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
             <hr/>
             <SidebarOption Icon={AppsIcon} title="Combat" handleOpen={handleOpenCombatModal}/>
             <hr/>
-            <SidebarOption Icon={AppsIcon} title="Vehicles"/>
+            <SidebarOption Icon={AppsIcon} title="Vehicles" handleOpen={handleOpenVehiclesModal}/>
             <hr/>
             <AmplifySignOut/>
         </div>
