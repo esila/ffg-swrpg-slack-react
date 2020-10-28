@@ -22,7 +22,7 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
         <div className="maincontent">
             <div className="maincontent__header">
                 <div className="maincontent__headerLeft">
-                    <input
+                    {false && <input
                         name="test"
                         value={test}
                         type="number"
@@ -32,7 +32,7 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                             const { target: {value} } = e;
                             setTest(value);
                         }}
-                    />
+                    />}
                 </div>
                 <div className="maincontent__headerMid">
 
