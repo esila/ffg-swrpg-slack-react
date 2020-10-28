@@ -57,7 +57,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
     };
 
     // User Menu (edit character sheet)
-    const [anchorUserMenuEl, setanchorUserMenuEl] = React.useState(null);
+    const [anchorUserMenuEl, setanchorUserMenuEl] = useState(null);
     const handleUserMenuClick = (event) => { setanchorUserMenuEl(event.currentTarget); };
     const handleUserMenuClose = () => { setanchorUserMenuEl(null); };
 
@@ -122,9 +122,12 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
                     handleOpenCSModal();
                     handleUserMenuClose();
                 }}
-                >Character Sheet
+                >
+                    Edit Character Sheet
                 </MenuItem>
-                <MenuItem onClick={handleUserMenuClose}>Switch Character</MenuItem>
+                <MenuItem onClick={handleUserMenuClose}>Place Holder 1</MenuItem>
+                <MenuItem onClick={handleUserMenuClose}>Place Holder 2</MenuItem>
+                <MenuItem onClick={handleUserMenuClose}>Place Holder 3</MenuItem>
             </Menu>
             <CharacterSheetModal
                 open={csOpen}
