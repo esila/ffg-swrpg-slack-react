@@ -90,7 +90,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
     };
     const handleCloseVehiclesModal = () => { setVehiclesOpen(false) };
 
-    return currentCS ? (
+    return (
         <div className="sidebar">
             <div className="sidebar_header">
                 <div className="sidebar_info" onClick={handleUserMenuClick} style={{cursor: "pointer"}}>
@@ -128,45 +128,49 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
                 <MenuItem onClick={handleUserMenuClose}>Place Holder 1</MenuItem>
                 <MenuItem onClick={handleUserMenuClose}>Place Holder 2</MenuItem>
                 <MenuItem onClick={handleUserMenuClose}>Place Holder 3</MenuItem>
+                <AmplifySignOut/>
             </Menu>
             <CharacterSheetModal
                 open={csOpen}
                 handleClose={handleCloseCSModal}
                 currentCS={currentCS}
             />
-            <SkillsModal
-                open={skillsOpen}
-                handleClose={handleCloseSkillsModal}
-                currentCS={currentCS}
-                handleClickDiceModalOpen={handleClickDiceModalOpen}
-            />
-            <CombatModal
-                open={combatOpen}
-                handleClose={handleCloseCombatModal}
-                currentCS={currentCS}
-                handleClickDiceModalOpen={handleClickDiceModalOpen}
-            />
-            <VehiclesModal
-                open={vehiclesOpen}
-                handleClose={handleCloseVehiclesModal}
-                currentCS={currentCS}
-                handleClickDiceModalOpen={handleClickDiceModalOpen}
-            />
-            <DiceModal
-                open={diceModalOpen}
-                diceCheck={diceCheck}
-                setDiceCheck={setDiceCheck}
-                handleClose={handleDiceModalClose}
-            />
-            <SidebarOption Icon={BuildIcon} title="Skills" handleOpen={handleOpenSkillsModal}/>
-            <hr/>
-            <SidebarOption Icon={AppsIcon} title="Combat" handleOpen={handleOpenCombatModal}/>
-            <hr/>
-            <SidebarOption Icon={AppsIcon} title="Vehicles" handleOpen={handleOpenVehiclesModal}/>
-            <hr/>
-            <AmplifySignOut/>
+            {currentCS &&
+            <>
+                <SkillsModal
+                    open={skillsOpen}
+                    handleClose={handleCloseSkillsModal}
+                    currentCS={currentCS}
+                    handleClickDiceModalOpen={handleClickDiceModalOpen}
+                />
+                < CombatModal
+                    open={combatOpen}
+                    handleClose={handleCloseCombatModal}
+                    currentCS={currentCS}
+                    handleClickDiceModalOpen={handleClickDiceModalOpen}
+                />
+                <VehiclesModal
+                    open={vehiclesOpen}
+                    handleClose={handleCloseVehiclesModal}
+                    currentCS={currentCS}
+                    handleClickDiceModalOpen={handleClickDiceModalOpen}
+                />
+                <DiceModal
+                    open={diceModalOpen}
+                    diceCheck={diceCheck}
+                    setDiceCheck={setDiceCheck}
+                    handleClose={handleDiceModalClose}
+                />
+                <SidebarOption Icon={BuildIcon} title="Skills" handleOpen={handleOpenSkillsModal}/>
+                <hr/>
+                <SidebarOption Icon={AppsIcon} title="Combat" handleOpen={handleOpenCombatModal}/>
+                <hr/>
+                <SidebarOption Icon={AppsIcon} title="Vehicles" handleOpen={handleOpenVehiclesModal}/>
+                <hr/>
+            </>
+            }
         </div>
-    ): <div></div>
+    )
 }
 
 export default Sidebar;

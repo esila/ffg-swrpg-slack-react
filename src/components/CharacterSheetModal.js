@@ -22,7 +22,7 @@ function CharacterSheetModal({open, handleClose, currentCS}) {
             >
                 <DialogTitle id="form-dialog-title">Character Sheet</DialogTitle>
                 <DialogContent style={{position: "inherit"}}>
-                        <CharacterSheet currentCS={currentCS}/>
+                        <CharacterSheet />
                 </DialogContent>
                 <DialogActions>
                     <Button
