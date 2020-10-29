@@ -4,6 +4,7 @@ import { UserContext } from '../App';
 import CharacterStatus from './CharacterStatus';
 import Visuals from './Visuals';
 import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
+import {Grid} from "@material-ui/core";
 import './MainContent.css';
 
 function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
@@ -20,35 +21,32 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
     }, []);
 
     return user ? (
-        <div className="maincontent">
-            <div className="maincontent__header">
-                <div className="maincontent__headerLeft">
-                    {false && <input
-                        name="test"
-                        value={test}
-                        type="number"
-                        step="1"
-                        onChange={(e) => {
-                            e.preventDefault();
-                            const { target: {value} } = e;
-                            setTest(value);
-                        }}
-                    />}
-                    <CharacterStatus/>
+            <div className="maincontent">
+                <div className="maincontent__header">
+                    <Grid container spacing={3}>
+                        <Grid item xs={8} direction="row" style={{textAlign: "left"}}>
+                           {false && <input
+                                name="test"
+                                value={test}
+                                type="number"
+                                step="1"
+                                onChange={(e) => {
+                                    e.preventDefault();
+                                    const { target: {value} } = e;
+                                    setTest(value);
+                                }}
+                            />}
+                            <CharacterStatus/>
+                        </Grid>
+                        <Grid item xs={4} style={{textAlign: "left"}}>
+                            <p>
+                                <InfoOutlinedIcon /> Vehicle Details
+                            </p>
+                        </Grid>
+                    </Grid>
                 </div>
-                <div className="maincontent__headerMid">
-
-                    <p>Wound Threshold: 0 | 12</p>
-                    <p>Strain Threshold: 0 | 15</p>
-                </div>
-                <div className="maincontent__headerRight">
-                    <p>
-                        <InfoOutlinedIcon /> Details
-                    </p>
-                </div>
+                <MainComponent characterSheet={characterSheets[activeIndex]}/>
             </div>
-            <MainComponent characterSheet={characterSheets[activeIndex]}/>
-        </div>
     )
         :
         <div className="maincontent">

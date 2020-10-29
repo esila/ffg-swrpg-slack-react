@@ -7,8 +7,9 @@ import {
 import {onUpdateCharacterStatus} from "../graphql/subscriptions";
 import {listCharacterStatuss, listCharacterSheets} from "../graphql/queries";
 import { UserContext} from "../App";
+import {Grid} from "@material-ui/core";
 
-function CharacterStatus({ characterName }) {
+function CharacterStatus({ characterSheet }) {
     const user = useContext(UserContext);
     const [characterStatus, setCharacterStatus] = useState({});
 
@@ -19,10 +20,10 @@ function CharacterStatus({ characterName }) {
 
     async function fetchCharacterStatus() {
         const apiData = await API.graphql({query: listCharacterStatuss });
-        const characterStatus = apiData.data.listCharacterStatuss.items;
-        const apiCharacterSheets = await API.graphql({query: listCharacterSheets});
-        const characterSheetData = apiCharacterSheets.data.listCharacterSheets.items;
-        setCharacterStatus({partyStatus: characterStatus, characterSheets: characterSheetData});
+        const partyStatus = apiData.data.listCharacterStatuss.items;
+        const currentCharacterStatus = partyStatus.filter((status) => status.player_name === user)[0];
+        const restPartyStatus = partyStatus.filter((status) => status.player_name !== user);
+        setCharacterStatus({partyStatus: restPartyStatus, currentCharacterStatus: currentCharacterStatus});
     }
 
     async function subscribeCharacterStatus() {
@@ -67,14 +68,35 @@ function CharacterStatus({ characterName }) {
             })
     }
     return characterStatus.partyStatus ? (
-        <div className="party_status">
-            <p>{JSON.stringify(characterStatus.partyStatus)}</p>
+        <div className="party_status" style={{fontSize: "12px"}}>
+            <Grid container spacing={3}>
+                <Grid item xs={6} direction="row" style={{textAlign: "left", display: "flex"}}>
+                    {characterStatus.currentCharacterStatus &&
+                    <div>
+                        <p>{characterStatus.currentCharacterStatus.name}</p>
+                        <p>Wounds: {characterStatus.currentCharacterStatus.wounds} | XXX</p>
+                        <p>Strain: {characterStatus.currentCharacterStatus.strain} | XXX</p>
+                    </div>
+                    }
+                </Grid>
+                <Grid item xs={6} direction="row" style={{textAlign: "left", display: "flex"}}>
+                    {characterStatus.partyStatus
+                        .filter((status) => status.player_name !== user)
+                        .map((status, status_idx) => {
+                            return (
+                                <div key={status_idx}>
+                                    <p>{status.name}</p>
+                                    <p>Wounds: {status.wounds} | XXX</p>
+                                    <p>Strain: {status.strain} | XXX</p>
+                                </div>
+                            )
+                        })}
+                </Grid>
+            </Grid>
         </div>
     ):
         <div className="party_status">
-            <button
-                onClick={() => {console.log(characterStatus.characterSheets)}}
-            >State2</button>
+            LOADING STATUS
         </div>
 }
 
