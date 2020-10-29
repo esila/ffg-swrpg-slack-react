@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import { UserContext } from '../App';
 import CharacterStatus from './CharacterStatus';
 import Visuals from './Visuals';
-import InfoOutlinedIcon from "@material-ui/icons/InfoOutlined";
 import {Grid} from "@material-ui/core";
 import './MainContent.css';
 
@@ -44,7 +43,7 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                         </Grid>
                         <Grid item xs={4} style={{textAlign: "left"}}>
                             <p>
-                                <InfoOutlinedIcon /> Vehicle Details
+                                Other Details
                             </p>
                         </Grid>
                     </Grid>
