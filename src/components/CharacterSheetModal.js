@@ -4,7 +4,7 @@ import {
     Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Grid,
 } from "@material-ui/core";
 
-function CharacterSheetModal({open, handleClose, currentCS}) {
+function CharacterSheetModal({open, handleClose, fetchUserCharacterSheets}) {
 
     return (
         <div>
@@ -22,19 +22,11 @@ function CharacterSheetModal({open, handleClose, currentCS}) {
             >
                 <DialogTitle id="form-dialog-title">Character Sheet</DialogTitle>
                 <DialogContent style={{position: "inherit"}}>
-                        <CharacterSheet />
+                        <CharacterSheet fetchUserCharacterSheets={fetchUserCharacterSheets}/>
                 </DialogContent>
                 <DialogActions>
-                    <Button
-                        onClick={() => {
-                            handleClose();
-                        }}
-                        color="primary"
-                    >
-                        Cancel
-                    </Button>
                     <Button onClick={(e) => handleClose()} color="primary">
-                        Save
+                        Close
                     </Button>
                 </DialogActions>
             </Dialog>

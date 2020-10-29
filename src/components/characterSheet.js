@@ -23,7 +23,7 @@ import {
     deleteCharacterSheet as deleteCharacterSheetMutation,
 } from "../graphql/mutations";
 
-function CharacterSheet(){
+function CharacterSheet({ fetchUserCharacterSheets }){
     const user = useContext(UserContext);
     const player_name = {
         character: {
@@ -107,6 +107,7 @@ function CharacterSheet(){
         await API.graphql({ query: createCharacterSheetMutation, variables: { input: state } });
         setActiveIndex(0);
         fetchCharacterSheets();
+        fetchUserCharacterSheets();
     }
 
     async function updateCharacterSheet(id) {
@@ -121,6 +122,7 @@ function CharacterSheet(){
                 console.log(`ERROR: ${JSON.stringify(error)}`)
                 });
         fetchCharacterSheets();
+        fetchUserCharacterSheets();
     }
 
     async function deleteCharacterSheet({ id }) {
@@ -133,6 +135,7 @@ function CharacterSheet(){
                 console.log(`ERROR`)
                 });
         fetchCharacterSheets();
+        fetchUserCharacterSheets();
     }
 
     function handleSubmit(event) {

@@ -15,7 +15,7 @@ import CombatModal from './CombatModal';
 import VehiclesModal from './VehiclesModal';
 import DiceModal from "../diceModal";
 
-function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
+function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCharacterSheets }) {
     const user = useContext(UserContext);
     const currentCS = userCharacterSheets && userCharacterSheets[activeIndex];
     const characterName = userCharacterSheets && userCharacterSheets[activeIndex] && userCharacterSheets[activeIndex].character.name;
@@ -134,6 +134,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets }) {
                 open={csOpen}
                 handleClose={handleCloseCSModal}
                 currentCS={currentCS}
+                fetchUserCharacterSheets={fetchUserCharacterSheets}
             />
             {currentCS &&
             <>

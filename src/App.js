@@ -42,6 +42,7 @@ function InitApp() {
                         userCharacterSheets={userCharacterSheets.characterSheets}
                         activeIndex={activeIndex}
                         setActiveIndex={setActiveIndex}
+                        fetchUserCharacterSheets={fetchUserCharacterSheets}
                     />
                     <Switch>
                         {contentSourceNames.map((name, idx) => {
