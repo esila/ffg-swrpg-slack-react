@@ -14,7 +14,7 @@ import backgroundImage from "../backgroundMap";
 function Visuals() {
     const [fabricObjects, setFabricObjects] = useState([]);
     const [background, setBackground] = useState({
-        url: "http://www.theaveragegamer.com/wp-content/uploads/2013/01/star_wars_edge_of_the_empire_JPTargete.jpg",
+        url: "https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg",
         scaleX: 1,
         scaleY: 1
     });
@@ -84,7 +84,7 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         ["Pash", "https://kndr.io/ts/swt1/i/HumanMaleBlasterSmugglerGoggles.png"],
     ];
     const mapList = [
-        ["Welcome", {url: "http://www.theaveragegamer.com/wp-content/uploads/2013/01/star_wars_edge_of_the_empire_JPTargete.jpg", scaleX: 1, scaleY: 1}],
+        ["Welcome", {url: "https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg", scaleX: 1, scaleY: 1}],
         ["Range Bands", {url: "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg", scaleX: 0.4, scaleY: 0.35}],
         ["Krayt Fang", {url: "https://s3.amazonaws.com/files.d20.io/images/3475756/Nfgcn3lIJFm3InNj5YLGXQ/original.png", scaleX: 0.5, scaleY: 0.5}],
         ["Mos Shuuta Streets", {url: "https://kainrath.files.wordpress.com/2014/05/mos-shuuta-streets-expanded-small.jpg", scaleX: 0.39, scaleY: 0.39}],
