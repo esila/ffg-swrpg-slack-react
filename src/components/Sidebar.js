@@ -97,7 +97,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                     <h2>The Armorer</h2>
                     <h3>
                         <FiberManualRecordIcon/>
-                        {characterName} | {user && user.replace(/["]+/g, '')}
+                        {characterName || "NEW CHARACTER"} | {user && user.replace(/["]+/g, '')}
                     </h3>
                 </div>
             </div>
@@ -123,11 +123,19 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                     handleUserMenuClose();
                 }}
                 >
-                    Edit Character Sheet
+                    Modify Character Sheet
                 </MenuItem>
-                <MenuItem onClick={handleUserMenuClose}>Place Holder 1</MenuItem>
-                <MenuItem onClick={handleUserMenuClose}>Place Holder 2</MenuItem>
-                <MenuItem onClick={handleUserMenuClose}>Place Holder 3</MenuItem>
+                {userCharacterSheets.map((sheet, sheet_idx) => {
+                    return (
+                        <MenuItem onClick={() => {
+                            setActiveIndex(sheet_idx);
+                            handleUserMenuClose();
+                        }}>{sheet.character.name}</MenuItem>
+                    );
+                })}
+                <MenuItem onClick={handleUserMenuClose}></MenuItem>
+                <MenuItem onClick={handleUserMenuClose}></MenuItem>
+                <MenuItem onClick={handleUserMenuClose}></MenuItem>
                 <AmplifySignOut/>
             </Menu>
             <CharacterSheetModal

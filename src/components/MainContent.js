@@ -25,18 +25,22 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                 <div className="maincontent__header">
                     <Grid container spacing={3}>
                         <Grid item xs={8} direction="row" style={{textAlign: "left"}}>
-                           {false && <input
-                                name="test"
-                                value={test}
-                                type="number"
-                                step="1"
-                                onChange={(e) => {
-                                    e.preventDefault();
-                                    const { target: {value} } = e;
-                                    setTest(value);
-                                }}
-                            />}
-                            <CharacterStatus currentCharacterSheet={characterSheets[activeIndex]} />
+                            {false &&
+                            <>
+                                <input
+                                    name="test"
+                                    value={test}
+                                    type="number"
+                                    step="1"
+                                    onChange={(e) => {
+                                        e.preventDefault();
+                                        const {target: {value}} = e;
+                                        setTest(value);
+                                    }}
+                                />
+                                <CharacterStatus currentCharacterSheet={characterSheets[activeIndex]} />
+                            </>
+                            }
                         </Grid>
                         <Grid item xs={4} style={{textAlign: "left"}}>
                             <p>
