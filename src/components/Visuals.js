@@ -13,8 +13,11 @@ import backgroundImage from "../backgroundMap";
 
 function Visuals() {
     const [fabricObjects, setFabricObjects] = useState([]);
-    const [background, setBackground] = useState("https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg");
-
+    const [background, setBackground] = useState({
+        url: "http://www.theaveragegamer.com/wp-content/uploads/2013/01/star_wars_edge_of_the_empire_JPTargete.jpg",
+        scaleX: 1,
+        scaleY: 1
+    });
     useEffect(() => {
         fetchFabricObjects();
         subscribeCreateFabricObjects();
@@ -81,10 +84,11 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         ["Pash", "https://kndr.io/ts/swt1/i/HumanMaleBlasterSmugglerGoggles.png"],
     ];
     const mapList = [
-        ["Range Bands", "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg"],
-        ["Krayt Fang", "https://s3.amazonaws.com/files.d20.io/images/3475756/Nfgcn3lIJFm3InNj5YLGXQ/original.png"],
-        ["Mos Shuuta Streets", "https://kainrath.files.wordpress.com/2014/05/mos-shuuta-streets-expanded-small.jpg"],
-        ["Teemo's Palace", "https://vignette.wikia.nocookie.net/starwars/images/9/9b/Teemos_palace.png"],
+        ["Welcome", {url: "http://www.theaveragegamer.com/wp-content/uploads/2013/01/star_wars_edge_of_the_empire_JPTargete.jpg", scaleX: 1, scaleY: 1}],
+        ["Range Bands", {url: "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg", scaleX: 0.4, scaleY: 0.35}],
+        ["Krayt Fang", {url: "https://s3.amazonaws.com/files.d20.io/images/3475756/Nfgcn3lIJFm3InNj5YLGXQ/original.png", scaleX: 0.5, scaleY: 0.5}],
+        ["Mos Shuuta Streets", {url: "https://kainrath.files.wordpress.com/2014/05/mos-shuuta-streets-expanded-small.jpg", scaleX: 0.39, scaleY: 0.39}],
+        ["Teemo's Palace", {url: "https://vignette.wikia.nocookie.net/starwars/images/9/9b/Teemos_palace.png", scaleX: 0.5, scaleY: 0.5}],
     ];
 
     const user = useContext(UserContext);
@@ -107,7 +111,7 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
             canvasDict[elem.fabricId] = elem.id;
             return elem.data;
         });
-        const backgroundData = {...backgroundImage, src: background };
+        const backgroundData = {...backgroundImage, src: background.url, scaleX: background.scaleX, scaleY: background.scaleY };
         canvas.loadFromJSON(`{"objects": [${fabricData}], "backgroundImage": ${JSON.stringify(backgroundData)}}`);
 
         canvas.off('object:modified');
@@ -243,6 +247,16 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         <div style={{height: "750px", overflow: "auto"}}>
             {user === "esila" &&
                 <>
+                    <input
+                        name="token_input"
+                        type="text"
+                        value={token}
+                        onChange={event => {
+                        event.preventDefault();
+                        const { target: {value} } = event;
+                        setToken(value);
+                        }}
+                    />
                     <select
                         name="token_select"
                         onChange={event => {
@@ -289,12 +303,12 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                 onChange={event => {
                     event.preventDefault();
                     const { target: {value} } = event;
-                    setBackground(value);
+                    setBackground(JSON.parse(value));
                 }}
             >
                 {mapList.map((map, map_idx) => {
                     const [name, value] = map;
-                    return <option key={map_idx} value={value}>{name}</option>
+                    return <option key={map_idx} value={JSON.stringify(value)}>{name}</option>
                 })}
             </select>
             <canvas ref={canvasEl} id="my-fabric-canvas" width="1920" height="1080" />

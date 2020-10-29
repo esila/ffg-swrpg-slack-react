@@ -40,11 +40,10 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                                 <CharacterStatus currentCharacterSheet={characterSheets[activeIndex]} />
                             </>
                             }
+                            <h1>Edge of The Empire</h1>
                         </Grid>
                         <Grid item xs={4} style={{textAlign: "left"}}>
-                            <p>
-                                Other Details
-                            </p>
+                            <h3>Session 0<br/>Character Creation</h3>
                         </Grid>
                     </Grid>
                 </div>
