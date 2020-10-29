@@ -36,7 +36,7 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                                     setTest(value);
                                 }}
                             />}
-                            <CharacterStatus/>
+                            <CharacterStatus currentCharacterSheet={characterSheets[activeIndex]} />
                         </Grid>
                         <Grid item xs={4} style={{textAlign: "left"}}>
                             <p>

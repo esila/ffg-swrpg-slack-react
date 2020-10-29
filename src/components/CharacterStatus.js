@@ -9,9 +9,10 @@ import {listCharacterStatuss, listCharacterSheets} from "../graphql/queries";
 import { UserContext} from "../App";
 import {Grid} from "@material-ui/core";
 
-function CharacterStatus({ characterSheet }) {
+function CharacterStatus({ currentCharacterSheet }) {
     const user = useContext(UserContext);
     const [characterStatus, setCharacterStatus] = useState({});
+    const currentCharacterSoakWounds = currentCharacterSheet && currentCharacterSheet.soakWounds;
 
     useEffect(() => {
         fetchCharacterStatus();
@@ -19,11 +20,19 @@ function CharacterStatus({ characterSheet }) {
     }, []);
 
     async function fetchCharacterStatus() {
-        const apiData = await API.graphql({query: listCharacterStatuss });
-        const partyStatus = apiData.data.listCharacterStatuss.items;
-        const currentCharacterStatus = partyStatus.filter((status) => status.player_name === user)[0];
+        const apiStatusData = await API.graphql({query: listCharacterStatuss });
+        const apiCSData = await API.graphql({query: listCharacterSheets });
+
+        const partyStatus = apiStatusData.data.listCharacterStatuss.items;
+        const currentCharacterStatus = partyStatus.find((status) => status.player_name === user);
         const restPartyStatus = partyStatus.filter((status) => status.player_name !== user);
-        setCharacterStatus({partyStatus: restPartyStatus, currentCharacterStatus: currentCharacterStatus});
+
+        const partySheets = apiCSData.data.listCharacterSheets.items.filter((sheet) => sheet.character.player_name !== user);
+        setCharacterStatus({
+            partyStatus: restPartyStatus,
+            partySheets: partySheets,
+            currentCharacterStatus: currentCharacterStatus,
+        });
     }
 
     async function subscribeCharacterStatus() {
@@ -72,22 +81,22 @@ function CharacterStatus({ characterSheet }) {
             <Grid container spacing={3}>
                 <Grid item xs={6} direction="row" style={{textAlign: "left", display: "flex"}}>
                     {characterStatus.currentCharacterStatus &&
-                    <div>
+                    <div style={{cursor: "pointer"}}>
                         <p>{characterStatus.currentCharacterStatus.name}</p>
-                        <p>Wounds: {characterStatus.currentCharacterStatus.wounds} | XXX</p>
-                        <p>Strain: {characterStatus.currentCharacterStatus.strain} | XXX</p>
+                        <p>Wounds: {characterStatus.currentCharacterStatus.wounds} | {currentCharacterSoakWounds.wounds.threshold}</p>
+                        <p>Strain: {characterStatus.currentCharacterStatus.strain} | {currentCharacterSoakWounds.strain.threshold}</p>
                     </div>
                     }
                 </Grid>
                 <Grid item xs={6} direction="row" style={{textAlign: "left", display: "flex"}}>
                     {characterStatus.partyStatus
-                        .filter((status) => status.player_name !== user)
                         .map((status, status_idx) => {
+                            const characterSoakWounds = characterStatus.partySheets.find((sheet) => sheet.character.player_name === status.player_name).soakWounds;
                             return (
                                 <div key={status_idx}>
                                     <p>{status.name}</p>
-                                    <p>Wounds: {status.wounds} | XXX</p>
-                                    <p>Strain: {status.strain} | XXX</p>
+                                    <p>Wounds: {status.wounds} | {characterSoakWounds.wounds.threshold}</p>
+                                    <p>Strain: {status.strain} | {characterSoakWounds.strain.threshold}</p>
                                 </div>
                             )
                         })}
