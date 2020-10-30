@@ -19,7 +19,10 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
 
     // Save Snackbar State
     const [snackbarOpen, setSnackbarOpen] = useState({open: false, message: "", severity: ""});
-    const handleOpenSnackbar = (message, severity) => { setSnackbarOpen({open: true, message: message, severity: severity}) };
+    const handleOpenSnackbar = (status) => {
+        const [message, severity] = status;
+        setSnackbarOpen({open: true, message: message, severity: severity})
+    };
     const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') { return; }
         setSnackbarOpen({open: false, message: "", severity: ""});

@@ -74,17 +74,17 @@ function CharacterStatus({ currentCharacterSheet, handleOpenSnackBar }) {
         //console.log(`UPDATE INPUT: ${wounds} / ${strain}`);
         const prevWounds = characterStatus.currentCharacterStatus.wounds;
         const prevStrain = characterStatus.currentCharacterStatus.strain;
-        let woundMessage = "";
-        let strainMessage = "";
+        let woundStatus = "";
+        let strainStatus = "";
         if (wounds > prevWounds) {
-            woundMessage = `${user} suffered ${wounds - prevWounds} wounds!`;
+            woundStatus = [`${user} suffered ${wounds - prevWounds} wounds!`, "error"];
         } else if (wounds < prevWounds) {
-            woundMessage = `${user} healed ${prevWounds - wounds} wounds!`;
+            woundStatus = [`${user} healed ${prevWounds - wounds} wounds!`, "success"];
         }
         if (strain > prevStrain) {
-            strainMessage = `${user} suffered ${strain - prevStrain} strain!`;
+            strainStatus = [`${user} suffered ${strain - prevStrain} strain!`, "warning"];
         } else if (strain < prevStrain) {
-            strainMessage = `${user} recovered ${prevStrain - strain} strain!`;
+            strainStatus = [`${user} recovered ${prevStrain - strain} strain!`, "info"];
         }
         if (!status_id) return;
         console.log("GOT PAST DATA TYPE");
@@ -92,8 +92,8 @@ function CharacterStatus({ currentCharacterSheet, handleOpenSnackBar }) {
             input: { id: status_id, wounds: wounds, strain: strain
             }}})
             .then(success => {
-                woundMessage && handleOpenSnackBar(woundMessage, "success");
-                strainMessage && handleOpenSnackBar(strainMessage, "success");
+                woundStatus && handleOpenSnackBar(woundStatus);
+                strainStatus && handleOpenSnackBar(strainStatus);
                 console.log(`SUCCESS: ${JSON.stringify(success)}`);
             },
                 error => {

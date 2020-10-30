@@ -106,7 +106,7 @@ function CharacterSheet({ fetchUserCharacterSheets, handleOpenSnackBar }){
         console.log("Create character sheet: ", state);
         await API.graphql({ query: createCharacterSheetMutation, variables: { input: state } })
             .then(success => {
-                    handleOpenSnackBar("Character sheet created!", "success");
+                    handleOpenSnackBar(["Character sheet created!", "success"]);
                     console.log(`SUCCESS: ${success}`);
                 },
                 error => {
@@ -123,7 +123,7 @@ function CharacterSheet({ fetchUserCharacterSheets, handleOpenSnackBar }){
         //console.log(JSON.stringify(state));
         await API.graphql({ query: updateCharacterSheetMutation, variables: { input: { id, ...state } }})
             .then(success => {
-                    handleOpenSnackBar("Character sheet saved!", "success");
+                    handleOpenSnackBar(["Character sheet saved!", "success"]);
                     console.log(`SUCCESS: ${success}`);
                 },
                 error => {
