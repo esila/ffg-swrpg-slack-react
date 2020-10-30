@@ -20,9 +20,9 @@ export default function CustomizedSnackbars({open, handleClose}) {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success">
-                    Character sheet saved!
+            <Snackbar open={open.open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={open.severity}>
+                    {open.message}
                 </Alert>
             </Snackbar>
         </div>

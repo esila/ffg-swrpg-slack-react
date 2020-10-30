@@ -4,17 +4,26 @@ import { UserContext } from '../App';
 import CharacterStatus from './CharacterStatus';
 import Visuals from './Visuals';
 import {Grid} from "@material-ui/core";
+import CustomizedSnackbars from './CustomizedSnackBar';
 import './MainContent.css';
+import CharacterSheetModal from "./CharacterSheetModal";
 
 function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
     const { characterSheets } = userCharacterSheets;
-    const [test, setTest] = useState(0);
     const location = useLocation().pathname.split('/')[1];
     const user = useContext(UserContext);
 
     const MainComponent = {
         visuals: Visuals,
     }[location];
+
+    // Save Snackbar State
+    const [snackbarOpen, setSnackbarOpen] = useState({open: false, message: "", severity: ""});
+    const handleOpenSnackbar = (message, severity) => { setSnackbarOpen({open: true, message: message, severity: severity}) };
+    const handleCloseSnackbar = (event, reason) => {
+        if (reason === 'clickaway') { return; }
+        setSnackbarOpen({open: false, message: "", severity: ""});
+    };
 
     useEffect(() => {
     }, []);
@@ -24,23 +33,10 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                 <div className="maincontent__header">
                     <Grid container spacing={3}>
                         <Grid item xs={8} direction="row" style={{textAlign: "left"}}>
-                            {false &&
-                            <>
-                                <input
-                                    name="test"
-                                    value={test}
-                                    type="number"
-                                    step="1"
-                                    onChange={(e) => {
-                                        e.preventDefault();
-                                        const {target: {value}} = e;
-                                        setTest(value);
-                                    }}
-                                />
-                                <CharacterStatus currentCharacterSheet={characterSheets[activeIndex]} />
-                            </>
-                            }
-                            <h1>Edge of The Empire</h1>
+                            <CharacterStatus
+                                currentCharacterSheet={characterSheets[activeIndex]}
+                                handleOpenSnackBar={handleOpenSnackbar}
+                            />
                         </Grid>
                         <Grid item xs={4} style={{textAlign: "left"}}>
                             <h3>Session 0<br/>Character Creation</h3>
@@ -48,6 +44,10 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                     </Grid>
                 </div>
                 <MainComponent characterSheet={characterSheets[activeIndex]}/>
+                <CustomizedSnackbars
+                    open={snackbarOpen}
+                    handleClose={handleCloseSnackbar}
+                />
             </div>
     )
         :

@@ -66,11 +66,11 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
     const handleCloseCSModal = () => { setCSOpen(false) };
 
     // Save Snackbar State
-    const [snackbarOpen, setSnackbarOpen] = useState(false);
-    const handleOpenSnackbar= () => { setSnackbarOpen(true) };
-    const handleCloseSnackbar= (event, reason) => {
+    const [snackbarOpen, setSnackbarOpen] = useState({open: false, message: "", severity: ""});
+    const handleOpenSnackbar = (message, severity) => { setSnackbarOpen({open: true, message: message, severity: severity}) };
+    const handleCloseSnackbar = (event, reason) => {
         if (reason === 'clickaway') { return; }
-        setSnackbarOpen(false);
+        setSnackbarOpen({open: false, message: "", severity: ""});
     };
 
     // Skills Modal State
@@ -160,7 +160,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                     currentCS={currentCS}
                     handleClickDiceModalOpen={handleClickDiceModalOpen}
                 />
-                < CombatModal
+                <CombatModal
                     open={combatOpen}
                     handleClose={handleCloseCombatModal}
                     currentCS={currentCS}

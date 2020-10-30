@@ -8,11 +8,19 @@ import {onUpdateCharacterStatus} from "../graphql/subscriptions";
 import {listCharacterStatuss, listCharacterSheets} from "../graphql/queries";
 import { UserContext} from "../App";
 import {Grid} from "@material-ui/core";
+import CharacterStatusModal from "./CharacterStatusModal";
 
-function CharacterStatus({ currentCharacterSheet }) {
+function CharacterStatus({ currentCharacterSheet, handleOpenSnackBar }) {
     const user = useContext(UserContext);
     const [characterStatus, setCharacterStatus] = useState({});
     const currentCharacterSoakWounds = currentCharacterSheet && currentCharacterSheet.soakWounds;
+
+    // Player Status Modal State
+    const [playerStatusModalOpen, setPlayerStatusModalOpen] = useState(false);
+    const handleOpenPlayerStatusModalModal = () => {
+        setPlayerStatusModalOpen(true);
+    };
+    const handleClosePlayerStatusModal = () => { setPlayerStatusModalOpen(false) };
 
     useEffect(() => {
         fetchCharacterStatus();
@@ -25,7 +33,7 @@ function CharacterStatus({ currentCharacterSheet }) {
 
         const partyStatus = apiStatusData.data.listCharacterStatuss.items;
         const currentCharacterStatus = partyStatus.find((status) => status.player_name === user);
-        const restPartyStatus = partyStatus.filter((status) => status.player_name !== user);
+        const restPartyStatus = partyStatus.filter((status) => status.player_name !== user && status.player_name !== "esila");
 
         const partySheets = apiCSData.data.listCharacterSheets.items.filter((sheet) => sheet.character.player_name !== user);
         setCharacterStatus({
@@ -61,15 +69,31 @@ function CharacterStatus({ currentCharacterSheet }) {
             })
     }
 
-    async function updateCharacterStatus(light, dark) {
+    async function updateCharacterStatus(status_id, wounds, strain) {
         //console.log("GOT HERE");
-        //console.log(`UPDATE INPUT: ${JSON.stringify(fabricData)} / ${graphId}`);
-        if (!characterStatus.id) return;
-        //console.log("GOT PAST DATA TYPE");
+        //console.log(`UPDATE INPUT: ${wounds} / ${strain}`);
+        const prevWounds = characterStatus.currentCharacterStatus.wounds;
+        const prevStrain = characterStatus.currentCharacterStatus.strain;
+        let woundMessage = "";
+        let strainMessage = "";
+        if (wounds > prevWounds) {
+            woundMessage = `${user} suffered ${wounds - prevWounds} wounds!`;
+        } else if (wounds < prevWounds) {
+            woundMessage = `${user} healed ${prevWounds - wounds} wounds!`;
+        }
+        if (strain > prevStrain) {
+            strainMessage = `${user} suffered ${strain - prevStrain} strain!`;
+        } else if (strain < prevStrain) {
+            strainMessage = `${user} recovered ${prevStrain - strain} strain!`;
+        }
+        if (!status_id) return;
+        console.log("GOT PAST DATA TYPE");
         await API.graphql({query: updateCharacterStatusMutation, variables: {
-            input: { id: characterStatus.id, light: light, dark: dark
+            input: { id: status_id, wounds: wounds, strain: strain
             }}})
             .then(success => {
+                woundMessage && handleOpenSnackBar(woundMessage, "success");
+                strainMessage && handleOpenSnackBar(strainMessage, "success");
                 console.log(`SUCCESS: ${JSON.stringify(success)}`);
             },
                 error => {
@@ -81,7 +105,10 @@ function CharacterStatus({ currentCharacterSheet }) {
             <Grid container spacing={3}>
                 <Grid item xs={6} direction="row" style={{textAlign: "left", display: "flex"}}>
                     {characterStatus.currentCharacterStatus &&
-                    <div style={{cursor: "pointer"}}>
+                    <div
+                        style={{cursor: "pointer"}}
+                        onClick={() => { handleOpenPlayerStatusModalModal()}}
+                    >
                         <p>{characterStatus.currentCharacterStatus.name}</p>
                         <p>Wounds: {characterStatus.currentCharacterStatus.wounds} | {currentCharacterSoakWounds.wounds.threshold}</p>
                         <p>Strain: {characterStatus.currentCharacterStatus.strain} | {currentCharacterSoakWounds.strain.threshold}</p>
@@ -102,6 +129,13 @@ function CharacterStatus({ currentCharacterSheet }) {
                         })}
                 </Grid>
             </Grid>
+            <CharacterStatusModal
+                open={playerStatusModalOpen}
+                handleClose={handleClosePlayerStatusModal}
+                status={characterStatus.currentCharacterStatus}
+                threshold={currentCharacterSoakWounds}
+                updateCharacterStatus={updateCharacterStatus}
+            />
         </div>
     ):
         <div className="party_status">
