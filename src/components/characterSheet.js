@@ -23,7 +23,7 @@ import {
     deleteCharacterSheet as deleteCharacterSheetMutation,
 } from "../graphql/mutations";
 
-function CharacterSheet({ fetchUserCharacterSheets }){
+function CharacterSheet({ fetchUserCharacterSheets, handleOpenSnackBar }){
     const user = useContext(UserContext);
     const player_name = {
         character: {
@@ -104,7 +104,14 @@ function CharacterSheet({ fetchUserCharacterSheets }){
     async function createCharacterSheet() {
         if (!character.name || !character.player_name) return;
         console.log("Create character sheet: ", state);
-        await API.graphql({ query: createCharacterSheetMutation, variables: { input: state } });
+        await API.graphql({ query: createCharacterSheetMutation, variables: { input: state } })
+            .then(success => {
+                    handleOpenSnackBar();
+                    console.log(`SUCCESS: ${success}`);
+                },
+                error => {
+                    console.log(`ERROR: ${JSON.stringify(error)}`)
+                });
         setActiveIndex(0);
         fetchCharacterSheets();
         fetchUserCharacterSheets();
@@ -116,10 +123,11 @@ function CharacterSheet({ fetchUserCharacterSheets }){
         //console.log(JSON.stringify(state));
         await API.graphql({ query: updateCharacterSheetMutation, variables: { input: { id, ...state } }})
             .then(success => {
-                console.log(`SUCCESS: ${success}`);
-            },
+                    handleOpenSnackBar();
+                    console.log(`SUCCESS: ${success}`);
+                },
                 error => {
-                console.log(`ERROR: ${JSON.stringify(error)}`)
+                    console.log(`ERROR: ${JSON.stringify(error)}`)
                 });
         fetchCharacterSheets();
         fetchUserCharacterSheets();

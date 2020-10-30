@@ -4,16 +4,15 @@ import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { UserContext} from "../App";
 import SidebarOption from './SidebarOption';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import CreateIcon from '@material-ui/icons/Create';
 import AppsIcon from '@material-ui/icons/Apps';
 import BuildIcon from '@material-ui/icons/Build'
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import {Menu, MenuItem} from '@material-ui/core';
 import CharacterSheetModal from './CharacterSheetModal';
 import SkillsModal from './SkillsModal';
 import CombatModal from './CombatModal';
 import VehiclesModal from './VehiclesModal';
 import DiceModal from "../diceModal";
+import CustomizedSnackbars from './CustomizedSnackBar';
 
 function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCharacterSheets }) {
     const user = useContext(UserContext);
@@ -65,6 +64,14 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
     const [csOpen, setCSOpen] = useState(false);
     const handleOpenCSModal = () => { setCSOpen(true) };
     const handleCloseCSModal = () => { setCSOpen(false) };
+
+    // Save Snackbar State
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const handleOpenSnackbar= () => { setSnackbarOpen(true) };
+    const handleCloseSnackbar= (event, reason) => {
+        if (reason === 'clickaway') { return; }
+        setSnackbarOpen(false);
+    };
 
     // Skills Modal State
     const [skillsOpen, setSkillsOpen] = useState(false);
@@ -143,6 +150,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                 handleClose={handleCloseCSModal}
                 currentCS={currentCS}
                 fetchUserCharacterSheets={fetchUserCharacterSheets}
+                handleOpenSnackBar={handleOpenSnackbar}
             />
             {currentCS &&
             <>
@@ -169,6 +177,10 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                     diceCheck={diceCheck}
                     setDiceCheck={setDiceCheck}
                     handleClose={handleDiceModalClose}
+                />
+                <CustomizedSnackbars
+                    open={snackbarOpen}
+                    handleClose={handleCloseSnackbar}
                 />
                 <SidebarOption Icon={BuildIcon} title="Skills" handleOpen={handleOpenSkillsModal}/>
                 <hr/>

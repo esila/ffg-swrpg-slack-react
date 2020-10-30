@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-    Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Grid,
+    Button, Dialog, DialogContent, DialogTitle, DialogActions,
 } from "@material-ui/core";
 import Weapons from '../weapons';
 import '../sheet-style.css';

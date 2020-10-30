@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import CharacterSheet from './characterSheet';
 import {
-    Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Grid,
+    Button, Dialog, DialogContent, DialogTitle, DialogActions,
 } from "@material-ui/core";
 
-function CharacterSheetModal({open, handleClose, fetchUserCharacterSheets}) {
+function CharacterSheetModal({open, handleClose, fetchUserCharacterSheets, handleOpenSnackBar}) {
 
     return (
         <div>
@@ -22,7 +22,10 @@ function CharacterSheetModal({open, handleClose, fetchUserCharacterSheets}) {
             >
                 <DialogTitle id="form-dialog-title">Character Sheet</DialogTitle>
                 <DialogContent style={{position: "inherit"}}>
-                        <CharacterSheet fetchUserCharacterSheets={fetchUserCharacterSheets}/>
+                        <CharacterSheet
+                            fetchUserCharacterSheets={fetchUserCharacterSheets}
+                            handleOpenSnackBar={handleOpenSnackBar}
+                        />
                 </DialogContent>
                 <DialogActions>
                     <Button type="button" onClick={(e) => handleClose()} color="primary">
