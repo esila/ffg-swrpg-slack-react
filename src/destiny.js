@@ -140,6 +140,7 @@ function DestinyPool({ characterName }) {
                         }}
                     />
                     <button
+                        type="button"
                         onClick={() => updateDestinyPool(destinyPool.light, destinyPool.dark)}
                     >Save Destiny</button>
                 </div>

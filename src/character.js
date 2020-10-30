@@ -20,7 +20,6 @@ function Character({character, setState}){
         let items = [...character.specializations];
         let newSpecializations = [...items, specializationStub];
         items = newSpecializations;
-        console.log(`items: ${JSON.stringify(items)}`);
         setState(prev => ({
             ...prev,
             character: {
@@ -162,7 +161,7 @@ function Character({character, setState}){
                                             options={{Yes: "yes", No: "no"}}
                                         />
                                         <td style={{float: "right"}}>
-                                            <button onClick={(event) => { removeSpecialization(event, specialization_idx) }}>Delete Specialization</button>
+                                            <button type="button" onClick={(event) => { removeSpecialization(event, specialization_idx); }}>Delete Specialization</button>
                                         </td>
                                     </tr>
                                     <tr><td colSpan={3}><hr/></td></tr>
@@ -172,7 +171,7 @@ function Character({character, setState}){
                             })}
                             <tr>
                                 <td>
-                                    <button onClick={(event) => { addSpecialization(event) }}>Add Specialization</button>
+                                    <button type="button" onClick={(event) => { addSpecialization(event) }}>Add Specialization</button>
                                 </td>
                             </tr>
                         </tbody>

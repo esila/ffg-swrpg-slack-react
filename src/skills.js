@@ -108,21 +108,21 @@ function SkillsSection({ character, characteristics, skills, skillsLegend, skill
                             </td>
                             <td>
                                 <input
-                                  type="checkbox"
-                                  name={`${elem}_career`}
-                                  value={skills[elem].career}
-                                  onChange={event => {
-                                      event.persist();
-                                      setState(prev => ({
-                                          ...prev,
-                                          [skillsKey]: {
-                                              ...prev[skillsKey],
-                                              [elem]: {
-                                                  ...prev[skillsKey][elem],
-                                                  career: event.target && event.target.checked,
-                                              }
-                                          }
-                                      }))}}
+                                    type="checkbox"
+                                    name={`${elem}_career`}
+                                    checked={skills[elem].career}
+                                    onChange={event => {
+                                        event.persist();
+                                        setState(prev => ({
+                                            ...prev,
+                                            [skillsKey]: {
+                                                ...prev[skillsKey],
+                                                [elem]: {
+                                                    ...prev[skillsKey][elem],
+                                                    career: event.target && event.target.checked,
+                                                }
+                                            }
+                                        }))}}
                                 />
                             </td>
                             <td>
@@ -181,6 +181,7 @@ function SkillsSection({ character, characteristics, skills, skillsLegend, skill
                             </td>
                             <td>
                                 <button
+                                    type="button"
                                     onClick={() => handleClickOpen(
                                         {
                                             dicePool: getDerivedDicePool(characteristics[skills[elem].characteristic], skills[elem].rank),

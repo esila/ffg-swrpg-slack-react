@@ -25,7 +25,7 @@ function CharacterSheetModal({open, handleClose, fetchUserCharacterSheets}) {
                         <CharacterSheet fetchUserCharacterSheets={fetchUserCharacterSheets}/>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={(e) => handleClose()} color="primary">
+                    <Button type="button" onClick={(e) => handleClose()} color="primary">
                         Close
                     </Button>
                 </DialogActions>

@@ -271,9 +271,11 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                         })}
                     </select>
                     <button
+                        type="button"
                         onClick={() => addToCanvas(token)}
                     >Add Elements</button>
                     <button
+                        type="button"
                         className="chat__delete"
                         onClick={(event) => {
                             event.preventDefault();
@@ -286,6 +288,7 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                         DELETE ALL
                     </button>
                     <button
+                        type="button"
                         className="chat__delete"
                         onClick={(event) => {
                             event.preventDefault();

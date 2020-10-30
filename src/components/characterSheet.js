@@ -240,9 +240,13 @@ function CharacterSheet({ fetchUserCharacterSheets }){
                         <Critical source_name={character.name} critical_injuries={critical_injuries} type="Character" setState={setState}/>
                     </div>
                     <hr/>
-                    <button>Save Character Sheet</button>
+                    <button type="button" onClick={(e) => {
+                        e.preventDefault();
+                        handleSubmit(e);
+                    }}>Save Character Sheet</button>
                     {characterSheets.length > 0 &&
                     <button
+                        type="button"
                         className="chat__delete"
                         style={{float: "right"}}
                         onClick={(event) => {

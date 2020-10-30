@@ -103,11 +103,11 @@ function Talents({ talents, setState }){
                                             </tbody>
                                         </table>
                                     </div>
-                                    <button style={{float: "right"}} onClick={(event) => { removeTalent(event, talent_idx) }}>Delete Talent</button>
+                                    <button type="button" style={{float: "right"}} onClick={(event) => { removeTalent(event, talent_idx) }}>Delete Talent</button>
                                 </div>
                             )
                         })}
-                        <button onClick={(event) => { addTalent(event) }}>Add Talent</button>
+                        <button type="button" onClick={(event) => { addTalent(event) }}>Add Talent</button>
                         <div className="sheet-clear" ></div>
                     </fieldset>
                 </div> <div className="sheet-clear"></div>

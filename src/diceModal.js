@@ -188,6 +188,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                 </DialogContent>
                 <DialogActions>
                     <Button
+                        type="button"
                         onClick={() => {
                             setPositiveUpgrade(0);
                             setNegativeUpgrade(0);
@@ -197,7 +198,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                     >
                         Cancel
                     </Button>
-                    <Button onClick={(e) => handleRoll(e)} color="primary">
+                    <Button type="button" onClick={(e) => handleRoll(e)} color="primary">
                         Roll
                     </Button>
                 </DialogActions>

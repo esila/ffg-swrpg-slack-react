@@ -106,6 +106,7 @@ function CombatSkills({ character, characteristics, generalSkills, combatSkills,
                             </td>
                             <td>
                                 <button
+                                    type="button"
                                     onClick={() => handleClickOpen(
                                         {
                                             dicePool: getDerivedDicePool(skill),
@@ -173,7 +174,7 @@ function CombatModal({open, handleClose, handleClickDiceModalOpen, currentCS}) {
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => handleClose()} color="primary">Close</Button>
+                    <Button type="button" onClick={() => handleClose()} color="primary">Close</Button>
                 </DialogActions>
             </Dialog>
         </div>

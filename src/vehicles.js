@@ -736,6 +736,7 @@ function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSk
                                             </td>
                                             <td>
                                                 <button
+                                                    type="button"
                                                     onClick={() => handleClickOpen(
                                                         {
                                                             dicePool: getDerivedDicePool(role.skill),
@@ -750,11 +751,11 @@ function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSk
                                         </tbody>
                                     </table>
                                     <br/>
-                                    <button style={{float: "right"}} onClick={(event) => { removeVehicleRole(event, "starship", role_idx) }}>Delete Role</button>
+                                    <button type="button" style={{float: "right"}} onClick={(event) => { removeVehicleRole(event, "starship", role_idx) }}>Delete Role</button>
                                 </div>
                             )
                         })}
-                        <button onClick={(event) => { addVehicleRole(event, "starship") }}>Add Role</button>
+                        <button type="button" onClick={(event) => { addVehicleRole(event, "starship") }}>Add Role</button>
                     </div>
                     <div className="sheet-clear"></div>
                 </div>
@@ -899,6 +900,7 @@ function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSk
                                             </td>
                                             <td>
                                                 <button
+                                                    type="button"
                                                     onClick={() => handleClickOpen(
                                                         {
                                                             dicePool: getDerivedDicePool(weapon.skill),
@@ -963,11 +965,11 @@ function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSk
                                         </tbody>
                                     </table>
                                     <br/>
-                                    <button style={{float: "right"}} onClick={(event) => { removeVehicleWeapon(event, "starship", weapon_idx) }}>Delete Weapon</button>
+                                    <button type="button" style={{float: "right"}} onClick={(event) => { removeVehicleWeapon(event, "starship", weapon_idx) }}>Delete Weapon</button>
                                 </div>
                             )
                         })}
-                        <button onClick={(event) => { addVehicleWeapon(event, "starship") }}>Add Weapon</button>
+                        <button type="button" onClick={(event) => { addVehicleWeapon(event, "starship") }}>Add Weapon</button>
                     </div>
                     <div className="sheet-clear"></div>
                 </div>
@@ -1070,18 +1072,18 @@ function Vehicles({ handleSubmit, vehicles, setState, characteristics, generalSk
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <button style={{float: "right"}} onClick={(event) => { removeVehicleAttachment(event, "starship", attachment_idx) }}>Delete Attachment</button>
+                                        <button type="button" style={{float: "right"}} onClick={(event) => { removeVehicleAttachment(event, "starship", attachment_idx) }}>Delete Attachment</button>
                                         <br/>
                                     </fieldset>
                                 </div>
                             )
                         })}
-                        <button onClick={(event) => { addVehicleAttachment(event, "starship") }}>Add Attachment</button>
+                        <button type="button" onClick={(event) => { addVehicleAttachment(event, "starship") }}>Add Attachment</button>
                     </div>
                     <div className="sheet-clear"></div>
                     <Critical source_name={starship_details.name} critical_injuries={starship_criticals} type="Vehicle" setState={setState}/>
                     <hr/>
-                    <button onClick={(event) => { handleSubmit(event);}}>Save Character Sheet</button>
+                    <button type="button" onClick={(event) => { handleSubmit(event);}}>Save Character Sheet</button>
                     <div className="sheet-clear"></div>
                 </div>
             </div>

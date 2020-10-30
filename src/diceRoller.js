@@ -30,7 +30,7 @@ function DiceRoller({ rollType, diceString, diceSource, diceMessage, diceUser })
     return (
         <>
             <button
-                type="roll"
+                type="button"
                 onClick={event => { handleRoll(event); }}
             >
                 Roll

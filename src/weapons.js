@@ -128,6 +128,7 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
                                                             {title === "Encum" &&
                                                                 <td>
                                                                     <button
+                                                                        type="button"
                                                                         onClick={() => handleClickOpen(
                                                                             {
                                                                                 dicePool: getDerivedDicePool(weapons[weapon_idx].skill),
@@ -378,7 +379,7 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
                                                                 />
                                                             </td>
                                                             <td>
-                                                                <button style={{float: "right"}} onClick={(event) => { removeAttachment(event, weapon_idx, attach_idx) }}>Delete Attachment</button>
+                                                                <button type="button" style={{float: "right"}} onClick={(event) => { removeAttachment(event, weapon_idx, attach_idx) }}>Delete Attachment</button>
                                                             </td>
                                                         </tr>
                                                         </React.Fragment>
@@ -386,18 +387,18 @@ function Weapons({ character, weapons, characteristics, generalSkills, combatSki
                                                 })}
                                                 <tr>
                                                     <td>
-                                                        <button onClick={(event) => { addAttachment(event, weapon_idx) }}>Add Attachment</button>
+                                                        <button type="button" onClick={(event) => { addAttachment(event, weapon_idx) }}>Add Attachment</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
-                                    <button style={{float: "right"}} onClick={(event) => { removeWeapon(event, weapon_idx) }}>Delete Weapon</button>
+                                    <button type="button" style={{float: "right"}} onClick={(event) => { removeWeapon(event, weapon_idx) }}>Delete Weapon</button>
                                 </div>
                             )
                         })}
-                        <button onClick={(event) => { addWeapon(event) }}>Add Weapon</button>
+                        <button type="button" onClick={(event) => { addWeapon(event) }}>Add Weapon</button>
                         <div className="sheet-clear" ></div>
                     </fieldset>
                 </div> <div className="sheet-clear"></div>

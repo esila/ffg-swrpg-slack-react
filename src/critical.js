@@ -432,7 +432,7 @@ function Critical({ source_name, critical_injuries, type, setState }) {
                     <tr>
                         <td colSpan="2">
                             <button
-                                type='roll' className="sheet-btn-roll-crit"
+                                type='button' className="sheet-btn-roll-crit"
                                 onClick={(e) => getCritical(e)}
                             >Roll Critical
                             </button>
@@ -444,7 +444,7 @@ function Critical({ source_name, critical_injuries, type, setState }) {
                             <input type="text" name="attr_character-critAddRangeNum" defaultValue=""/>
                         </td>
                         <td valign="bottom">
-                            <button type='roll' className="sheet-btn-add-crit" onClick={(e) => {e.preventDefault()}}>
+                            <button type="button" className="sheet-btn-add-crit" onClick={(e) => {e.preventDefault()}}>
                                 Add Critical
                             </button>
                         </td>
@@ -494,7 +494,7 @@ function Critical({ source_name, critical_injuries, type, setState }) {
                                 <tr>
                                     <td>
                                         <button
-                                            type='roll'
+                                            type='button'
                                             className="sheet-btn-heal-crit"
                                             onClick={(e) => healCritical(e, crit_idx)}
                                             >Heal

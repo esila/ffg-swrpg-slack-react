@@ -39,7 +39,7 @@ function SkillsModal({open, handleClose, handleClickDiceModalOpen, currentCS}) {
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => handleClose()} color="primary">Close</Button>
+                    <Button type="button" onClick={() => handleClose()} color="primary">Close</Button>
                 </DialogActions>
             </Dialog>
         </div>
