@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import {
     createCharacterStatus as createCharacterStatusMutation,
@@ -14,7 +14,12 @@ import { useSnackbar } from 'notistack';
 function CharacterStatus({ currentCharacterSheet }) {
     const user = useContext(UserContext);
     const [characterStatus, setCharacterStatus] = useState({});
+    const [prevCharacterStatus, setPrevCharacterStatus] = useState({});
     const currentCharacterSoakWounds = currentCharacterSheet && currentCharacterSheet.soakWounds;
+
+    // useRef to get at previous status state
+    const prevStatus = useRef({});
+    prevStatus.current = prevCharacterStatus;
 
     // Snackbar
     const { enqueueSnackbar } = useSnackbar();
@@ -45,6 +50,13 @@ function CharacterStatus({ currentCharacterSheet }) {
 
         const partySheets = apiCSData.data.listCharacterSheets.items.filter((sheet) => sheet.character.player_name !== user);
         setCharacterStatus({
+            fullPartyStatus: partyStatus,
+            partyStatus: restPartyStatus,
+            partySheets: partySheets,
+            currentCharacterStatus: currentCharacterStatus,
+        });
+        setPrevCharacterStatus({
+            fullPartyStatus: partyStatus,
             partyStatus: restPartyStatus,
             partySheets: partySheets,
             currentCharacterStatus: currentCharacterStatus,
@@ -56,6 +68,25 @@ function CharacterStatus({ currentCharacterSheet }) {
             next: subonUpdateCharacterStatus => {
                 console.log(`subscribed message: ${JSON.stringify(subonUpdateCharacterStatus.value.data.onUpdateCharacterStatus)}`);
                 //setCharacterStatus([subonUpdateCharacterStatus.value.data.onUpdateCharacterStatus]);
+                const {name, player_name, wounds, strain, critical_injuries} = subonUpdateCharacterStatus.value.data.onUpdateCharacterStatus;
+                const prevCharacter = prevStatus.current.fullPartyStatus.find((status) => status.player_name === player_name);
+                const prevWounds = prevCharacter.wounds;
+                const prevStrain = prevCharacter.strain;
+                console.log(prevWounds, prevStrain);
+                let woundStatus = "";
+                let strainStatus = "";
+                if (wounds > prevWounds) {
+                    woundStatus = [`${name} suffered ${wounds - prevWounds} wound${wounds - prevWounds > 1 && "s"}!`, "error"];
+                } else if (wounds < prevWounds) {
+                    woundStatus = [`${name} healed ${prevWounds - wounds} wound${prevWounds - wounds > 1 && "s"}!`, "success"];
+                }
+                if (strain > prevStrain) {
+                    strainStatus = [`${name} suffered ${strain - prevStrain} strain!`, "warning"];
+                } else if (strain < prevStrain) {
+                    strainStatus = [`${name} recovered ${prevStrain - strain} strain!`, "info"];
+                }
+                woundStatus && handleOpenSnackBar(woundStatus);
+                strainStatus && handleOpenSnackBar(strainStatus);
                 fetchCharacterStatus();
             }
         })
@@ -80,35 +111,24 @@ function CharacterStatus({ currentCharacterSheet }) {
     async function updateCharacterStatus(status_id, wounds, strain) {
         //console.log("GOT HERE");
         //console.log(`UPDATE INPUT: ${wounds} / ${strain}`);
-        const prevWounds = characterStatus.currentCharacterStatus.wounds;
-        const prevStrain = characterStatus.currentCharacterStatus.strain;
-        let woundStatus = "";
-        let strainStatus = "";
-        if (wounds > prevWounds) {
-            woundStatus = [`${user} suffered ${wounds - prevWounds} wounds!`, "error"];
-        } else if (wounds < prevWounds) {
-            woundStatus = [`${user} healed ${prevWounds - wounds} wounds!`, "success"];
-        }
-        if (strain > prevStrain) {
-            strainStatus = [`${user} suffered ${strain - prevStrain} strain!`, "warning"];
-        } else if (strain < prevStrain) {
-            strainStatus = [`${user} recovered ${prevStrain - strain} strain!`, "info"];
-        }
+
         if (!status_id) return;
         console.log("GOT PAST DATA TYPE");
         await API.graphql({query: updateCharacterStatusMutation, variables: {
             input: { id: status_id, wounds: wounds, strain: strain
             }}})
             .then(success => {
-                woundStatus && handleOpenSnackBar(woundStatus);
-                strainStatus && handleOpenSnackBar(strainStatus);
+                //woundStatus && handleOpenSnackBar(woundStatus);
+                //strainStatus && handleOpenSnackBar(strainStatus);
                 //enqueueSnackbar('This is a success message!', { variant: "success" });
+                //setPrevCharacterStatus(characterStatus);
                 console.log(`SUCCESS: ${JSON.stringify(success)}`);
             },
                 error => {
                 console.log(`ERROR: ${JSON.stringify(error)}`);
             })
     }
+
     return characterStatus.partyStatus ? (
         <div className="party_status" style={{fontSize: "12px"}}>
             <Grid container spacing={3}>
