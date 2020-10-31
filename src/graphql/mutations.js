@@ -1402,6 +1402,48 @@ export const deleteDestinyPool = /* GraphQL */ `
     }
   }
 `;
+export const createMusicPlayer = /* GraphQL */ `
+  mutation CreateMusicPlayer(
+    $input: CreateMusicPlayerInput!
+    $condition: ModelMusicPlayerConditionInput
+  ) {
+    createMusicPlayer(input: $input, condition: $condition) {
+      id
+      track
+      play
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMusicPlayer = /* GraphQL */ `
+  mutation UpdateMusicPlayer(
+    $input: UpdateMusicPlayerInput!
+    $condition: ModelMusicPlayerConditionInput
+  ) {
+    updateMusicPlayer(input: $input, condition: $condition) {
+      id
+      track
+      play
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteMusicPlayer = /* GraphQL */ `
+  mutation DeleteMusicPlayer(
+    $input: DeleteMusicPlayerInput!
+    $condition: ModelMusicPlayerConditionInput
+  ) {
+    deleteMusicPlayer(input: $input, condition: $condition) {
+      id
+      track
+      play
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createCharacterStatus = /* GraphQL */ `
   mutation CreateCharacterStatus(
     $input: CreateCharacterStatusInput!

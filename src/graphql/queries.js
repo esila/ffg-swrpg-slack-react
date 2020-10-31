@@ -938,6 +938,35 @@ export const listDestinyPools = /* GraphQL */ `
     }
   }
 `;
+export const getMusicPlayer = /* GraphQL */ `
+  query GetMusicPlayer($id: ID!) {
+    getMusicPlayer(id: $id) {
+      id
+      track
+      play
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listMusicPlayers = /* GraphQL */ `
+  query ListMusicPlayers(
+    $filter: ModelMusicPlayerFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMusicPlayers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        track
+        play
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getCharacterStatus = /* GraphQL */ `
   query GetCharacterStatus($id: ID!) {
     getCharacterStatus(id: $id) {

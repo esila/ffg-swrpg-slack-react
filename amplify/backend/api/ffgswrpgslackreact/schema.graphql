@@ -357,6 +357,13 @@ type DestinyPool
   dark: Int
 }
 
+type MusicPlayer
+@model {
+  id: ID!
+  track: String
+  play: Boolean
+}
+
 type CharacterStatus
 @model {
   id: ID!

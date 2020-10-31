@@ -1375,6 +1375,39 @@ export const onDeleteDestinyPool = /* GraphQL */ `
     }
   }
 `;
+export const onCreateMusicPlayer = /* GraphQL */ `
+  subscription OnCreateMusicPlayer {
+    onCreateMusicPlayer {
+      id
+      track
+      play
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateMusicPlayer = /* GraphQL */ `
+  subscription OnUpdateMusicPlayer {
+    onUpdateMusicPlayer {
+      id
+      track
+      play
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteMusicPlayer = /* GraphQL */ `
+  subscription OnDeleteMusicPlayer {
+    onDeleteMusicPlayer {
+      id
+      track
+      play
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateCharacterStatus = /* GraphQL */ `
   subscription OnCreateCharacterStatus {
     onCreateCharacterStatus {

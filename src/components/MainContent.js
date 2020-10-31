@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { UserContext } from '../App';
 import CharacterStatus from './CharacterStatus';
 import Visuals from './Visuals';
+import MusicPlayer from './MusicPlayer';
 import {Grid} from "@material-ui/core";
 import './MainContent.css';
 
@@ -32,6 +33,7 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                         </Grid>
                     </Grid>
                 </div>
+                <MusicPlayer/>
                 <MainComponent characterSheet={characterSheets[activeIndex]}/>
             </div>
     )
