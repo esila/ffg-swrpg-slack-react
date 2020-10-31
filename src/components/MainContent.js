@@ -4,9 +4,7 @@ import { UserContext } from '../App';
 import CharacterStatus from './CharacterStatus';
 import Visuals from './Visuals';
 import {Grid} from "@material-ui/core";
-import CustomizedSnackbars from './CustomizedSnackBar';
 import './MainContent.css';
-import CharacterSheetModal from "./CharacterSheetModal";
 
 function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
     const { characterSheets } = userCharacterSheets;
@@ -16,17 +14,6 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
     const MainComponent = {
         visuals: Visuals,
     }[location];
-
-    // Save Snackbar State
-    const [snackbarOpen, setSnackbarOpen] = useState({open: false, message: "", severity: ""});
-    const handleOpenSnackbar = (status) => {
-        const [message, severity] = status;
-        setSnackbarOpen({open: true, message: message, severity: severity})
-    };
-    const handleCloseSnackbar = (event, reason) => {
-        if (reason === 'clickaway') { return; }
-        setSnackbarOpen({open: false, message: "", severity: ""});
-    };
 
     useEffect(() => {
     }, []);
@@ -38,7 +25,6 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                         <Grid item xs={8} direction="row" style={{textAlign: "left"}}>
                             <CharacterStatus
                                 currentCharacterSheet={characterSheets[activeIndex]}
-                                handleOpenSnackBar={handleOpenSnackbar}
                             />
                         </Grid>
                         <Grid item xs={4} style={{textAlign: "left"}}>
@@ -47,10 +33,6 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                     </Grid>
                 </div>
                 <MainComponent characterSheet={characterSheets[activeIndex]}/>
-                <CustomizedSnackbars
-                    open={snackbarOpen}
-                    handleClose={handleCloseSnackbar}
-                />
             </div>
     )
         :

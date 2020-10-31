@@ -5,11 +5,12 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 import { listCharacterSheets } from './graphql/queries';
 import MainContent from './components/MainContent';
 import Sidebar from './components/Sidebar';
+import { SnackbarProvider } from 'notistack';
 import './App.css';
 
 const UserContext = React.createContext("");
 
-function InitApp() {
+function InitSnackApp() {
     const contentSourceNames = ["character", "skills", "weapons", "talents", "visuals"];
     const [userCharacterSheets, setUserCharacterSheets] = useState({user: null, characterSheets: []});
     const [activeIndex, setActiveIndex] = useState(0);
@@ -66,6 +67,14 @@ function InitApp() {
         </UserContext.Provider>
     )
 
+}
+
+function InitApp() {
+    return (
+        <SnackbarProvider maxSnack={3}>
+            <InitSnackApp/>
+        </SnackbarProvider>
+    );
 }
 
 const App = withAuthenticator(InitApp);

@@ -9,11 +9,19 @@ import {listCharacterStatuss, listCharacterSheets} from "../graphql/queries";
 import { UserContext} from "../App";
 import {Grid} from "@material-ui/core";
 import CharacterStatusModal from "./CharacterStatusModal";
+import { useSnackbar } from 'notistack';
 
-function CharacterStatus({ currentCharacterSheet, handleOpenSnackBar }) {
+function CharacterStatus({ currentCharacterSheet }) {
     const user = useContext(UserContext);
     const [characterStatus, setCharacterStatus] = useState({});
     const currentCharacterSoakWounds = currentCharacterSheet && currentCharacterSheet.soakWounds;
+
+    // Snackbar
+    const { enqueueSnackbar } = useSnackbar();
+    const handleOpenSnackBar = (status) => {
+        const [message, severity] = status;
+        enqueueSnackbar( message, {variant: severity})
+    };
 
     // Player Status Modal State
     const [playerStatusModalOpen, setPlayerStatusModalOpen] = useState(false);
@@ -94,6 +102,7 @@ function CharacterStatus({ currentCharacterSheet, handleOpenSnackBar }) {
             .then(success => {
                 woundStatus && handleOpenSnackBar(woundStatus);
                 strainStatus && handleOpenSnackBar(strainStatus);
+                //enqueueSnackbar('This is a success message!', { variant: "success" });
                 console.log(`SUCCESS: ${JSON.stringify(success)}`);
             },
                 error => {

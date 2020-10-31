@@ -12,7 +12,7 @@ import SkillsModal from './SkillsModal';
 import CombatModal from './CombatModal';
 import VehiclesModal from './VehiclesModal';
 import DiceModal from "../diceModal";
-import CustomizedSnackbars from './CustomizedSnackBar';
+import { useSnackbar } from 'notistack';
 
 function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCharacterSheets }) {
     const user = useContext(UserContext);
@@ -65,15 +65,11 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
     const handleOpenCSModal = () => { setCSOpen(true) };
     const handleCloseCSModal = () => { setCSOpen(false) };
 
-    // Save Snackbar State
-    const [snackbarOpen, setSnackbarOpen] = useState({open: false, message: "", severity: ""});
-    const handleOpenSnackbar = (status) => {
+    // Snackbar
+    const { enqueueSnackbar } = useSnackbar();
+    const handleOpenSnackBar = (status) => {
         const [message, severity] = status;
-        setSnackbarOpen({open: true, message: message, severity: severity})
-    };
-    const handleCloseSnackbar = (event, reason) => {
-        if (reason === 'clickaway') { return; }
-        setSnackbarOpen({open: false, message: "", severity: ""});
+        enqueueSnackbar( message, {variant: severity})
     };
 
     // Skills Modal State
@@ -153,7 +149,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                 handleClose={handleCloseCSModal}
                 currentCS={currentCS}
                 fetchUserCharacterSheets={fetchUserCharacterSheets}
-                handleOpenSnackBar={handleOpenSnackbar}
+                handleOpenSnackBar={handleOpenSnackBar}
             />
             {currentCS &&
             <>
@@ -180,10 +176,6 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                     diceCheck={diceCheck}
                     setDiceCheck={setDiceCheck}
                     handleClose={handleDiceModalClose}
-                />
-                <CustomizedSnackbars
-                    open={snackbarOpen}
-                    handleClose={handleCloseSnackbar}
                 />
                 <SidebarOption Icon={BuildIcon} title="Skills" handleOpen={handleOpenSkillsModal}/>
                 <hr/>
