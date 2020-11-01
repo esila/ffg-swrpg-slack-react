@@ -1342,6 +1342,36 @@ export const onDeleteFabricObject = /* GraphQL */ `
     }
   }
 `;
+export const onCreateCanvasObject = /* GraphQL */ `
+  subscription OnCreateCanvasObject {
+    onCreateCanvasObject {
+      id
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateCanvasObject = /* GraphQL */ `
+  subscription OnUpdateCanvasObject {
+    onUpdateCanvasObject {
+      id
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteCanvasObject = /* GraphQL */ `
+  subscription OnDeleteCanvasObject {
+    onDeleteCanvasObject {
+      id
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateDestinyPool = /* GraphQL */ `
   subscription OnCreateDestinyPool {
     onCreateDestinyPool {

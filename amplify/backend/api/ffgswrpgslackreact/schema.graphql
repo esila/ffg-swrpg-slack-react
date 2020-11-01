@@ -350,6 +350,12 @@ type FabricObject
   data: String
 }
 
+type CanvasObject
+@model {
+  id: ID!
+  data: String
+}
+
 type DestinyPool
 @model {
   id: ID!

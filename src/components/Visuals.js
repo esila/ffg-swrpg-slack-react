@@ -3,43 +3,97 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { fabric } from 'fabric';
 import {
     createFabricObject as createFabricObjectMutation,
+    createCanvasObject as createCanvasObjectMutation,
     deleteFabricObject as deleteFabricObjectMutation,
-    updateFabricObject as updateFabricObjectMutation
+    updateFabricObject as updateFabricObjectMutation,
+    updateCanvasObject as updateCanvasObjectMutation
 } from "../graphql/mutations";
-import {onCreateFabricObject, onDeleteFabricObject, onUpdateFabricObject} from "../graphql/subscriptions";
-import {listFabricObjects} from "../graphql/queries";
+import {onCreateFabricObject, onDeleteFabricObject, onUpdateCanvasObject} from "../graphql/subscriptions";
+import {listFabricObjects, listCanvasObjects} from "../graphql/queries";
 import { UserContext} from "../App";
 import backgroundImage from "../backgroundMap";
 
+const scratch = '{"version":"4.2.0","objects":[{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":115.21,"top":145,"width":452,"height":404,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.16,"scaleY":0.16,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/DroidHk-47.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":299,"top":459,"width":259,"height":235,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.25,"scaleY":0.25,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/HumanMaleBaldCyborg.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":264.5,"top":56.5,"width":326,"height":326,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.48,"scaleY":0.48,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/BothanWomanCivilian.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":389,"top":455,"width":524,"height":470,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.14,"scaleY":0.14,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/WookieeMaleRoar.png","crossOrigin":null,"filters":[]}],"backgroundImage":{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":0,"top":0,"width":3060,"height":1980,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg","crossOrigin":null,"filters":[]}}';
+
 function Visuals() {
-    const [fabricObjects, setFabricObjects] = useState([]);
-    const [background, setBackground] = useState({
-        url: "https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg",
-        scaleX: 1,
-        scaleY: 1
-    });
+    const [canvasObjects, setCanvasObjects] = useState();
+    const [canvasState, setCanvasState] = useState();
+    const canvasEl = useRef(null);
+
     useEffect(() => {
-        fetchFabricObjects();
-        subscribeCreateFabricObjects();
-        subscribeUpdateFabricObjects();
-        subscribeDeleteFabricObjects();
+        fetchCanvasObjects();
+        //subscribeCreateCanvasObjects();
+        subscribeUpdateCanvasObjects();
+        //subscribeDeleteCanvasObjects();
     }, []);
 
-    async function fetchFabricObjects() {
-        const apiData = await API.graphql({query: listFabricObjects });
-        setFabricObjects(apiData.data.listFabricObjects.items);
+    async function fetchCanvasObjects() {
+        const apiData = await API.graphql({query: listCanvasObjects });
+        const fetchedData = apiData.data.listCanvasObjects.items[0];
+        fetchedData && setCanvasObjects(fetchedData.data);
+
+        console.log("INIT CANVAS");
+        const canvas = canvasState || new fabric.Canvas(canvasEl.current);
+        fetchedData && canvas.loadFromJSON(JSON.parse(fetchedData.data));
+
+        canvas.off('object:modified');
+        canvas.off('selection:created');
+        canvas.off('selection:updated');
+        canvas.off('selection:cleared');
+        canvas.on({
+            'object:modified': () => {
+                console.log("Object modified");
+                updateCanvasObject(fetchedData.id, JSON.stringify(canvas));
+            },
+            'selection:created': () => {
+                console.log("Object selection created");
+                updateCanvasObject(fetchedData.id, JSON.stringify(canvas));
+                //setActiveToken(graphId);
+            },
+            'selection:updated': (e) => {
+                console.log("Object selection updated");
+                updateCanvasObject(fetchedData.id, JSON.stringify(canvas));
+                //setActiveToken(graphId);
+            },
+            'selection:cleared': (e) => {
+                updateCanvasObject(fetchedData.id, JSON.stringify(canvas));
+                //setActiveToken();
+            },
+        });
+
+        setCanvasState(canvas);
+        // UseEffect's cleanup function
+        return () => {
+          canvas.dispose();
+        };
     }
 
-    async function subscribeUpdateFabricObjects() {
-        await API.graphql(graphqlOperation(onUpdateFabricObject)).subscribe({
-            next: subonUpdateFabricObject => {
-                console.log(`subscribed message: ${JSON.stringify(subonUpdateFabricObject.value.data.onUpdateFabricObject)}`);
-                //setFabricObjects([subonUpdateFabricObject.value.data.onUpdateFabricObject]);
-                fetchFabricObjects();
+    async function updateCanvasObject(canvasId, canvasData) {
+        if (!canvasId || !canvasData) return;
+        await API.graphql({query: updateCanvasObjectMutation, variables: {
+            input: {
+                id: canvasId,
+                data: canvasData
+            }}})
+            .then(success => {
+                console.log(`SUCCESS: ${JSON.stringify(success)}`);
+            },
+                error => {
+                console.log(`ERROR: ${JSON.stringify(error)}`);
+            })
+    }
+
+    async function subscribeUpdateCanvasObjects() {
+        await API.graphql(graphqlOperation(onUpdateCanvasObject)).subscribe({
+            next: subonUpdateCanvasObject => {
+                console.log(`subscribed message: ${JSON.stringify(subonUpdateCanvasObject.value.data.onUpdateCanvasObject)}`);
+                //setCanvasObjects([subonUpdateCanvasObject.value.data.onUpdateCanvasObject]);
+                fetchCanvasObjects();
             }
         })
     }
 
+    /*
     async function subscribeCreateFabricObjects() {
         await API.graphql(graphqlOperation(onCreateFabricObject)).subscribe({
             next: subonCreateFabricObject => {
@@ -60,13 +114,69 @@ function Visuals() {
         })
     }
 
-    return fabricObjects.length > 0 ? (
+    function initCanvas() {
+        console.log("INIT CANVAS");
+        const canvas = canvasState || new fabric.Canvas(canvasEl.current);
+        let canvasDict = {};
+
+        const fabricData = fabricObjects.map((elem, idx) => {
+            canvasDict[elem.fabricId] = elem.id;
+            return elem.data;
+        });
+        const backgroundData = {...backgroundImage, src: background.url, scaleX: background.scaleX, scaleY: background.scaleY };
+        canvas.loadFromJSON(`{"objects": [${fabricData}], "backgroundImage": ${JSON.stringify(backgroundData)}}`);
+
+        canvas.off('object:modified');
+        canvas.off('selection:created');
+        canvas.off('selection:updated');
+        canvas.off('selection:cleared');
+        canvas.on({
+            'object:modified': (e) => {
+                console.log("Object modified");
+                const fabricId = e.target.toJSON(['fabricId']).fabricId;
+                const graphId = canvasDict[fabricId];
+                const resp = updateFabricObject(graphId, JSON.stringify(e.target.toJSON(['fabricId'])));
+                //console.log(`UPDATE RESP: ${JSON.stringify(resp)}`);
+                //console.log(JSON.stringify(e.target.toJSON(['fabricId'])));
+            },
+            'selection:created': (e) => {
+                console.log("Object selection created");
+                const fabricId = e.target.toJSON(['fabricId']).fabricId;
+                const graphId = canvasDict[fabricId];
+                console.log(graphId);
+                setActiveToken(graphId);
+            },
+            'selection:updated': (e) => {
+                console.log("Object selection updated");
+                const fabricId = e.target.toJSON(['fabricId']).fabricId;
+                const graphId = canvasDict[fabricId];
+                console.log(graphId);
+                setActiveToken(graphId);
+            },
+            'selection:cleared': (e) => {
+                console.log("Object selection cleared");
+                setActiveToken();
+            },
+        });
+
+        setCanvasState(canvas);
+        // UseEffect's cleanup function
+        return () => {
+          canvas.dispose();
+        };
+    }
+
+     */
+
+    return canvasObjects ? (
         <div>
-            <MapCanvas
-                fabricObjects={fabricObjects}
-                background={background}
-                setBackground={setBackground}
-            />
+            <button
+                onClick={() => console.log(canvasObjects)}
+            >Stringify Canvas</button>
+             <button
+                onClick={() => updateCanvasObject("32914896-c627-47b9-903b-730cc2f4b589", scratch)}
+            >Reload Canvas</button>
+            <canvas ref={canvasEl} id="my-fabric-canvas" width="1920" height="1080" />
         </div>
     ):
         <div></div>
@@ -198,6 +308,22 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
         console.log(`RESP: ${JSON.stringify(resp)}`);
     }
 
+     async function createCanvasObject(canvasData) {
+        console.log("GOT HERE");
+        if (!canvasData) return;
+        //console.log("GOT PAST DATA TYPE");
+        await API.graphql({query: createCanvasObjectMutation, variables: {
+            input: {
+                data: JSON.stringify(canvasData)
+            }}})
+            .then(success => {
+                console.log(`SUCCESS: ${JSON.stringify(success)}`);
+            },
+                error => {
+                console.log(`ERROR: ${JSON.stringify(error)}`);
+            })
+    }
+
     async function createFabricObject(fabricId, fabricData) {
         //console.log("GOT HERE");
         //console.log(`CREATE INPUT: ${JSON.stringify(fabricData)} / ${fabricId}`);
@@ -314,6 +440,9 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                     return <option key={map_idx} value={JSON.stringify(value)}>{name}</option>
                 })}
             </select>
+            <button
+                onClick={() => createCanvasObject(canvasState)}
+            >Stringify Canvas</button>
             <canvas ref={canvasEl} id="my-fabric-canvas" width="1920" height="1080" />
         </div>
     ):

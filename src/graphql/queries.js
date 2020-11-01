@@ -909,6 +909,33 @@ export const listFabricObjects = /* GraphQL */ `
     }
   }
 `;
+export const getCanvasObject = /* GraphQL */ `
+  query GetCanvasObject($id: ID!) {
+    getCanvasObject(id: $id) {
+      id
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listCanvasObjects = /* GraphQL */ `
+  query ListCanvasObjects(
+    $filter: ModelCanvasObjectFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listCanvasObjects(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        data
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getDestinyPool = /* GraphQL */ `
   query GetDestinyPool($id: ID!) {
     getDestinyPool(id: $id) {

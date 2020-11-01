@@ -1360,6 +1360,45 @@ export const deleteFabricObject = /* GraphQL */ `
     }
   }
 `;
+export const createCanvasObject = /* GraphQL */ `
+  mutation CreateCanvasObject(
+    $input: CreateCanvasObjectInput!
+    $condition: ModelCanvasObjectConditionInput
+  ) {
+    createCanvasObject(input: $input, condition: $condition) {
+      id
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateCanvasObject = /* GraphQL */ `
+  mutation UpdateCanvasObject(
+    $input: UpdateCanvasObjectInput!
+    $condition: ModelCanvasObjectConditionInput
+  ) {
+    updateCanvasObject(input: $input, condition: $condition) {
+      id
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteCanvasObject = /* GraphQL */ `
+  mutation DeleteCanvasObject(
+    $input: DeleteCanvasObjectInput!
+    $condition: ModelCanvasObjectConditionInput
+  ) {
+    deleteCanvasObject(input: $input, condition: $condition) {
+      id
+      data
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createDestinyPool = /* GraphQL */ `
   mutation CreateDestinyPool(
     $input: CreateDestinyPoolInput!
