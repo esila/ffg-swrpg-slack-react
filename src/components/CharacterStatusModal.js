@@ -4,14 +4,14 @@ import {
 } from "@material-ui/core";
 
 function CharacterStatusModal({open, handleClose, status, threshold, updateCharacterStatus}) {
-    const status_id = status.id;
-    const initWounds = status.wounds;
-    const initStrain = status.strain;
+    const status_id = status && status.id;
+    const initWounds = status && status.wounds;
+    const initStrain = status && status.strain;
     const [wounds, setWounds] = useState(initWounds);
     const [strain, setStrain] = useState(initStrain);
 
-    const woundsThreshold = threshold.wounds.threshold;
-    const strainThreshold = threshold.strain.threshold;
+    const woundsThreshold = threshold && threshold.wounds.threshold;
+    const strainThreshold = threshold && threshold.strain.threshold;
 
     return (
         <div>
