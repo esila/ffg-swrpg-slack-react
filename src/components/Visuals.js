@@ -19,6 +19,8 @@ function Visuals() {
     const [canvasObjects, setCanvasObjects] = useState();
     const [canvasState, setCanvasState] = useState();
     const canvasEl = useRef(null);
+    const canvasMock = useRef(null);
+    canvasMock.current = canvasState;
 
     useEffect(() => {
         fetchCanvasObjects();
@@ -33,7 +35,7 @@ function Visuals() {
         fetchedData && setCanvasObjects(fetchedData.data);
 
         console.log("INIT CANVAS");
-        const canvas = canvasState || new fabric.Canvas(canvasEl.current);
+        const canvas = canvasMock.current || new fabric.Canvas(canvasEl.current);
         fetchedData && canvas.loadFromJSON(JSON.parse(fetchedData.data));
 
         canvas.off('object:modified');
@@ -47,16 +49,14 @@ function Visuals() {
             },
             'selection:created': () => {
                 console.log("Object selection created");
-                updateCanvasObject(fetchedData.id, JSON.stringify(canvas));
                 //setActiveToken(graphId);
             },
             'selection:updated': (e) => {
                 console.log("Object selection updated");
-                updateCanvasObject(fetchedData.id, JSON.stringify(canvas));
                 //setActiveToken(graphId);
             },
             'selection:cleared': (e) => {
-                updateCanvasObject(fetchedData.id, JSON.stringify(canvas));
+                console.log("Object selection cleared");
                 //setActiveToken();
             },
         });
