@@ -149,7 +149,7 @@ function Visuals() {
     }
 
     return canvasObjects ? (
-        <div>
+        <div style={{height: "750px", overflow: "auto"}}>
             {user === "esila" &&
             <>
                 <select
