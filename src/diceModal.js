@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import {
     Button, Dialog, DialogContent, DialogContentText, DialogTitle, TextField, DialogActions, Grid, Divider
 } from "@material-ui/core";
+import { API } from 'aws-amplify';
+import {createMessage as createMessageMutation} from "./graphql/mutations";
 import './sheet-style.css';
 
 function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
@@ -13,8 +15,14 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
     const negativeDice = diceTypes.slice(3,6);
     const { dicePool, roll_type, roll_source, roll_user, roll_message } = diceCheck;
 
+    async function createMessage(data) {
+        const {message, user, type, timestamp} = data;
+        if (!message || !user || !type) return;
+        await API.graphql({ query: createMessageMutation, variables: { input: { data } } });
+    }
+
     const handleRoll = (event) => {
-        const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/${roll_type}`;
+        //const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/${roll_type}`;
         //const API_ADDRESS = `http://127.0.0.1:5000/${rollType}`;
         event.preventDefault();
         const roll_string = diceTypes.map((type) => {
@@ -23,7 +31,12 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
             return dicePool[key] && `${dicePool[key]}${prefix}`;
         }).filter(n => n).join(' ');
         const data = { roll_source, roll_message, roll_string, roll_user };
+        // TODO - calculate result from roll_string
+        // Take result and shape into proper message to store
+        // Take result message and parse to JSON and populate on front end
         console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
+
+        /*
         fetch(API_ADDRESS, {
             method: 'POST',
             headers: {
@@ -37,6 +50,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
                         console.log(allResp);
                     })
             });
+         */
         setPositiveUpgrade(0);
         setNegativeUpgrade(0);
         handleClose(true);

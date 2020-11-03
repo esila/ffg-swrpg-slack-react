@@ -3,6 +3,7 @@ import './Sidebar.css';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { UserContext} from "../App";
 import SidebarOption from './SidebarOption';
+import Chat from './Chat';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import AppsIcon from '@material-ui/icons/Apps';
 import BuildIcon from '@material-ui/icons/Build'
@@ -185,6 +186,7 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                 <hr/>
             </>
             }
+            <Chat/>
         </div>
     )
 }

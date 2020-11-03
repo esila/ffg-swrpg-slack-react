@@ -456,6 +456,18 @@ type CriticalInjuries {
   result: String
 }
 
+type Message
+@model
+@key(name: "ByTimestamp", fields: [ "type", "timestamp" ], queryField: "getMessagesByTimestamp")
+{
+  id: ID!
+  type: String!
+  message: String!
+  timestamp: AWSDateTime!
+  user: String!
+  userImage: String
+}
+
 # Types with identical fields:
 # Encumberance Strain Wounds
 # Xenology Underworld OuterRim Lore Education CoreWorlds RangedHeavy RangedLight Melee Lightsaber Gunnery Brawl Vigilance Survival Streetwise Stealth Skulduggery Resilience PilotingSpace PilotingPlanetary Perception Negotiation Medicine Mechanics Leadership Discipline Deception Coordination Cool Computers Coercion Charm Athletics Astrogation
