@@ -3,7 +3,6 @@ import './Sidebar.css';
 import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { UserContext} from "../App";
 import SidebarOption from './SidebarOption';
-import Chat from './Chat';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import AppsIcon from '@material-ui/icons/Apps';
 import BuildIcon from '@material-ui/icons/Build'
@@ -13,6 +12,7 @@ import SkillsModal from './SkillsModal';
 import CombatModal from './CombatModal';
 import VehiclesModal from './VehiclesModal';
 import DiceModal from "../diceModal";
+import TemporaryDrawer from "./RollResultsDrawer";
 import { useSnackbar } from 'notistack';
 
 function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCharacterSheets }) {
@@ -184,9 +184,9 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                 <hr/>
                 <SidebarOption Icon={AppsIcon} title="Vehicles" handleOpen={handleOpenVehiclesModal}/>
                 <hr/>
+                <TemporaryDrawer/>
             </>
             }
-            <Chat/>
         </div>
     )
 }
