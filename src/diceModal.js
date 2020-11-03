@@ -4,6 +4,7 @@ import {
 } from "@material-ui/core";
 import { API } from 'aws-amplify';
 import {createMessage as createMessageMutation} from "./graphql/mutations";
+import {rollDice} from "./components/DiceAPI";
 import './sheet-style.css';
 
 function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
@@ -32,6 +33,8 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
         }).filter(n => n).join(' ');
         const data = { roll_source, roll_message, roll_string, roll_user };
         // TODO - calculate result from roll_string
+        const [rollDieFaces, resultString, resultSymbols] = rollDice(dicePool);
+        console.log(rollDieFaces, resultString, resultSymbols);
         // Take result and shape into proper message to store
         // Take result message and parse to JSON and populate on front end
         console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
@@ -116,7 +119,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
             ...prev,
             dicePool: {
                 ...prev.dicePool,
-                [name]: value
+                [name]: Number.parseInt(value)
             }
         }));
     };
