@@ -465,7 +465,6 @@ type Message
   message: String!
   timestamp: AWSDateTime!
   user: String!
-  userImage: String
 }
 
 # Types with identical fields:

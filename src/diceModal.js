@@ -14,27 +14,25 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
     const diceTypes = ["Ability", "Proficiency", "Boost", "Difficulty", "Challenge", "Setback", "Force"];
     const positiveDice = diceTypes.slice(0,3);
     const negativeDice = diceTypes.slice(3,6);
-    const { dicePool, roll_type, roll_source, roll_user, roll_message } = diceCheck;
+    const { dicePool, roll_source, roll_user, roll_message } = diceCheck;
 
-    async function createMessage(data) {
-        const {message, user, type, timestamp} = data;
-        if (!message || !user || !type) return;
-        await API.graphql({ query: createMessageMutation, variables: { input: { data } } });
+    async function createMessage(user, data) {
+        const message = JSON.stringify(data);
+        const type = "swrpg";
+        const timestamp = new Date().toISOString();
+        if (!message || !user || !type || !timestamp) return;
+        const payload = { message, type, timestamp, user}
+        await API.graphql({ query: createMessageMutation, variables: { input: { ...payload } } });
     }
 
     const handleRoll = (event) => {
         //const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/${roll_type}`;
         //const API_ADDRESS = `http://127.0.0.1:5000/${rollType}`;
         event.preventDefault();
-        const roll_string = diceTypes.map((type) => {
-            const key = type.toLowerCase();
-            const prefix = key[0];
-            return dicePool[key] && `${dicePool[key]}${prefix}`;
-        }).filter(n => n).join(' ');
-        const data = { roll_source, roll_message, roll_string, roll_user };
-        // TODO - calculate result from roll_string
         const [rollDieFaces, resultString, resultSymbols] = rollDice(dicePool);
-        console.log(rollDieFaces, resultString, resultSymbols);
+        const data = { roll_source, roll_message, rollDieFaces, resultString, resultSymbols };
+        console.log(data);
+        createMessage(roll_user, data);
         // Take result and shape into proper message to store
         // Take result message and parse to JSON and populate on front end
         console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
