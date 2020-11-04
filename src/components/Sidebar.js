@@ -97,6 +97,13 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
     };
     const handleCloseVehiclesModal = () => { setVehiclesOpen(false) };
 
+    // RollResults RightRail State
+    const [rollResultsOpen, setRollResultsOpen] = useState(false);
+    const handleOpenRollResultsRightRail = () => {
+        setRollResultsOpen(true);
+    };
+    const handleCloseRollResultsRightRail = () => { setRollResultsOpen(false) };
+
     return (
         <div className="sidebar">
             <div className="sidebar_header">
@@ -178,13 +185,22 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                     setDiceCheck={setDiceCheck}
                     handleClose={handleDiceModalClose}
                 />
+                <TemporaryDrawer
+                    open={rollResultsOpen}
+                    handleOpen={handleOpenRollResultsRightRail}
+                    handleClose={handleCloseRollResultsRightRail}
+                />
                 <SidebarOption Icon={BuildIcon} title="Skills" handleOpen={handleOpenSkillsModal}/>
                 <hr/>
                 <SidebarOption Icon={AppsIcon} title="Combat" handleOpen={handleOpenCombatModal}/>
                 <hr/>
                 <SidebarOption Icon={AppsIcon} title="Vehicles" handleOpen={handleOpenVehiclesModal}/>
                 <hr/>
-                <TemporaryDrawer/>
+                <SidebarOption
+                    Icon={AppsIcon}
+                    title="Roll Results"
+                    handleOpen={rollResultsOpen ? handleCloseRollResultsRightRail : handleOpenRollResultsRightRail}
+                />
             </>
             }
         </div>

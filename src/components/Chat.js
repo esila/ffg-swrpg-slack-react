@@ -41,8 +41,9 @@ function Message({message, timestamp, user}) {
     )
 }
 
-function Chat({ setDrawerState }) {
+function Chat({ handleOpen, handleClose }) {
     const [messages, setMessages] = useState([]);
+    const [firstLoad, setFirstLoad] = useState(true);
 
     // useRef to update current messages since I can't seem to access state in the async subscribe
     const latestMessages = useRef([]);
@@ -56,7 +57,8 @@ function Chat({ setDrawerState }) {
     async function fetchMessages() {
         const apiData = await API.graphql(graphqlOperation(getMessagesByTimestamp, {sortDirection: 'ASC', type: 'swrpg'}));
         setMessages(apiData.data.getMessagesByTimestamp.items);
-        setDrawerState({ right: true});
+        !firstLoad && handleOpen();
+        setFirstLoad(false);
     }
 
     async function subscribeMessages() {
@@ -64,7 +66,8 @@ function Chat({ setDrawerState }) {
             next: subonCreateMessage => {
                 console.log(`subscribed message: ${JSON.stringify(subonCreateMessage.value.data.onCreateMessage)}`);
                 setMessages([...latestMessages.current, subonCreateMessage.value.data.onCreateMessage]);
-                setDrawerState({ right: true});
+                setFirstLoad(false);
+                handleOpen();
             }
         })
     }
