@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef, useContext} from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { getMessagesByTimestamp } from '../graphql/queries';
 import { deleteMessage as deleteMessageMutation } from "../graphql/mutations";
 import { onCreateMessage } from "../graphql/subscriptions";
+import { UserContext} from "../App";
 import Message from "./Message";
 import './Chat.css';
 
@@ -29,6 +30,7 @@ function AutoScroller(props) {
 }
 
 function Chat({ handleOpen, handleClose }) {
+    const user = useContext(UserContext);
     const [messages, setMessages] = useState([]);
     const [firstLoad, setFirstLoad] = useState(true);
 
@@ -75,6 +77,7 @@ function Chat({ handleOpen, handleClose }) {
                      />
                 ))}
             </AutoScroller>
+            {user === "esila" &&
             <button
                 className="chat__delete"
                 onClick={(event) => {
@@ -87,6 +90,7 @@ function Chat({ handleOpen, handleClose }) {
             >
                 DELETE ALL
             </button>
+            }
         </>
     );
 }
