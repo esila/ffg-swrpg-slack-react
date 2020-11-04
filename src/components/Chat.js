@@ -3,6 +3,7 @@ import { API, graphqlOperation } from 'aws-amplify';
 import { getMessagesByTimestamp } from '../graphql/queries';
 import { deleteMessage as deleteMessageMutation } from "../graphql/mutations";
 import { onCreateMessage } from "../graphql/subscriptions";
+import Message from "./Message";
 import './Chat.css';
 
 function AutoScroller(props) {
@@ -25,20 +26,6 @@ function AutoScroller(props) {
     }
 
     return <div {...props} onScroll={(e) => handleScroll(e)} ref={scrollerRef} />
-}
-
-function Message({message, timestamp, user}) {
-    return (
-        <div className="message">
-            <div className="message__info">
-                <h4>
-                    {user} <span className="message__timestamp">{timestamp}</span>
-                </h4>
-                <p>{message}</p>
-            </div>
-
-        </div>
-    )
 }
 
 function Chat({ handleOpen, handleClose }) {
@@ -85,7 +72,6 @@ function Chat({ handleOpen, handleClose }) {
                         message={message.message}
                         timestamp={message.timestamp}
                         user={message.user}
-                        userImage={message.userImage}
                      />
                 ))}
             </AutoScroller>
