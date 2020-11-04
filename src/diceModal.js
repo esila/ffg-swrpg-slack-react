@@ -26,32 +26,12 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
     }
 
     const handleRoll = (event) => {
-        //const API_ADDRESS = `https://3nnmgyv8f7.execute-api.us-east-1.amazonaws.com/dev/${roll_type}`;
-        //const API_ADDRESS = `http://127.0.0.1:5000/${rollType}`;
         event.preventDefault();
         const [rollDieFaces, resultString, resultSymbols] = rollDice(dicePool);
         const data = { roll_source, roll_message, rollDieFaces, resultString, resultSymbols };
         console.log(data);
         createMessage(roll_user, data);
-        // Take result and shape into proper message to store
-        // Take result message and parse to JSON and populate on front end
         console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
-
-        /*
-        fetch(API_ADDRESS, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data)
-        })
-            .then((res) => {
-                res.json()
-                    .then((allResp) => {
-                        console.log(allResp);
-                    })
-            });
-         */
         setPositiveUpgrade(0);
         setNegativeUpgrade(0);
         handleClose(true);
