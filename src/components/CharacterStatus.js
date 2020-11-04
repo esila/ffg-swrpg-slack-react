@@ -9,6 +9,7 @@ import {listCharacterStatuss, listCharacterSheets} from "../graphql/queries";
 import { UserContext} from "../App";
 import {Grid} from "@material-ui/core";
 import CharacterStatusModal from "./CharacterStatusModal";
+import StatusCard from "./StatusCard";
 import { useSnackbar } from 'notistack';
 
 function CharacterStatus({ currentCharacterSheet }) {
@@ -132,27 +133,35 @@ function CharacterStatus({ currentCharacterSheet }) {
     return characterStatus.partyStatus ? (
         <div className="party_status" style={{fontSize: "12px"}}>
             <Grid container spacing={3}>
-                <Grid item xs={6} direction="row" style={{textAlign: "left", display: "flex"}}>
+                <Grid item xs={4} direction="row" style={{textAlign: "left", display: "flex"}}>
                     {characterStatus.currentCharacterStatus &&
                     <div
                         style={{cursor: "pointer"}}
                         onClick={() => { handleOpenPlayerStatusModalModal()}}
                     >
-                        <p>{characterStatus.currentCharacterStatus.name}</p>
-                        <p>Wounds: {characterStatus.currentCharacterStatus.wounds} | {currentCharacterSoakWounds.wounds.threshold}</p>
-                        <p>Strain: {characterStatus.currentCharacterStatus.strain} | {currentCharacterSoakWounds.strain.threshold}</p>
+                        <StatusCard
+                            name={characterStatus.currentCharacterStatus.name}
+                            currentWounds={characterStatus.currentCharacterStatus.wounds}
+                            currentStrain={characterStatus.currentCharacterStatus.strain}
+                            thresholdWounds={currentCharacterSoakWounds.wounds.threshold}
+                            thresholdStrain={currentCharacterSoakWounds.strain.threshold}
+                        />
                     </div>
                     }
                 </Grid>
-                <Grid item xs={6} direction="row" style={{textAlign: "left", display: "flex"}}>
+                <Grid item xs={8} direction="row" style={{textAlign: "left", display: "flex"}}>
                     {characterStatus.partyStatus
                         .map((status, status_idx) => {
                             const characterSoakWounds = characterStatus.partySheets.find((sheet) => sheet.character.player_name === status.player_name).soakWounds;
                             return (
                                 <div key={status_idx}>
-                                    <p>{status.name}</p>
-                                    <p>Wounds: {status.wounds} | {characterSoakWounds.wounds.threshold}</p>
-                                    <p>Strain: {status.strain} | {characterSoakWounds.strain.threshold}</p>
+                                    <StatusCard
+                                        name={status.name}
+                                        currentWounds={status.wounds}
+                                        currentStrain={status.strain}
+                                        thresholdWounds={characterSoakWounds.wounds.threshold}
+                                        thresholdStrain={characterSoakWounds.strain.threshold}
+                                    />
                                 </div>
                             )
                         })}

@@ -23,12 +23,12 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
             <div className="maincontent">
                 <div className="maincontent__header">
                     <Grid container spacing={3}>
-                        <Grid item xs={8} direction="row" style={{textAlign: "left"}}>
+                        <Grid item xs={10} direction="row" style={{textAlign: "left"}}>
                             <CharacterStatus
                                 currentCharacterSheet={characterSheets[activeIndex]}
                             />
                         </Grid>
-                        <Grid item xs={4} style={{textAlign: "left"}}>
+                        <Grid item xs={2} style={{textAlign: "left"}}>
                             <h3>Session 0<br/>Character Creation</h3>
                         </Grid>
                     </Grid>
