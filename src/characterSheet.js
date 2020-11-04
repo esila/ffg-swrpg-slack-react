@@ -241,7 +241,6 @@ function CharacterSheet(){
                     {characterSheets.length > 0 &&
                     <button
                         type="button"
-                        className="chat__delete"
                         style={{float: "right"}}
                         onClick={(event) => {
                             event.preventDefault();

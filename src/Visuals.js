@@ -262,7 +262,6 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                     >Add Elements</button>
                     <button
                         type="button"
-                        className="chat__delete"
                         onClick={(event) => {
                             event.preventDefault();
                             fabricObjects.forEach((obj) => {
@@ -275,7 +274,6 @@ function MapCanvas({ fabricObjects, background, setBackground }) {
                     </button>
                     <button
                         type="button"
-                        className="chat__delete"
                         onClick={(event) => {
                             event.preventDefault();
                             console.log("DELETE CALLED FOR: ", activeToken);
