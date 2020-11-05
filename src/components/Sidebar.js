@@ -4,8 +4,12 @@ import { AmplifySignOut } from '@aws-amplify/ui-react';
 import { UserContext} from "../App";
 import SidebarOption from './SidebarOption';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import AppsIcon from '@material-ui/icons/Apps';
 import BuildIcon from '@material-ui/icons/Build'
+import SportsKabaddiIcon from '@material-ui/icons/SportsKabaddi';
+import FlightIcon from '@material-ui/icons/Flight';
+import FlareIcon from '@material-ui/icons/Flare';
 import {Menu, MenuItem} from '@material-ui/core';
 import CharacterSheetModal from './CharacterSheetModal';
 import SkillsModal from './SkillsModal';
@@ -201,14 +205,14 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                 />
                 <SidebarOption Icon={BuildIcon} title="Skills" handleOpen={handleOpenSkillsModal}/>
                 <hr/>
-                <SidebarOption Icon={AppsIcon} title="Combat" handleOpen={handleOpenCombatModal}/>
+                <SidebarOption Icon={SportsKabaddiIcon} title="Combat" handleOpen={handleOpenCombatModal}/>
                 <hr/>
-                <SidebarOption Icon={AppsIcon} title="Vehicles" handleOpen={handleOpenVehiclesModal}/>
+                <SidebarOption Icon={FlightIcon} title="Vehicles" handleOpen={handleOpenVehiclesModal}/>
                 <hr/>
-                <SidebarOption Icon={AppsIcon} title="Destiny Check" handleOpen={handleRollDestiny}/>
+                <SidebarOption Icon={FlareIcon} title="Destiny Check" handleOpen={handleRollDestiny}/>
                 <hr/>
                 <SidebarOption
-                    Icon={AppsIcon}
+                    Icon={AssignmentIcon}
                     title="Roll Results"
                     handleOpen={rollResultsOpen ? handleCloseRollResultsRightRail : handleOpenRollResultsRightRail}
                 />
