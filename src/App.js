@@ -19,6 +19,20 @@ function InitSnackApp() {
         fetchUserCharacterSheets();
     }, []);
 
+    // GM Visuals Modal State
+    const [gmVisualsModalOpen, setGMVisualsModalOpen] = useState(false);
+    const handleOpenGMVisualsModal = () => {
+        setGMVisualsModalOpen(true);
+    };
+    const handleCloseGMVisualsModal = () => { setGMVisualsModalOpen(false) };
+
+    // GM Music Modal State
+    const [gmMusicModalOpen, setGMMusicModalOpen] = useState(false);
+    const handleOpenGMMusicModal = () => {
+        setGMMusicModalOpen(true);
+    };
+    const handleCloseGMMusicModal = () => { setGMMusicModalOpen(false) };
+
     async function fetchUserCharacterSheets() {
         const { username } = await Auth.currentAuthenticatedUser({bypassCache: false});
         const apiData = username && await API.graphql({
@@ -44,6 +58,8 @@ function InitSnackApp() {
                         activeIndex={activeIndex}
                         setActiveIndex={setActiveIndex}
                         fetchUserCharacterSheets={fetchUserCharacterSheets}
+                        handleOpenGMVisualsModal={handleOpenGMVisualsModal}
+                        handleOpenGMMusicModal={handleOpenGMMusicModal}
                     />
                     <Switch>
                         {contentSourceNames.map((name, idx) => {
@@ -53,6 +69,12 @@ function InitSnackApp() {
                                         userCharacterSheets={userCharacterSheets}
                                         activeIndex={activeIndex}
                                         setActiveIndex={setActiveIndex}
+                                        gmVisualsModalOpen={gmVisualsModalOpen}
+                                        handleOpenGMVisualsModal={handleOpenGMVisualsModal}
+                                        handleCloseGMVisualsModal={handleCloseGMVisualsModal}
+                                        gmMusicModalOpen={gmMusicModalOpen}
+                                        handleOpenGMMusicModal={handleOpenGMMusicModal}
+                                        handleCloseGMMusicModal={handleCloseGMMusicModal}
                                     />
                                 </Route>
                             )

@@ -7,7 +7,11 @@ import MusicPlayer from './MusicPlayer';
 import {Grid} from "@material-ui/core";
 import './MainContent.css';
 
-function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
+function MainContent({
+    userCharacterSheets, activeIndex, setActiveIndex, gmVisualsModalOpen, handleCloseGMVisualsModal, handleOpenGMVisualsModal,
+    handleCloseGMMusicModal, handleOpenGMMusicModal, gmMusicModalOpen
+    }) {
+
     const { characterSheets } = userCharacterSheets;
     const location = useLocation().pathname.split('/')[1];
     const user = useContext(UserContext);
@@ -33,8 +37,17 @@ function MainContent({ userCharacterSheets, activeIndex, setActiveIndex }) {
                         </Grid>
                     </Grid>
                 </div>
-                <MusicPlayer/>
-                <MainComponent characterSheet={characterSheets[activeIndex]}/>
+                <MusicPlayer
+                    gmMusicModalOpen={gmMusicModalOpen}
+                    handleOpenGMMusicModal={handleOpenGMMusicModal}
+                    handleCloseGMMusicModal={handleCloseGMMusicModal}
+                />
+                <MainComponent
+                    characterSheet={characterSheets[activeIndex]}
+                    gmVisualsModalOpen={gmVisualsModalOpen}
+                    handleCloseGMVisualsModal={handleCloseGMVisualsModal}
+                    handleOpenGMVisualsModal={handleOpenGMVisualsModal}
+                />
             </div>
     )
         :

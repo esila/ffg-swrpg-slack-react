@@ -18,8 +18,9 @@ import VehiclesModal from './VehiclesModal';
 import DiceModal from "../diceModal";
 import TemporaryDrawer from "./RollResultsDrawer";
 import { useSnackbar } from 'notistack';
+import {Apps} from "@material-ui/icons";
 
-function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCharacterSheets }) {
+function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCharacterSheets, handleOpenGMMusicModal, handleOpenGMVisualsModal }) {
     const user = useContext(UserContext);
     const currentCS = userCharacterSheets && userCharacterSheets[activeIndex];
     const characterName = userCharacterSheets && userCharacterSheets[activeIndex] && userCharacterSheets[activeIndex].character.name;
@@ -217,6 +218,16 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                     handleOpen={rollResultsOpen ? handleCloseRollResultsRightRail : handleOpenRollResultsRightRail}
                 />
                 <hr/>
+                {user === "esila" &&
+                <>
+                    <SidebarOption Icon={AppsIcon} title="" handleOpen={() => {}} style={{height: "20px"}}/>
+                    <hr/>
+                    <SidebarOption Icon={AppsIcon} title="Visuals Admin" handleOpen={handleOpenGMVisualsModal}/>
+                    <hr/>
+                    <SidebarOption Icon={AppsIcon} title="Music Admin" handleOpen={handleOpenGMMusicModal}/>
+                    <hr/>
+                </>
+                }
             </>
             }
         </div>

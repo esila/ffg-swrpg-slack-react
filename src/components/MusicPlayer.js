@@ -14,7 +14,7 @@ http://users.du.se/~dbe/mp3/Star%20Wars%20Soundtrack/
 https://downloads.khinsider.com/game-soundtracks/album/lego-star-wars-the-complete-saga
  */
 
-function MusicPlayer() {
+function MusicPlayer({ gmMusicModalOpen, handleCloseGMMusicModal, handleOpenGMMusicModal }) {
     const user = useContext(UserContext);
     const [musicPlayer, setMusicPlayer] = useState({});
     const [player, setPlayer] = useState();
@@ -40,13 +40,6 @@ function MusicPlayer() {
         subscribeMusicPlayer();
     }, []);
 
-    // GM Music Modal State
-    const [gmMusicModalOpen, setGMMusicModalOpen] = useState(false);
-    const handleOpenGMMusicModal = () => {
-        setGMMusicModalOpen(true);
-    };
-    const handleCloseGMMusicModal = () => { setGMMusicModalOpen(false) };
-
     async function fetchMusicPlayer() {
         const apiData = await API.graphql({query: listMusicPlayers});
         const musicPlayer = apiData.data.listMusicPlayers.items && apiData.data.listMusicPlayers.items[0];
@@ -64,6 +57,7 @@ function MusicPlayer() {
         !play && playerRef.current && playerRef.current.pause();
         play && playerRef.current && playerRef.current.play();
     }
+
     async function subscribeMusicPlayer() {
         await API.graphql(graphqlOperation(onUpdateMusicPlayer)).subscribe({
             next: subonUpdateMusicPlayer => {
@@ -101,10 +95,6 @@ function MusicPlayer() {
                         handleClose={handleCloseGMMusicModal}
                         updateMusicPlayer={updateMusicPlayer}
                     />
-                    <button
-                        type="button"
-                        onClick={() => handleOpenGMMusicModal()}
-                    >GM Music</button>
                 </>
                 }
             </div>
