@@ -9,6 +9,7 @@ import {listCharacterStatuss, listCharacterSheets} from "../graphql/queries";
 import { UserContext} from "../App";
 import {Grid} from "@material-ui/core";
 import CharacterStatusModal from "./CharacterStatusModal";
+import Destiny from "./Destiny";
 import StatusCard from "./StatusCard";
 import { useSnackbar } from 'notistack';
 
@@ -148,6 +149,7 @@ function CharacterStatus({ currentCharacterSheet }) {
                         />
                     </div>
                     }
+                    <Destiny/>
                 </Grid>
                 <Grid item xs={8} direction="row" style={{textAlign: "left", display: "flex"}}>
                     {characterStatus.partyStatus

@@ -104,6 +104,15 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
     };
     const handleCloseRollResultsRightRail = () => { setRollResultsOpen(false) };
 
+    const handleRollDestiny = () => { handleClickDiceModalOpen( {
+            dicePool: {force: 1},
+            roll_type: "force",
+            roll_source: `Force Check`,
+            roll_user: characterName || "anonymous",
+            roll_message: {},
+        }
+    )}
+
     return (
         <div className="sidebar">
             <div className="sidebar_header">
@@ -196,11 +205,14 @@ function Sidebar({ activeIndex, setActiveIndex, userCharacterSheets, fetchUserCh
                 <hr/>
                 <SidebarOption Icon={AppsIcon} title="Vehicles" handleOpen={handleOpenVehiclesModal}/>
                 <hr/>
+                <SidebarOption Icon={AppsIcon} title="Destiny Check" handleOpen={handleRollDestiny}/>
+                <hr/>
                 <SidebarOption
                     Icon={AppsIcon}
                     title="Roll Results"
                     handleOpen={rollResultsOpen ? handleCloseRollResultsRightRail : handleOpenRollResultsRightRail}
                 />
+                <hr/>
             </>
             }
         </div>

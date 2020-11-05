@@ -3,12 +3,11 @@ import { API, graphqlOperation } from 'aws-amplify';
 import {
     createDestinyPool as createDestinyPoolMutation,
     updateDestinyPool as updateDestinyPoolMutation
-} from "./graphql/mutations";
-import {onUpdateDestinyPool} from "./graphql/subscriptions";
-import {listDestinyPools} from "./graphql/queries";
-import { UserContext} from "./App";
-import './destiny.css';
-import DiceRoller from "./diceRoller";
+} from "../graphql/mutations";
+import {onUpdateDestinyPool} from "../graphql/subscriptions";
+import {listDestinyPools} from "../graphql/queries";
+import { UserContext} from "../App";
+import '../destiny.css';
 
 function DestinyPool({ characterName }) {
     const user = useContext(UserContext);
@@ -69,13 +68,13 @@ function DestinyPool({ characterName }) {
     return destinyPool && Object.keys(destinyPool).includes("light") ? (
         <div className="destiny">
             <div className="token_display">
-                <h3>Destiny Points</h3>
+                <br/>
                 {[...Array(destinyPool.light).keys()].map((elem) => {
                     return (
                         <img
                             key={elem}
                             src="https://starwars-armorer-images.s3.amazonaws.com/light-side.jpeg"
-                            width="4%"
+                            width="15%"
                             style={{cursor: "pointer"}}
                             onClick={() => {
                                 const newLight = destinyPool.light - 1;
@@ -90,7 +89,7 @@ function DestinyPool({ characterName }) {
                         <img
                             key={elem}
                             src="https://starwars-armorer-images.s3.amazonaws.com/dark-side-emblem.jpeg"
-                            width="3%"
+                            width="14%"
                             style={user === "esila" ? {cursor: "pointer"} : {}}
                             onClick={() => {
                                 if (user === "esila") {
@@ -102,49 +101,7 @@ function DestinyPool({ characterName }) {
                         />
                     )
                 })}
-                <div>
-                    <DiceRoller
-                        rollType={"skillroll"}
-                        diceString="1f"
-                        diceSource={`Destiny Point Roll`}
-                        diceUser={characterName || "anonymous"}
-                    />
-                </div>
             </div>
-            {user === "esila" &&
-                <div className="admin_settings">
-                    <label>Light Side Points</label>
-                    <input
-                        type="number"
-                        value={destinyPool.light}
-                        onChange={(event) => {
-                            event.preventDefault();
-                            const {target: {value}} = event;
-                            setDestinyPool(prev => ({
-                                ...prev,
-                                light: value
-                            }))
-                        }}
-                    />
-                    <label>Dark Side Points</label>
-                    <input
-                        type="number"
-                        value={destinyPool.dark}
-                        onChange={(event) => {
-                            event.preventDefault();
-                            const {target: {value}} = event;
-                            setDestinyPool(prev => ({
-                                ...prev,
-                                dark: value
-                            }))
-                        }}
-                    />
-                    <button
-                        type="button"
-                        onClick={() => updateDestinyPool(destinyPool.light, destinyPool.dark)}
-                    >Save Destiny</button>
-                </div>
-            }
         </div>
     ):
         <div>

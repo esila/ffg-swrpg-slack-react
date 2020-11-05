@@ -34,7 +34,7 @@ function DiceModal({open, diceCheck, setDiceCheck, handleClose}) {
         console.log(`Dice roller payload:\n${JSON.stringify(data)}`);
         setPositiveUpgrade(0);
         setNegativeUpgrade(0);
-        handleClose(true);
+        handleClose(roll_source !== "Force Check");
     };
 
     const toggleDicePool = (e) => {
