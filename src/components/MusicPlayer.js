@@ -6,6 +6,8 @@ import {listMusicPlayers} from "../graphql/queries";
 import { UserContext} from "../App";
 import ReactJkMusicPlayer from 'react-jinke-music-player';
 import 'react-jinke-music-player/assets/index.css';
+import GMMusicModal from "./GMMusicModal";
+import {Grid} from "@material-ui/core";
 
 /*
 http://users.du.se/~dbe/mp3/Star%20Wars%20Soundtrack/
@@ -37,6 +39,13 @@ function MusicPlayer() {
         fetchMusicPlayer();
         subscribeMusicPlayer();
     }, []);
+
+    // GM Music Modal State
+    const [gmMusicModalOpen, setGMMusicModalOpen] = useState(false);
+    const handleOpenGMMusicModal = () => {
+        setGMMusicModalOpen(true);
+    };
+    const handleCloseGMMusicModal = () => { setGMMusicModalOpen(false) };
 
     async function fetchMusicPlayer() {
         const apiData = await API.graphql({query: listMusicPlayers});
@@ -87,31 +96,15 @@ function MusicPlayer() {
                 />
                 {user === "esila" &&
                 <>
+                    <GMMusicModal
+                        open={gmMusicModalOpen}
+                        handleClose={handleCloseGMMusicModal}
+                        updateMusicPlayer={updateMusicPlayer}
+                    />
                     <button
                         type="button"
-                        onClick={() => updateMusicPlayer({
-                            play: true,
-                            track: "https://vgmdownloads.com/soundtracks/lego-star-wars-the-complete-saga/gqqgromtht/01.%20Star%20Wars%20Main%20Title%20and%20Ambush%20on%20Coruscant.mp3"
-                        })}
-                    >Play Track 1</button>
-                    <button
-                        type="button"
-                        onClick={() => updateMusicPlayer({
-                            play: true,
-                            track: "http://users.du.se/~dbe/mp3/Star%20Wars%20Soundtrack/Star%20Wars%20I%20-%20Duel%20Of%20The%20Fates.mp3"
-                        })}
-                    >Play Track 2</button>
-                    <button
-                        type="button"
-                        onClick={() => updateMusicPlayer({
-                            play: true,
-                            track: "http://users.du.se/~dbe/mp3/Star%20Wars%20Soundtrack/Star%20Wars%20VI%20-%20Twentieth%20Century%20Fox%20Theme.mp3"
-                        })}
-                    >Play Track 3</button>
-                    <button
-                        type="button"
-                        onClick={() => updateMusicPlayer({play: false, track: ""})}
-                    >Stop Track</button>
+                        onClick={() => handleOpenGMMusicModal()}
+                    >GM Music</button>
                 </>
                 }
             </div>
