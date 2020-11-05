@@ -22,8 +22,12 @@ const mapList = [
 ];
 
 const tokenList = [
-    ["Daro Blunt", "https://kndr.io/ts/swt1/i/HumanMaleOutlaw.png"],
+    ["Zukata Netakka", "https://kndr.io/ts/swt1/i/RodianWomanGoggles.png"],
+    ["Daro Blunt", "https://kndr.io/ts/swt1/i/HumanMaleThug1.png"],
     ["Spir Fraxis", "https://kndr.io/ts/swt1/i/HumanMale_29.png"],
+    ["Gut-Guro", "https://kndr.io/ts/swt1/i/WeequayMale.png"],
+    ["Zalg the Toydarian", "https://kndr.io/ts/swt1/i/ToydarianMale.png"],
+    ["R4 Droid", "https://kndr.io/ts/swt1/i/DroidR5D4.png"],
 ]
 
 function GMVisualsModal({open, handleClose, updateCanvasObject, canvasObjects, canvasId, token, setToken, activeToken}) {
