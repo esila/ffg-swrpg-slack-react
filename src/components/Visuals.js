@@ -15,8 +15,8 @@ const mapList = [
     ["Welcome", {url: "https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg", scaleX: 1, scaleY: 1}],
     ["Range Bands", {url: "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg", scaleX: 0.4, scaleY: 0.35}],
     ["Krayt Fang", {url: "https://s3.amazonaws.com/files.d20.io/images/3475756/Nfgcn3lIJFm3InNj5YLGXQ/original.png", scaleX: 0.5, scaleY: 0.5}],
-    ["Mos Shuuta Streets", {url: "https://kainrath.files.wordpress.com/2014/05/mos-shuuta-streets-expanded-small.jpg", scaleX: 0.39, scaleY: 0.39}],
-    ["Teemo's Palace", {url: "https://vignette.wikia.nocookie.net/starwars/images/9/9b/Teemos_palace.png", scaleX: 0.5, scaleY: 0.5}],
+    ["Formos", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/FormosMap.jpg", scaleX: 1.5, scaleY: 1.2}],
+    ["Daro Warehouse", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/daro-warehouse.jpg", scaleX: 1.3, scaleY: 1.3}],
 ];
 
 function Visuals() {
