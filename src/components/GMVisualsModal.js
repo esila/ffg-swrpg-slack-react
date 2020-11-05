@@ -4,14 +4,27 @@ import {
 } from "@material-ui/core";
 import backgroundImage from "../backgroundMap";
 
-const scratch = '{"version":"4.2.0","objects":[{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":115.21,"top":145,"width":452,"height":404,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.16,"scaleY":0.16,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/DroidHk-47.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":299,"top":459,"width":259,"height":235,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.25,"scaleY":0.25,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/HumanMaleBaldCyborg.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":264.5,"top":56.5,"width":326,"height":326,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.48,"scaleY":0.48,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/BothanWomanCivilian.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":389,"top":455,"width":524,"height":470,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.14,"scaleY":0.14,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/WookieeMaleRoar.png","crossOrigin":null,"filters":[]}],"backgroundImage":{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":0,"top":0,"width":3060,"height":1980,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg","crossOrigin":null,"filters":[]}}';
+const scratch = '{"version":"4.2.0","objects":[{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":141,"top":28,"width":259,"height":235,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.28,"scaleY":0.28,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/HumanMaleBaldCyborg.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":39.5,"top":26.5,"width":326,"height":326,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.22,"scaleY":0.22,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/BothanWomanCivilian.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":338,"top":32,"width":524,"height":470,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.14,"scaleY":0.14,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/WookieeMaleRoar.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":239,"top":27.02,"width":128,"height":128,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.54,"scaleY":0.54,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/DroidIg88_2.png","crossOrigin":null,"filters":[]}],"backgroundImage":{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":0,"top":0,"width":3060,"height":1980,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":1,"scaleY":1,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg","crossOrigin":null,"filters":[]}}';
+
+const pcs = [{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":141,"top":28,"width":259,"height":235,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.28,"scaleY":0.28,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/HumanMaleBaldCyborg.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":39.5,"top":26.5,"width":326,"height":326,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.22,"scaleY":0.22,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/BothanWomanCivilian.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":338,"top":32,"width":524,"height":470,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.14,"scaleY":0.14,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/WookieeMaleRoar.png","crossOrigin":null,"filters":[]},{"type":"image","version":"4.2.0","originX":"left","originY":"top","left":239,"top":27.02,"width":128,"height":128,"fill":"rgb(0,0,0)","stroke":null,"strokeWidth":0,"strokeDashArray":null,"strokeLineCap":"butt","strokeDashOffset":0,"strokeLineJoin":"miter","strokeMiterLimit":4,"scaleX":0.54,"scaleY":0.54,"angle":0,"flipX":false,"flipY":false,"opacity":1,"shadow":null,"visible":true,"backgroundColor":"","fillRule":"nonzero","paintFirst":"fill","globalCompositeOperation":"source-over","skewX":0,"skewY":0,"cropX":0,"cropY":0,"src":"https://kndr.io/ts/swt1/i/DroidIg88_2.png","crossOrigin":null,"filters":[]}];
+
 const mapList = [
+    ["", {url: "", scaleX: 1, scaleY: 1}],
     ["Welcome", {url: "https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg", scaleX: 1, scaleY: 1}],
+    ["21st Century Fox", {url: "https://miro.medium.com/max/1000/1*okBmCv9-qkcRMmwfl0f_Gw.jpeg", scaleX: 1.3, scaleY: 1.3}],
+    ["Long Time Ago", {url: "https://miro.medium.com/max/1400/0*n6zzxzDrGFPV6Tue.png", scaleX: .85, scaleY: .85}],
+    ["Main Theme", {url: "https://i.ytimg.com/vi/MYmIggbpQ80/maxresdefault.jpg", scaleX: 1, scaleY: 1}],
+    ["Opening Crawl", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/eote_crawl.png", scaleX: .48, scaleY: .48}],
     ["Range Bands", {url: "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg", scaleX: 0.4, scaleY: 0.35}],
     ["Krayt Fang", {url: "https://s3.amazonaws.com/files.d20.io/images/3475756/Nfgcn3lIJFm3InNj5YLGXQ/original.png", scaleX: 0.5, scaleY: 0.5}],
     ["Formos", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/FormosMap.jpg", scaleX: 1.5, scaleY: 1.2}],
     ["Daro Warehouse", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/daro-warehouse.jpg", scaleX: 1.3, scaleY: 1.3}],
 ];
+
+const tokenList = [
+    ["Daro Blunt", "https://kndr.io/ts/swt1/i/HumanMaleOutlaw.png"],
+    ["Spir Fraxis", "https://kndr.io/ts/swt1/i/HumanMale_29.png"],
+]
 
 function GMVisualsModal({open, handleClose, updateCanvasObject, canvasObjects, canvasId, token, setToken, activeToken}) {
 
@@ -108,7 +121,6 @@ function GMVisualsModal({open, handleClose, updateCanvasObject, canvasObjects, c
                                     return <option key={map_idx} value={JSON.stringify(value)}>{name}</option>
                                 })}
                             </select>
-
                             <hr/>
                             <br/>
                             <input
@@ -121,6 +133,20 @@ function GMVisualsModal({open, handleClose, updateCanvasObject, canvasObjects, c
                                     setToken(value);
                                 }}
                             />
+                            <select
+                                name="token_select"
+                                value={token}
+                                onChange={event => {
+                                    event.preventDefault();
+                                    const {target: {value}} = event;
+                                    setToken(value);
+                                }}
+                            >
+                                {tokenList.map((token, token_idx) => {
+                                    const [name, value] = token;
+                                    return <option key={token_idx} value={value}>{name}</option>
+                                })}
+                            </select>
                             <button
                                 type="button"
                                 onClick={() => addToCanvas(token)}
@@ -153,6 +179,20 @@ function GMVisualsModal({open, handleClose, updateCanvasObject, canvasObjects, c
                             <br/>
                             <br/>
                             <button
+                                onClick={() => {
+                                    const canvasObjectsJSON = JSON.parse(canvasObjects);
+                                    const updateInput = {
+                                        ...canvasObjectsJSON,
+                                        objects: []
+                                    }
+                                    if (!updateInput) return;
+                                    updateCanvasObject(canvasId, JSON.stringify(updateInput));
+                                }}
+                            >DELETE PC Tokens</button>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <button
                                 onClick={() => console.log(canvasObjects)}
                             >Stringify Canvas</button>
                             <br/>
@@ -160,6 +200,20 @@ function GMVisualsModal({open, handleClose, updateCanvasObject, canvasObjects, c
                             <button
                                 onClick={() => updateCanvasObject("32914896-c627-47b9-903b-730cc2f4b589", scratch)}
                             >Reload Canvas</button>
+
+                            <br/>
+                            <br/>
+                            <button
+                                onClick={() => {
+                                    const canvasObjectsJSON = JSON.parse(canvasObjects);
+                                    const updateInput = {
+                                        ...canvasObjectsJSON,
+                                        objects: pcs
+                                    }
+                                    if (!updateInput) return;
+                                    updateCanvasObject(canvasId, JSON.stringify(updateInput));
+                                }}
+                            >Restore PC Tokens</button>
                         </Grid>
                     </Grid>
                 </DialogContent>
