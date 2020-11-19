@@ -1503,7 +1503,6 @@ export const onCreateMessage = /* GraphQL */ `
       message
       timestamp
       user
-      userImage
       createdAt
       updatedAt
     }
@@ -1517,7 +1516,6 @@ export const onUpdateMessage = /* GraphQL */ `
       message
       timestamp
       user
-      userImage
       createdAt
       updatedAt
     }
@@ -1531,7 +1529,6 @@ export const onDeleteMessage = /* GraphQL */ `
       message
       timestamp
       user
-      userImage
       createdAt
       updatedAt
     }

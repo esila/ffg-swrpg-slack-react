@@ -1051,7 +1051,6 @@ export const getMessage = /* GraphQL */ `
       message
       timestamp
       user
-      userImage
       createdAt
       updatedAt
     }
@@ -1070,7 +1069,6 @@ export const listMessages = /* GraphQL */ `
         message
         timestamp
         user
-        userImage
         createdAt
         updatedAt
       }
@@ -1101,7 +1099,6 @@ export const getMessagesByTimestamp = /* GraphQL */ `
         message
         timestamp
         user
-        userImage
         createdAt
         updatedAt
       }
