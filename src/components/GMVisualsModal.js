@@ -19,6 +19,7 @@ const mapList = [
     ["Krayt Fang", {url: "https://s3.amazonaws.com/files.d20.io/images/3475756/Nfgcn3lIJFm3InNj5YLGXQ/original.png", scaleX: 0.5, scaleY: 0.5}],
     ["Formos", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/FormosMap.jpg", scaleX: 1.5, scaleY: 1.2}],
     ["Daro Warehouse", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/daro-warehouse.jpg", scaleX: 1.3, scaleY: 1.3}],
+    ["Daro Basement", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/daro_basement.png", scaleX: 1.3, scaleY: 1.3}],
 ];
 
 const tokenList = [
