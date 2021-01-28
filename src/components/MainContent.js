@@ -33,7 +33,7 @@ function MainContent({
                             />
                         </Grid>
                         <Grid item xs={2} style={{textAlign: "left"}}>
-                            <h3>Session 1<br/>Welcome to Formos</h3>
+                            <h3>Session 3<br/>You Can Run...</h3>
                         </Grid>
                     </Grid>
                 </div>
