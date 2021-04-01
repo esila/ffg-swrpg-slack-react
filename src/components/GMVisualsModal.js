@@ -10,25 +10,18 @@ const pcs = [{"type":"image","version":"4.2.0","originX":"left","originY":"top",
 
 const mapList = [
     ["", {url: "", scaleX: 1, scaleY: 1}],
-    ["Welcome", {url: "https://1.bp.blogspot.com/-bvU8Hvlw53k/UPmkuLOAjzI/AAAAAAAACIE/vgbunrLNPyc/s1600/star_wars_edge_of_the_empire_JPTargete.jpg", scaleX: 1, scaleY: 1}],
-    ["21st Century Fox", {url: "https://miro.medium.com/max/1000/1*okBmCv9-qkcRMmwfl0f_Gw.jpeg", scaleX: 1.3, scaleY: 1.3}],
-    ["Long Time Ago", {url: "https://miro.medium.com/max/1400/0*n6zzxzDrGFPV6Tue.png", scaleX: .85, scaleY: .85}],
-    ["Main Theme", {url: "https://i.ytimg.com/vi/MYmIggbpQ80/maxresdefault.jpg", scaleX: 1, scaleY: 1}],
-    ["Opening Crawl", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/eote_crawl.png", scaleX: .48, scaleY: .48}],
     ["Range Bands", {url: "https://triumphdespair.files.wordpress.com/2012/11/range-bands.jpg", scaleX: 0.4, scaleY: 0.35}],
     ["Krayt Fang", {url: "https://s3.amazonaws.com/files.d20.io/images/3475756/Nfgcn3lIJFm3InNj5YLGXQ/original.png", scaleX: 0.5, scaleY: 0.5}],
     ["Formos", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/FormosMap.jpg", scaleX: 1.5, scaleY: 1.2}],
     ["Daro Warehouse", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/daro-warehouse.jpg", scaleX: 1.3, scaleY: 1.3}],
-    ["Daro Basement", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/daro_basement.png", scaleX: 1.3, scaleY: 1.3}],
+    ["Hit Site", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/hit_site.png", scaleX: 0.8, scaleY: 0.7}],
 ];
 
 const tokenList = [
     ["Zukata Netakka", "https://kndr.io/ts/swt1/i/RodianWomanGoggles.png"],
     ["Daro Blunt", "https://kndr.io/ts/swt1/i/HumanMaleThug1.png"],
-    ["Spir Fraxis", "https://kndr.io/ts/swt1/i/HumanMale_29.png"],
-    ["Gut-Guro", "https://kndr.io/ts/swt1/i/WeequayMale.png"],
-    ["Zalg the Toydarian", "https://kndr.io/ts/swt1/i/ToydarianMale.png"],
     ["R4 Droid", "https://kndr.io/ts/swt1/i/DroidR5D4.png"],
+    ["Rebel", "https://kndr.io/ts/swt1/i/HumanMaleRebel_14.png"],
 ]
 
 function GMVisualsModal({open, handleClose, updateCanvasObject, canvasObjects, canvasId, token, setToken, activeToken}) {
