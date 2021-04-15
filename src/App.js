@@ -35,6 +35,7 @@ function InitSnackApp() {
 
     async function fetchUserCharacterSheets() {
         const { username } = await Auth.currentAuthenticatedUser({bypassCache: false});
+        //const  username  = "morgan";
         const apiData = username && await API.graphql({
             query: listCharacterSheets,
             variables: {
