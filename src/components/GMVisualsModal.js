@@ -15,6 +15,8 @@ const mapList = [
     ["Formos", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/FormosMap.jpg", scaleX: 1.5, scaleY: 1.2}],
     ["Daro Warehouse", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/daro-warehouse.jpg", scaleX: 1.3, scaleY: 1.3}],
     ["Hit Site", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/hit_site.png", scaleX: 0.8, scaleY: 0.7}],
+    ["Kashyyk", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/RryattTrailMap-SWG.jpeg", scaleX: 1.5, scaleY: 1.0}],
+    ["Whisper Base", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/Whisper_Base.png", scaleX: 1.0, scaleY: 1.0}],
 ];
 
 const tokenList = [
