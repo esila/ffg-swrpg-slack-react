@@ -16,6 +16,7 @@ const mapList = [
     ["Daro Warehouse", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/daro-warehouse.jpg", scaleX: 1.3, scaleY: 1.3}],
     ["Hit Site", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/hit_site.png", scaleX: 0.8, scaleY: 0.7}],
     ["Kashyyk", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/RryattTrailMap-SWG.jpeg", scaleX: 1.5, scaleY: 1.0}],
+    ["Shadowlands", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/Shadowlands.jpg", scaleX: 0.95, scaleY: 0.7}],
     ["Whisper Base", {url: "https://starwars-armorer-images.s3.amazonaws.com/backgrounds/Whisper_Base.png", scaleX: 1.0, scaleY: 1.0}],
 ];
 
@@ -24,6 +25,9 @@ const tokenList = [
     ["Daro Blunt", "https://kndr.io/ts/swt1/i/HumanMaleThug1.png"],
     ["R4 Droid", "https://kndr.io/ts/swt1/i/DroidR5D4.png"],
     ["Rebel", "https://kndr.io/ts/swt1/i/HumanMaleRebel_14.png"],
+    ["Krykna", "https://starwars-armorer-images.s3.amazonaws.com/Krykna.png"],
+    ["Kallinik", "https://kndr.io/ts/swt1/i/WookieeMale_8.png"],
+    ["Wookie Goon", "https://kndr.io/ts/swt1/i/WookieeMale_6.png"],
 ]
 
 function GMVisualsModal({open, handleClose, updateCanvasObject, canvasObjects, canvasId, token, setToken, activeToken}) {

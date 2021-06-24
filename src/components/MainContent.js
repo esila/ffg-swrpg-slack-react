@@ -33,7 +33,7 @@ function MainContent({
                             />
                         </Grid>
                         <Grid item xs={2} style={{textAlign: "left"}}>
-                            <h3>Session 6<br/>So Presumptuous of You</h3>
+                            <h3>Session 7<br/>These Wounds, They Will Not Heal</h3>
                         </Grid>
                     </Grid>
                 </div>
